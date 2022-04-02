@@ -1,5 +1,7 @@
 package com.laura.carpaciu.entity.user;
 
-public class Authorities {
+public enum Authorities {
+
+    MANAGER, HOUSE_REPAIR, MECHANICAL_REPAIR, WAREHOUSE
 
 }

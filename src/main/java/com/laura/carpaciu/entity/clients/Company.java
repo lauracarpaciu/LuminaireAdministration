@@ -11,6 +11,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import com.laura.carpaciu.entity.order.ServiceOrder;
+
 @Entity
 public class Company extends Client {
 

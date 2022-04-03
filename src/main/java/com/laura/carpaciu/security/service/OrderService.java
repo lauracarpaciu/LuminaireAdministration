@@ -14,17 +14,16 @@ import com.laura.carpaciu.entity.order.ServiceOrder;
 import com.laura.carpaciu.entity.order.WorkOrder;
 import com.laura.carpaciu.utility.OrderStatus;
 
-public interface OrderRepository extends CrudRepository<Order, Integer> {
+public interface OrderService {
 
 	void createServiceOrder(ServiceOrder serviceOrder);
 
 	Set<ServiceOrder> findAllServiceOrders();
 
-	List<ServiceOrderIdAndStatusDto> allServiceOrderIdAndStatus();
-
+	
 	Optional<ServiceOrder> findServiceOrderById(int id);
 
-	ServiceOrder updateServiceOrder(ServiceOrder serviceOrder);
+	ServiceOrder updateServiceOrder(ServiceOrder serviceOrder,int decrement, String partNumber);
 
 	ServiceOrder findServiceOrderParts(int id);
 
@@ -34,6 +33,6 @@ public interface OrderRepository extends CrudRepository<Order, Integer> {
 
 	ServiceOrder findCompleteServiceOrderById(int id);
 
-	int updateOrderStatus(OrderStatus orderStatus, int id);
+	int closeOrder(ServiceOrder serviceOrder);
 
 }

@@ -16,24 +16,24 @@ import com.laura.carpaciu.utility.OrderStatus;
 
 public interface OrderRepository extends CrudRepository<Order, Integer> {
 
-	void createServiceOrder(ServiceOrder serviceOrder);
-
-	Set<ServiceOrder> findAllServiceOrders();
-
-	List<ServiceOrderIdAndStatusDto> allServiceOrderIdAndStatus();
-
-	Optional<ServiceOrder> findServiceOrderById(int id);
-
-	ServiceOrder updateServiceOrder(ServiceOrder serviceOrder);
-
-	ServiceOrder findServiceOrderParts(int id);
-
-	List<PieceOrder> getPartsFormServiceOrder(int id);
-
-	List<WorkOrder> findAllWorksInOrder(int id);
-
-	ServiceOrder findCompleteServiceOrderById(int id);
-
-	int updateOrderStatus(OrderStatus orderStatus, int id);
+//	void createServiceOrder(ServiceOrder serviceOrder);
+//
+//	Set<ServiceOrder> findAllServiceOrders();
+//
+//	List<ServiceOrderIdAndStatusDto> allServiceOrderIdAndStatus();
+//
+//	Optional<ServiceOrder> findServiceOrderById(int id);
+//
+//	ServiceOrder updateServiceOrder(ServiceOrder serviceOrder);
+//
+//	ServiceOrder findServiceOrderParts(int id);
+//
+//	List<PieceOrder> getPartsFormServiceOrder(int id);
+//
+//	List<WorkOrder> findAllWorksInOrder(int id);
+//
+//	ServiceOrder findCompleteServiceOrderById(int id);
+//
+//	int updateOrderStatus(OrderStatus orderStatus, int id);
 
 }

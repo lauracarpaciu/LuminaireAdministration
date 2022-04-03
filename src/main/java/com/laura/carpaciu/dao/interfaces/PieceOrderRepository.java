@@ -10,12 +10,12 @@ import com.laura.carpaciu.entity.order.ServiceOrder;
 
 public interface PieceOrderRepository extends CrudRepository<PieceOrder, Integer>{
 	
-	void createPieceOrder(PieceOrder partServiceOrder);
-
-	Optional<PieceOrder> findPartOrderByPartName(String partNumber, ServiceOrder serviceOrder);
-
-	int deletePartFromServiceOrder(String partNumber);
-
-	int updatePartOrderCount(int id, int increment);
+//	void createPieceOrder(PieceOrder partServiceOrder);
+//
+//	Optional<PieceOrder> findPartOrderByPartName(String partNumber, ServiceOrder serviceOrder);
+//
+//	int deletePartFromServiceOrder(String partNumber);
+//
+//	int updatePartOrderCount(int id, int increment);
 
 }

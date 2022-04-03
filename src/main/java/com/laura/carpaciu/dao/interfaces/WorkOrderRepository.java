@@ -10,14 +10,14 @@ import com.laura.carpaciu.entity.user.User;
 
 public interface WorkOrderRepository extends CrudRepository<WorkOrder, Integer> {
 	
-	void createUser(User user);
-
-	Optional<User> findUserByUsername(String username);
-
-	Optional<User> findUserByEmail(String email);
-
-	int activateUserAccount(User user);
-
-	Optional<User> findUserWithToken(String email);
+//	void createUser(User user);
+//
+//	Optional<User> findUserByUsername(String username);
+//
+//	Optional<User> findUserByEmail(String email);
+//
+//	int activateUserAccount(User user);
+//
+//	Optional<User> findUserWithToken(String email);
 
 }

@@ -9,8 +9,8 @@ import com.laura.carpaciu.entity.order.LuminaireCases;
 
 public interface LuminaireCasesRepository extends CrudRepository<LuminaireCases, Integer>{
 	
-	void createLuminaireCases(LuminaireCases luminaireProblems);
-
-	List<LuminaireCases> luminaireProblemsList();
+//	void createLuminaireCases(LuminaireCases luminaireProblems);
+//
+//	List<LuminaireCases> luminaireProblemsList();
 
 }

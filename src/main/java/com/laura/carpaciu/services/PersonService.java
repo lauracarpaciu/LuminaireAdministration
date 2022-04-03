@@ -1,11 +1,10 @@
 package com.laura.carpaciu.services;
 
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.laura.carpaciu.entity.clients.Person;
 
-public interface PersonService extends CrudRepository<Person, Integer> {
+public interface PersonService {
 
 	@Transactional
 	void createPerson(Person person);

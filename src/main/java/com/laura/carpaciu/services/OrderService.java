@@ -13,6 +13,7 @@ import com.laura.carpaciu.dto.ServiceOrderIdAndStatusDto;
 import com.laura.carpaciu.entity.order.PieceOrder;
 import com.laura.carpaciu.entity.order.ServiceOrder;
 import com.laura.carpaciu.entity.order.WorkOrder;
+import com.laura.carpaciu.errors.order.OrderIsClosedException;
 import com.laura.carpaciu.utility.OrderStatus;
 
 public interface OrderService {
@@ -39,12 +40,12 @@ public interface OrderService {
 	List<PieceOrder> getPartsFormServiceOrder(int id);
 
 	@Transactional
-	List<WorkOrder> findAllLaborsInOrder(int id);
-
-	@Transactional
 	ServiceOrder findCompleteServiceOrderById(int id);
 
 	@Transactional
-	int closeOrder(ServiceOrder serviceOrder);
+	int closeOrder(ServiceOrder serviceOrder) throws OrderIsClosedException;
+
+	@Transactional
+	List<WorkOrder> findAllWorksInOrder(int id);
 
 }

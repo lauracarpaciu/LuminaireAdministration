@@ -1,7 +1,6 @@
 package com.laura.carpaciu.dao.interfaces;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 import javax.persistence.criteria.Order;
@@ -15,6 +14,26 @@ import com.laura.carpaciu.entity.order.WorkOrder;
 import com.laura.carpaciu.utility.OrderStatus;
 
 public interface OrderRepository extends CrudRepository<Order, Integer> {
+
+	void createServiceOrder(ServiceOrder serviceOrder);
+
+	Set<ServiceOrder> findAllServiceOrders();
+
+	Object findServiceOrderById(int id);
+
+	ServiceOrder updateServiceOrder(ServiceOrder serviceOrder);
+
+	ServiceOrder findServiceOrderParts(int id);
+
+	List<PieceOrder> getPartsFromServiceOrder(int id);
+
+	List<WorkOrder> findAllWorksInOrder(int id);
+
+	int updateOrderStatus(String close, Integer orderId);
+
+	ServiceOrder findCompleteServiceOrderById(int id);
+
+	List<ServiceOrderIdAndStatusDto> allServiceOrderIdAndStatus();
 
 //	void createServiceOrder(ServiceOrder serviceOrder);
 //

@@ -11,6 +11,7 @@ import com.laura.carpaciu.entity.order.ServiceOrder;
 
 import java.util.*;
 
+@SuppressWarnings("deprecation")
 @Entity
 public class User {
 

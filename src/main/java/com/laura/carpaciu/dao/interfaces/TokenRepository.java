@@ -1,10 +1,7 @@
 package com.laura.carpaciu.dao.interfaces;
 
-import org.springframework.data.repository.CrudRepository;
+public interface TokenRepository {
 
-import com.laura.carpaciu.entity.clients.Company;
-
-
-public interface TokenRepository extends CrudRepository<Token, Integer>{
+	int updateToken(int userId, String token);
 
 }

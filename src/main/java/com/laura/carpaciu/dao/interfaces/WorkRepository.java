@@ -9,6 +9,8 @@ import com.laura.carpaciu.entity.clients.Company;
 import com.laura.carpaciu.entity.work.Work;
 
 public interface WorkRepository extends CrudRepository<Work, Integer> {
+
+	void createWork(Work work);
 //	void createWork(Work work);
 //
 //	List<Work> findWorkByName(String workDescription);
@@ -20,6 +22,16 @@ public interface WorkRepository extends CrudRepository<Work, Integer> {
 //	Optional<Work> findWorkById(int id);
 //
 //	int deleteWork(int id);
+
+	List<Work> findAllWorks();
+
+	List<Work> findWorkByName(String workDescription);
+
+	Optional<Work> findWorkById(int id);
+
+	int updateWorkTimeAndDescription(double timedWork, String workDescription, int id);
+
+	int deleteWork(int id);
 
 
 }

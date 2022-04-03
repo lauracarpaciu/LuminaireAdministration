@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.laura.carpaciu.entity.clients.Company;
 import com.laura.carpaciu.entity.work.Work;
 
-public interface WorkService extends CrudRepository<Work, Integer> {
+public interface WorkService  {
 	@Transactional
 	void createWork(Work work);
 

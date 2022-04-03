@@ -8,6 +8,8 @@ import com.laura.carpaciu.entity.clients.Company;
 import com.laura.carpaciu.entity.work.WorkPrice;
 
 public interface WorkPriceRepository extends CrudRepository<WorkPrice, Integer> {
+
+	Optional<WorkPrice> findAllWorkPrices();
 //	
 //	void createAllWorkPrices(WorkPrice workPrice);
 //
@@ -20,5 +22,17 @@ public interface WorkPriceRepository extends CrudRepository<WorkPrice, Integer> 
 //	int updateElectricalWorkPrice(double electricalWorkPrice, int id);
 //
 //	int updateNormalWorkPrice(double normalWorkPrice, int id);
+
+	void createAllWorkPrices(WorkPrice workPrice);
+
+	void updateMechanicalWorkPrice(double newPrice, Integer id);
+
+	void updateHouseWorkPrice(double newPrice, Integer id);
+
+	void updateElectricalWorkPrice(double newPrice, Integer id);
+
+	void updateNormalWorkPrice(double newPrice, Integer id);
+
+	Optional<WorkPrice> findAllWorkPrices();
 
 }

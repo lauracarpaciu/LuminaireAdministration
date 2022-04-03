@@ -1,4 +1,4 @@
-package com.laura.carpaciu.security.service;
+package com.laura.carpaciu.services;
 
 import java.util.Optional;
 
@@ -8,7 +8,7 @@ import com.laura.carpaciu.entity.clients.Company;
 import com.laura.carpaciu.entity.order.PieceOrder;
 import com.laura.carpaciu.entity.order.ServiceOrder;
 
-public interface PieceOrderRepository extends CrudRepository<PieceOrder, Integer>{
+public interface PieceOrderService {
 	
 	void createPieceOrder(PieceOrder partServiceOrder);
 

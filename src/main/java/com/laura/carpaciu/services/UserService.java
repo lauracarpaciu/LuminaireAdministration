@@ -1,4 +1,4 @@
-package com.laura.carpaciu.security.service;
+package com.laura.carpaciu.services;
 
 import java.util.Optional;
 
@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import com.laura.carpaciu.entity.clients.Company;
 import com.laura.carpaciu.entity.user.User;
 
-public interface UserRepository extends CrudRepository<User, Integer>{
+public interface UserService extends CrudRepository<User, Integer>{
 	void createUser(User user);
 
 	Optional<User> findUserByUsername(String username);

@@ -1,4 +1,4 @@
-package com.laura.carpaciu.security.service;
+package com.laura.carpaciu.services;
 
 import java.util.Optional;
 
@@ -8,8 +8,8 @@ import com.laura.carpaciu.entity.clients.Company;
 import com.laura.carpaciu.entity.order.WorkOrder;
 import com.laura.carpaciu.entity.user.User;
 
-public interface WorkOrderRepository extends CrudRepository<WorkOrder, Integer> {
-	
+public interface WorkOrderService {
+
 	void createUser(User user);
 
 	Optional<User> findUserByUsername(String username);

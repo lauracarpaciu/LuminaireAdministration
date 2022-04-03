@@ -1,4 +1,4 @@
-package com.laura.carpaciu.security.service;
+package com.laura.carpaciu.services;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,7 +8,7 @@ import org.springframework.data.repository.CrudRepository;
 import com.laura.carpaciu.entity.clients.Company;
 import com.laura.carpaciu.entity.clients.Person;
 
-public interface PersonRepository extends CrudRepository<Person, Integer>{
+public interface PersonService extends CrudRepository<Person, Integer>{
 	
 	void createPerson(Person person);
 

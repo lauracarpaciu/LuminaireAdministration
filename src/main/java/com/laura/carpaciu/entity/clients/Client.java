@@ -7,7 +7,7 @@ import com.laura.carpaciu.entity.order.ServiceOrder;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity
+@Entity //This tells Hibernate to make a table out of this class
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Client {
 

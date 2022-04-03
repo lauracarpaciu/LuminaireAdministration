@@ -2,6 +2,8 @@ package com.laura.carpaciu.service.impl.luminaire;
 
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.stereotype.Service;
 
 import com.laura.carpaciu.dao.interfaces.PieceRepository;
@@ -13,8 +15,8 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @Service
 public class PieceServiceImpl implements PieceService {
-	
-	private final PieceRepository pieceRepository ;
+
+	private final PieceRepository pieceRepository;
 
 	public PieceServiceImpl(PieceRepository pieceRepository) {
 		super();
@@ -22,39 +24,30 @@ public class PieceServiceImpl implements PieceService {
 	}
 
 	@Override
-	public void createPart(Piece part) {
-		// TODO Auto-generated method stub
-		
+	@Transactional
+	public void addPart(Piece part) {
+		Optional<Piece> optionalPart = pieceRepository.findPartByPartNumber(part.getPartNumber());
+
+		if (optionalPart.empty() != null) {
+			pieceRepository.createPart(part);
+			return;
+		}
+
+		if (optionalPart.get().equals(part)) {
+
+			pieceRepository.updatePieceCountAndPrice(part.getCount(), part.getPrice(), part.getPartNumber());
+		}
+
 	}
 
 	@Override
-	public Optional<Piece> findPartByName(String partName) {
-		// TODO Auto-generated method stub
-		return null;
+	public Piece findPartByPartNumber(String partNumber) {
+		return pieceRepository.findPartByPartNumber(partNumber).orElseThrow();
 	}
 
 	@Override
-	public Optional<Piece> findPartByPartNumber(String partNumber) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int updatePieceCount(int count, String partNumber) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int updatePieceCountAndPrice(int increment, double price, String partNumber) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int decreasePieceCount(int decrement, String partNumber) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int decreasePartCount(int decrement, String partNumber) {
+		return pieceRepository.decreasePieceCount(decrement, partNumber);
 	}
 
 }

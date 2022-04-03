@@ -1,16 +1,14 @@
 package com.laura.carpaciu.services;
 
-import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
-import org.springframework.data.repository.CrudRepository;
-
-import com.laura.carpaciu.entity.clients.Company;
-import com.laura.carpaciu.entity.order.LuminaireCases;
+import com.laura.carpaciu.entity.luminaire.Luminaire;
 
 public interface LuminaireCasesService {
 
-	void createLuminaireCases(LuminaireCases luminaireProblems);
+	@Transactional
+	void createLuminaire(Luminaire luminaire);
 
-	List<LuminaireCases> luminaireProblemsList();
-
+	@Transactional
+	Luminaire findLuminaireBySerialNumber(String serialNumber);
 }

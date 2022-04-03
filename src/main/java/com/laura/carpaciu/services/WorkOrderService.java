@@ -1,23 +1,17 @@
 package com.laura.carpaciu.services;
 
-import java.util.Optional;
+import org.springframework.transaction.annotation.Transactional;
 
-import org.springframework.data.repository.CrudRepository;
+import com.laura.carpaciu.entity.order.ServiceOrder;
 
-import com.laura.carpaciu.entity.clients.Company;
-import com.laura.carpaciu.entity.order.WorkOrder;
-import com.laura.carpaciu.entity.user.User;
+import com.laura.carpaciu.entity.work.Work;
 
 public interface WorkOrderService {
 
-	void createUser(User user);
+	@Transactional
+	void addWorkToServiceOrder(Work work, ServiceOrder serviceOrder);
 
-	Optional<User> findUserByUsername(String username);
-
-	Optional<User> findUserByEmail(String email);
-
-	int activateUserAccount(User user);
-
-	Optional<User> findUserWithToken(String email);
+	@Transactional
+	void deleteWorkFromOrder(int id, ServiceOrder order);
 
 }

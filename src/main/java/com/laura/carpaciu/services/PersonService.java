@@ -1,19 +1,16 @@
 package com.laura.carpaciu.services;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.laura.carpaciu.entity.clients.Company;
 import com.laura.carpaciu.entity.clients.Person;
 
-public interface PersonService extends CrudRepository<Person, Integer>{
-	
+public interface PersonService extends CrudRepository<Person, Integer> {
+
+	@Transactional
 	void createPerson(Person person);
 
-	Optional<Person> findPersonByCnp(String cnp);
-
-	List<Person> findPersonByFirstNameOrLastName(String firstOrLastName);
+	@Transactional
+	Person findPersonByCnp(String cnp);
 
 }

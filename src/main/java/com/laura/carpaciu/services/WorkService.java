@@ -4,22 +4,28 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.laura.carpaciu.entity.clients.Company;
 import com.laura.carpaciu.entity.work.Work;
 
 public interface WorkService extends CrudRepository<Work, Integer> {
+	@Transactional
 	void createWork(Work work);
 
-	List<Work> findWorkByName(String workDescription);
-
-	int updateWorkTimeAndDescription(double timedWork, String workDescription, int id);
-
+	@Transactional(readOnly = true)
 	List<Work> findAllWorks();
 
-	Optional<Work> findWorkById(int id);
+	@Transactional(readOnly = true)
+	List<Work> findWorkByName(String workDescription);
 
+	@Transactional(readOnly = true)
+	Work findWorkById(int id);
+
+	@Transactional
+	int updateWorkTimeAndDescription(double timedWork, String workDescription, int id);
+
+	@Transactional
 	int deleteWork(int id);
-
 
 }

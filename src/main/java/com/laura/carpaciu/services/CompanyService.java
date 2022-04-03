@@ -1,18 +1,15 @@
 package com.laura.carpaciu.services;
 
-import java.util.List;
-import java.util.Optional;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.laura.carpaciu.entity.clients.Company;
 
 public interface CompanyService {
 	
+	@Transactional
 	void createCompany(Company company);
 
-	Optional<Company> findCompanyByCui(String cui);
-
-	List<Company> findCompanyByName(String companyName);
-
+	@Transactional(readOnly = true)
+	Company findCompanyByCui(String cui);
 }

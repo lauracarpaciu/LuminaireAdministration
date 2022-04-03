@@ -1,21 +1,17 @@
 package com.laura.carpaciu.services;
 
-import java.util.Optional;
+import org.springframework.transaction.annotation.Transactional;
 
-import org.springframework.data.repository.CrudRepository;
+import com.laura.carpaciu.entity.luminaire.Piece;
 
-import com.laura.carpaciu.entity.clients.Company;
-import com.laura.carpaciu.entity.order.PieceOrder;
 import com.laura.carpaciu.entity.order.ServiceOrder;
 
 public interface PieceOrderService {
-	
-	void createPieceOrder(PieceOrder partServiceOrder);
 
-	Optional<PieceOrder> findPartOrderByPartName(String partNumber, ServiceOrder serviceOrder);
+	@Transactional
+	void addPartToServiceOrder(Piece part, ServiceOrder serviceOrder, int count);
 
-	int deletePartFromServiceOrder(String partNumber);
-
-	int updatePartOrderCount(int id, int increment);
+	@Transactional
+	int deletePartFromServiceOrder(String partNumber, int count, ServiceOrder order);
 
 }

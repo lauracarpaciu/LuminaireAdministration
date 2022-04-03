@@ -9,6 +9,12 @@ import com.laura.carpaciu.entity.order.WorkOrder;
 import com.laura.carpaciu.entity.user.User;
 
 public interface WorkOrderRepository extends CrudRepository<WorkOrder, Integer> {
+
+	void createWorkServiceOrder(WorkOrder workServiceOrder);
+
+	Optional<WorkOrder> findWorkOrderById(int id);
+
+	void deleteWorkFromOrder(int id);
 	
 //	void createUser(User user);
 //

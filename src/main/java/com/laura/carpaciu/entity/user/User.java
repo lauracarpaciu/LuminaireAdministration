@@ -144,5 +144,10 @@ public class User {
 		this.password = password;
 	}
 
+	public Object getId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

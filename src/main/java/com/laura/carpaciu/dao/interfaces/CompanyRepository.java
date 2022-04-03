@@ -14,6 +14,10 @@ import com.laura.carpaciu.entity.invoice.Invoice;
 //CRUD refers Create, Read, Update, Delete
 
 public interface CompanyRepository extends CrudRepository<Company, Integer>  {
+
+	Optional<Company> findCompanyByCui(String cui);
+
+	void createCompany(Company company);
 	
 //	void createCompany(Company company);
 //

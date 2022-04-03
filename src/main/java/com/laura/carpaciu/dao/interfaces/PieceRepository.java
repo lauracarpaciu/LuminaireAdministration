@@ -28,4 +28,6 @@ public interface PieceRepository extends CrudRepository<Piece, Integer> {
 
 	int decreasePieceCount(int decrement, String partNumber);
 
+	void updatePieceCount(int count, String partNumber);
+
 }

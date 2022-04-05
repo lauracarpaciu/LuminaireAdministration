@@ -1,9 +1,15 @@
 package com.laura.carpaciu.security.authentication;
 
-public class ResendTokenAuthentication {
+import java.util.Collection;
 
-	public ResendTokenAuthentication(String email, Object object, Object object2) {
-		// TODO Auto-generated constructor stub
-	}
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
+public class ResendTokenAuthentication extends UsernamePasswordAuthenticationToken {
+    public ResendTokenAuthentication(Object principal, Object credentials) {
+        super(principal, credentials);
+    }
+
+    public ResendTokenAuthentication(Object principal, Object credentials, Collection<? extends GrantedAuthority> authorities) {
+        super(principal, credentials, authorities);
+    }
 }

@@ -46,6 +46,4 @@ public class TokenFilter extends OncePerRequestFilter {
 		return !request.getServletPath().equals("/activate");
 	}
 
-
-
 }

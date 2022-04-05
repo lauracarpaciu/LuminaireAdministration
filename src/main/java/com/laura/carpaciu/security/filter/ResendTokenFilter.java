@@ -2,6 +2,7 @@ package com.laura.carpaciu.security.filter;
 
 import java.io.IOException;
 
+import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,7 +27,7 @@ public class ResendTokenFilter extends OncePerRequestFilter {
 
 		String email = request.getParameter("email");
 
-		Authentication authentication =  new ResendTokenAuthentication(email, null);
+		Authentication authentication = new ResendTokenAuthentication(email, null);
 
 		authentication = authenticationManager.authenticate(authentication);
 		SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -44,4 +45,5 @@ public class ResendTokenFilter extends OncePerRequestFilter {
 	protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
 		return !request.getServletPath().equals("/resendToken");
 	}
+
 }

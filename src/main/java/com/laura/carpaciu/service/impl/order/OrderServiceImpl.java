@@ -75,8 +75,7 @@ public class OrderServiceImpl implements OrderService {
 	@Transactional
 	public ServiceOrder findServiceOrderById(int id) {
 
-		return serviceOrderDao.findServiceOrderById(id)
-				.orElseThrow(() -> new RuntimeException("Service order not found"));
+		return (ServiceOrder) ( serviceOrderDao.findServiceOrderById( id));
 
 	}
 

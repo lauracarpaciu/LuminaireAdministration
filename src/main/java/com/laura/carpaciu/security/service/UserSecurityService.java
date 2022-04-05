@@ -16,32 +16,28 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class UserSecurityService implements UserDetailsService {
 
+	private final UserRepository userDao;
 
-    private final UserRepository userDao;
-
-
-    public UserSecurityService(UserRepository userDao) {
+	public UserSecurityService(UserRepository userDao) {
 		super();
 		this.userDao = userDao;
 	}
 
-
 	@Override
-    @Transactional(readOnly = true)
-    public UserDetails loadUserByUsername(String usernameOrEmail) throws UsernameNotFoundException {
-    	if(usernameOrEmail.contains("@")){
+	@Transactional(readOnly = true)
+	public UserDetails loadUserByUsername(String usernameOrEmail) throws UsernameNotFoundException {
+		if (usernameOrEmail.contains("@")) {
 
-            User user = userDao.findUserByEmail(usernameOrEmail)
-                     .orElseThrow(() -> new  UsernameNotFoundException("Email not found"));
+			User user = userDao.findUserByEmail(usernameOrEmail)
+					.orElseThrow(() -> new UsernameNotFoundException("Email not found"));
 
-            return new SecurityUser(user);
-         }
+			return new SecurityUser(user);
+		}
 
-             User user = userDao.findUserByUsername(usernameOrEmail)
-                     .orElseThrow(() -> new UsernameNotFoundException("Username not found"));
+		User user = userDao.findUserByUsername(usernameOrEmail)
+				.orElseThrow(() -> new UsernameNotFoundException("Username not found"));
 
+		return new SecurityUser(user);
 
-             return new SecurityUser(user);
-
-     }
- }
+	}
+}

@@ -20,4 +20,4 @@ public class PdfGeneratorConfig {
         templateResolver.setOrder(1);
 
         return templateResolver;
-    }
+    }}

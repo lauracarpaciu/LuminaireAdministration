@@ -1,15 +1,32 @@
 package com.laura.carpaciu.config;
 
+import java.util.Arrays;
+
+import org.apache.catalina.connector.Connector;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.embedded.tomcat.TomcatConnectorCustomizer;
+import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
+import org.springframework.boot.web.servlet.server.ConfigurableServletWebServerFactory;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.LogoutFilter;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 import com.laura.carpaciu.security.handler.SecurityLogoutHandler;
 import com.laura.carpaciu.security.handler.SuccessfulLogoutHandler;
+import com.laura.carpaciu.entity.user.Authorities;
+import com.laura.carpaciu.security.filter.ResendTokenFilter;
+import com.laura.carpaciu.security.filter.TokenFilter;
+import com.laura.carpaciu.security.filter.UsernameAndPasswordFilter;
 import com.laura.carpaciu.security.handler.CacheLogoutHandler;
 import com.laura.carpaciu.security.provider.EmailProvider;
 import com.laura.carpaciu.security.provider.ResendTokenProvider;
@@ -130,10 +147,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         .mvcMatchers("/app/**").hasAnyRole(roles)
                         .mvcMatchers("/parts/**").hasAnyRole(roles)
                         .mvcMatchers("/clients/**").hasAnyRole(roles)
-                        .mvcMatchers("/vehicles/**").hasAnyRole(roles)
-                        .mvcMatchers("/labors/**").hasAnyRole(roles)
+                        .mvcMatchers("/luminaires/**").hasAnyRole(roles)
+                        .mvcMatchers("/workss/**").hasAnyRole(roles)
                         .mvcMatchers("/prices/**").hasAnyRole("MANAGER")
-                        .mvcMatchers("/laborOrder/**").hasAnyRole(roles)
+                        .mvcMatchers("/workOrder/**").hasAnyRole(roles)
                         .mvcMatchers("/serviceOrder/**").hasAnyRole(roles)
                         .mvcMatchers("/orderPart/**").hasAnyRole(roles)
                         .mvcMatchers("/app2/**").hasAnyRole(roles)
@@ -144,7 +161,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                                     .formLogin()
                                     .loginPage("/login").permitAll();
 
-        http.headers().httpStrictTransportSecurity() //pt invoice dll dar nu merge
+        http.headers().httpStrictTransportSecurity() 
                       .disable();
     }
 

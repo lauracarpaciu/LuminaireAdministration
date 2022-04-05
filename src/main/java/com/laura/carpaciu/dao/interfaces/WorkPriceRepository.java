@@ -33,6 +33,4 @@ public interface WorkPriceRepository extends CrudRepository<WorkPrice, Integer> 
 
 	void updateNormalWorkPrice(double newPrice, Integer id);
 
-	Optional<WorkPrice> findAllWorkPrices();
-
 }

@@ -143,8 +143,8 @@ public class ServiceOrder {
 		return orderStatus;
 	}
 
-	public void setOrderStatus(OrderStatus orderStatus) {
-		this.orderStatus = orderStatus;
+	public void setOrderStatus(String close) {
+		this.orderStatus = close;
 	}
 
 	public List<PieceOrder> getParts() {

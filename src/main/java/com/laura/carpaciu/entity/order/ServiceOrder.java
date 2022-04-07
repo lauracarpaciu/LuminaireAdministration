@@ -139,12 +139,13 @@ public class ServiceOrder {
 		this.luminaire = luminaire;
 	}
 
+
 	public OrderStatus getOrderStatus() {
 		return orderStatus;
 	}
 
-	public void setOrderStatus(String close) {
-		this.orderStatus = close;
+	public void setOrderStatus(OrderStatus orderStatus) {
+		this.orderStatus = orderStatus;
 	}
 
 	public List<PieceOrder> getParts() {
@@ -231,8 +232,8 @@ public class ServiceOrder {
 			return this;
 		}
 
-		public Builder withOrderStatus(OrderStatus orderStatus) {
-			serviceOrder.orderStatus = orderStatus;
+		public Builder withOrderStatus(String open) {
+			serviceOrder.orderStatus = open;
 			return this;
 		}
 

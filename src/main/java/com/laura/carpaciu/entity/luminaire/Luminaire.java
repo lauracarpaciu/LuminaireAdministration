@@ -17,14 +17,13 @@ import javax.validation.constraints.Size;
 
 import com.laura.carpaciu.entity.order.ServiceOrder;
 
-
 @Entity
 @Table(name = "luminaires")
 public class Luminaire {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private Long id;
 
 	@NotNull(message = "required")
 	@Size(max = 30, message = "luminaire name is to long")
@@ -50,7 +49,10 @@ public class Luminaire {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Luminaire(int id, String luminaireManufacturer, String luminaireModel, String serialNumber,
+	public Luminaire(Long id,
+			@NotNull(message = "required") @Size(max = 30, message = "luminaire name is to long") String luminaireManufacturer,
+			@NotNull(message = "required") @Size(max = 30, message = "model name is to long") String luminaireModel,
+			@Size(max = 17, message = "VIN lenght can't be more than {max} characters") @NotNull(message = "required") @Pattern(regexp = "^[0-9]*[a-zA-Z]+[a-zA-Z0-9]*$", message = "invalid VIN") String serialNumber,
 			Set<ServiceOrder> serviceOrders) {
 		super();
 		this.id = id;
@@ -91,11 +93,12 @@ public class Luminaire {
 		this.serialNumber = serialNumber;
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
+
 }

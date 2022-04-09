@@ -12,7 +12,7 @@ public class Invoice {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private Long id;
 
 	private String invoiceNumber;
 
@@ -27,20 +27,20 @@ public class Invoice {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Invoice(int id, String invoiceNumber, byte[] invoice, ServiceOrder serviceOrder) {
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Invoice(Long id, String invoiceNumber, byte[] invoice, ServiceOrder serviceOrder) {
 		super();
 		this.id = id;
 		this.invoiceNumber = invoiceNumber;
 		this.invoice = invoice;
 		this.serviceOrder = serviceOrder;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public String getInvoiceNumber() {
@@ -85,5 +85,5 @@ public class Invoice {
 	@Override
 	public String toString() {
 		return "Invoice{" + "id=" + id + ", number='" + invoiceNumber + '\'' + '}';
-	}}
-
+	}
+}

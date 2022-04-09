@@ -7,14 +7,14 @@ import com.laura.carpaciu.entity.order.ServiceOrder;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity //This tells Hibernate to make a table out of this class
+@Entity // This tells Hibernate to make a table out of this class
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "clients")
 public class Client {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private Long id;
 
 	@Embedded
 	private Adress adress;
@@ -27,18 +27,18 @@ public class Client {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Client(int id, Adress adress, Set<ServiceOrder> serviceOrders) {
+	public Client(Long id, Adress adress, Set<ServiceOrder> serviceOrders) {
 		super();
 		this.id = id;
 		this.adress = adress;
 		this.serviceOrders = serviceOrders;
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

@@ -15,7 +15,7 @@ public class ServiceOrder {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private Long id;
 
 	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
 	private LuminaireCases luminaireProblems;
@@ -61,7 +61,31 @@ public class ServiceOrder {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ServiceOrder(int id, LuminaireCases luminaireProblems, User user, Client client, Luminaire luminaire,
+	public double getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(double totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+
+	public double getTotalPriceVAT() {
+		return totalPriceVAT;
+	}
+
+	public void setTotalPriceVAT(double totalPriceVAT) {
+		this.totalPriceVAT = totalPriceVAT;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public ServiceOrder(Long id, LuminaireCases luminaireProblems, User user, Client client, Luminaire luminaire,
 			OrderStatus orderStatus, List<PieceOrder> parts, List<WorkOrder> works, double partsTotalPrice,
 			double partsTotalPriceVAT, double workTotalPrice, double workTotalPriceVAT, double totalPrice,
 			double totalPriceVAT) {
@@ -80,32 +104,6 @@ public class ServiceOrder {
 		this.workTotalPriceVAT = workTotalPriceVAT;
 		this.totalPrice = totalPrice;
 		this.totalPriceVAT = totalPriceVAT;
-	}
-
-
-
-	public double getTotalPrice() {
-		return totalPrice;
-	}
-
-	public void setTotalPrice(double totalPrice) {
-		this.totalPrice = totalPrice;
-	}
-
-	public double getTotalPriceVAT() {
-		return totalPriceVAT;
-	}
-
-	public void setTotalPriceVAT(double totalPriceVAT) {
-		this.totalPriceVAT = totalPriceVAT;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public LuminaireCases getLuminaireProblems() {
@@ -139,7 +137,6 @@ public class ServiceOrder {
 	public void setLuminaire(Luminaire luminaire) {
 		this.luminaire = luminaire;
 	}
-
 
 	public OrderStatus getOrderStatus() {
 		return orderStatus;
@@ -197,13 +194,11 @@ public class ServiceOrder {
 		this.workTotalPriceVAT = workTotalPriceVAT;
 	}
 
-
-
 	public static class Builder {
 
 		private final ServiceOrder serviceOrder = new ServiceOrder();
 
-		public Builder withId(int id) {
+		public Builder withId(Long id) {
 			serviceOrder.id = id;
 			return this;
 		}

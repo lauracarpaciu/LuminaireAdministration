@@ -9,7 +9,7 @@ public class PieceOrder {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private Long id;
 
 	@Column(name = "part_Number")
 	private String partNumber;
@@ -31,7 +31,7 @@ public class PieceOrder {
 		// TODO Auto-generated constructor stub
 	}
 
-	public PieceOrder(int id, String partNumber, String partName, int count, double price, ServiceOrder serviceOrder) {
+	public PieceOrder(Long id, String partNumber, String partName, int count, double price, ServiceOrder serviceOrder) {
 		super();
 		this.id = id;
 		this.partNumber = partNumber;
@@ -80,16 +80,12 @@ public class PieceOrder {
 		this.price = price;
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
-
-
-
-
 
 }

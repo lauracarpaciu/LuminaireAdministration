@@ -14,7 +14,7 @@ public class Work {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private Long id;
 
 	@NotNull(message = "required")
 	private String workDescription;
@@ -30,20 +30,21 @@ public class Work {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Work(int id, String workDescription, Double timedWork, WorkCategory category) {
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Work(Long id, @NotNull(message = "required") String workDescription,
+			@Min(value = 0, message = "invalid") Double timedWork, WorkCategory category) {
 		super();
 		this.id = id;
 		this.workDescription = workDescription;
 		this.timedWork = timedWork;
 		this.category = category;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public String getWorkDescription() {

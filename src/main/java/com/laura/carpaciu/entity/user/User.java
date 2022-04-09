@@ -18,7 +18,7 @@ public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private Long id;
 
 	@NotNull(message = "required")
 	@Size(min = 2, max = 20)
@@ -59,8 +59,15 @@ public class User {
 	public User() {
 	}
 
-	public User(int id, String firstName, String lastName, String username, String email, String password,
-			boolean isEnabled, boolean isNonLoked, Set<String> authorities, ActivationToken activationToken,
+
+
+	public User(Long id, @NotNull(message = "required") @Size(min = 2, max = 20) String firstName,
+			@NotNull(message = "required") @Size(min = 2, message = "must have atleast 2 characters") String lastName,
+			@NotNull(message = "required") @Size(min = 2, message = "must have atlest 2 characterrs") String username,
+			@Email(message = "required") String email,
+			@NotBlank(message = "required") @Size(min = 3, message = "password must have at least 3 characters") String password,
+			boolean isEnabled, boolean isNonLoked,
+			@Size(min = 1, message = "select at lest one") Set<String> authorities, ActivationToken activationToken,
 			Set<ServiceOrder> serviceOrders) {
 		super();
 		this.id = id;
@@ -69,12 +76,14 @@ public class User {
 		this.username = username;
 		this.email = email;
 		this.password = password;
-		this.setEnabled(isEnabled);
-		this.setNonLoked(isNonLoked);
+		this.isEnabled = isEnabled;
+		this.isNonLoked = isNonLoked;
 		this.authorities = authorities;
 		this.activationToken = activationToken;
 		this.serviceOrders = serviceOrders;
 	}
+
+
 
 	@Override
 	public boolean equals(Object o) {

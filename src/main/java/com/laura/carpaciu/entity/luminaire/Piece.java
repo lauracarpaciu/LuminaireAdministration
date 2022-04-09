@@ -3,12 +3,13 @@ package com.laura.carpaciu.entity.luminaire;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.util.Objects;
+
 @Entity
 @Table(name = "pices")
 public class Piece {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private Long id;
 
 	@NotNull(message = "required")
 	@Size(min = 1, message = "required")
@@ -36,23 +37,24 @@ public class Piece {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Piece(int id, String partNumber, String partName, Integer count, Double price) {
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Piece(Long id, @NotNull(message = "required") @Size(min = 1, message = "required") String partNumber,
+			@NotNull(message = "required") @Size(min = 1, message = "required") String partName,
+			@Min(value = 1, message = "must be equal or greater than {value}") @Max(value = 100000, message = "must be less or equal to {value}") @NotNull(message = "required") Integer count,
+			@Min(value = 0, message = "must be equal or grater than {value}") @NotNull(message = "required") Double price) {
 		super();
 		this.id = id;
 		this.partNumber = partNumber;
 		this.partName = partName;
 		this.count = count;
 		this.price = price;
-	}
-
-	
-	
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public String getPartNumber() {
@@ -109,7 +111,5 @@ public class Piece {
 		return "Piece [id=" + id + ", partNumber=" + partNumber + ", partName=" + partName + ", count=" + count
 				+ ", price=" + price + "]";
 	}
-
-
 
 }

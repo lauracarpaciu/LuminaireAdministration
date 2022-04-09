@@ -1,7 +1,6 @@
 package com.laura.carpaciu.entity.clients;
 
 import java.util.Objects;
-import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,15 +11,13 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-import com.laura.carpaciu.entity.order.ServiceOrder;
-
 @Entity
 @Table(name = "companies")
 public class Company extends Client {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private Long id;
 
 	@NotNull(message = "required")
 	@Size(max = 30, message = " must have a maximum of {max} characters ")
@@ -31,31 +28,25 @@ public class Company extends Client {
 	@Size(max = 100, message = " must have a maximum of {max} characters ")
 	private String name;
 
-	
-
 	public Company() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Company(int id, Adress adress, Set<ServiceOrder> serviceOrders) {
-		super(id, adress, serviceOrders);
-		// TODO Auto-generated constructor stub
-	}
-
-		
-	public Company(int id, String cui, String name) {
+	public Company(Long id,
+			@NotNull(message = "required") @Size(max = 30, message = " must have a maximum of {max} characters ") @Pattern(regexp = "[0-9]+", message = "only digits") String cui,
+			@NotNull(message = "required") @Size(max = 100, message = " must have a maximum of {max} characters ") String name) {
 		super();
 		this.id = id;
 		this.cui = cui;
 		this.name = name;
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -74,7 +65,6 @@ public class Company extends Client {
 	public void setName(String name) {
 		this.name = name;
 	}
-
 
 	@Override
 	public boolean equals(Object o) {

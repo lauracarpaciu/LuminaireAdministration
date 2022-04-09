@@ -11,7 +11,7 @@ public class ActivationToken {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private Long id;
 	private String token;
 	private LocalDateTime createdAt;
 	private LocalDateTime activatedAt;
@@ -19,7 +19,15 @@ public class ActivationToken {
 	@OneToOne
 	private User user;
 
-	public ActivationToken(int id, String token, LocalDateTime createdAt, LocalDateTime activatedAt,
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public ActivationToken(Long id, String token, LocalDateTime createdAt, LocalDateTime activatedAt,
 			LocalDateTime expiredAt, User user) {
 		super();
 		this.id = id;
@@ -33,14 +41,6 @@ public class ActivationToken {
 	public ActivationToken() {
 		super();
 		// TODO Auto-generated constructor stub
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public String getToken() {
@@ -102,5 +102,4 @@ public class ActivationToken {
 				&& Objects.equals(user, other.user);
 	}
 
-	
 }

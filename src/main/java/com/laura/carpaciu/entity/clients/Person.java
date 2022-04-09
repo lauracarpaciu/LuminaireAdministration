@@ -5,10 +5,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-import com.laura.carpaciu.entity.order.ServiceOrder;
-
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @Table(name = "persons")
@@ -16,7 +13,7 @@ public class Person extends Client {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private Long id;
 
 	@NotNull(message = "required")
 	@Size(min = 13, max = 13, message = "has to have {max} digits")
@@ -36,12 +33,18 @@ public class Person extends Client {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Person(int id, Adress adress, Set<ServiceOrder> serviceOrders) {
-		super(id, adress, serviceOrders);
-		// TODO Auto-generated constructor stub
+	public Long getId() {
+		return id;
 	}
 
-	public Person(int id, String cnp, String firstName, String lastName) {
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Person(Long id,
+			@NotNull(message = "required") @Size(min = 13, max = 13, message = "has to have {max} digits") @Pattern(regexp = "[0-9]+", message = "only digits") String cnp,
+			@NotNull(message = "required") @Size(max = 30, message = "must have a maximum of {max} characters") String firstName,
+			@NotNull(message = "required") @Size(max = 30, message = "must have a maximum of {max} characters") String lastName) {
 		super();
 		this.id = id;
 		this.cnp = cnp;
@@ -49,7 +52,6 @@ public class Person extends Client {
 		this.lastName = lastName;
 	}
 
-	
 	public String getCnp() {
 		return cnp;
 	}
@@ -78,6 +80,5 @@ public class Person extends Client {
 		return "Person{" + "id=" + id + ", cnp='" + cnp + '\'' + ", firstName='" + firstName + '\'' + ", lastName='"
 				+ lastName + '\'' + '}';
 	}
-
 
 }

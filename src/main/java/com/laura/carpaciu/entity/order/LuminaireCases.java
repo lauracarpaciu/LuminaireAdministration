@@ -14,7 +14,7 @@ public class LuminaireCases {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private Long id;
 
 	@Lob
 	@Column(name = "luminaire_problems")
@@ -25,18 +25,18 @@ public class LuminaireCases {
 		// TODO Auto-generated constructor stub
 	}
 
-	public LuminaireCases(int id, String problems) {
-		super();
-		this.id = id;
-		this.problems = problems;
-	}
-
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public LuminaireCases(Long id, String problems) {
+		super();
+		this.id = id;
+		this.problems = problems;
 	}
 
 	public String getProblems() {

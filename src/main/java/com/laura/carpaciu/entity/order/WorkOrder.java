@@ -12,7 +12,7 @@ public class WorkOrder {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private Long id;
 
 	private String workDescription;
 
@@ -31,7 +31,15 @@ public class WorkOrder {
 		// TODO Auto-generated constructor stub
 	}
 
-	public WorkOrder(int id, String workDescription, double timedWork, double workPrice, ServiceOrder serviceOrder,
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public WorkOrder(Long id, String workDescription, double timedWork, double workPrice, ServiceOrder serviceOrder,
 			WorkCategory category) {
 		super();
 		this.id = id;
@@ -40,14 +48,6 @@ public class WorkOrder {
 		this.workPrice = workPrice;
 		this.serviceOrder = serviceOrder;
 		this.category = category;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public String getWorkDescription() {

@@ -10,7 +10,7 @@ public class WorkPrice {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private Long id;
 
 	@NotNull(message = "required")
 	@Min(value = 0, message = "invalid")
@@ -33,8 +33,11 @@ public class WorkPrice {
 		// TODO Auto-generated constructor stub
 	}
 
-	public WorkPrice(int id, Double mechanicalWorkPrice, Double houseWorkPrice, Double electricalWorkPrice,
-			Double normalWorkPrice) {
+	public WorkPrice(Long id,
+			@NotNull(message = "required") @Min(value = 0, message = "invalid") Double mechanicalWorkPrice,
+			@NotNull(message = "required") @Min(value = 0, message = "invalid") Double houseWorkPrice,
+			@NotNull(message = "required") @Min(value = 0, message = "invalid") Double electricalWorkPrice,
+			@NotNull(message = "required") @Min(value = 0, message = "invalid") Double normalWorkPrice) {
 		super();
 		this.id = id;
 		this.mechanicalWorkPrice = mechanicalWorkPrice;
@@ -50,11 +53,11 @@ public class WorkPrice {
 				+ normalWorkPrice + "]";
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -89,6 +92,5 @@ public class WorkPrice {
 	public void setNormalWorkPrice(Double normalWorkPrice) {
 		this.normalWorkPrice = normalWorkPrice;
 	}
-
 
 }

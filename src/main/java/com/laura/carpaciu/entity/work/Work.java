@@ -9,6 +9,7 @@ import com.laura.carpaciu.utility.WorkCategory;
 import java.util.Objects;
 
 @Entity
+@Table(name = "works")
 public class Work {
 
 	@Id

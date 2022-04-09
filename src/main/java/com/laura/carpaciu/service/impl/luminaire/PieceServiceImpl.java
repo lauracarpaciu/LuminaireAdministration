@@ -26,10 +26,10 @@ public class PieceServiceImpl implements PieceService {
 	@Override
 	@Transactional
 	public void addPart(Piece part) {
-		Optional<Piece> optionalPart = pieceRepository.findPartByPartNumber(part.getPartNumber());
+		Optional<Piece> optionalPart = pieceRepository.findByPartNumber(part.getPartNumber());
 
 		if (optionalPart.empty() != null) {
-			pieceRepository.createPart(part);
+			pieceRepository.create(part);
 			return;
 		}
 
@@ -42,7 +42,7 @@ public class PieceServiceImpl implements PieceService {
 
 	@Override
 	public Piece findPartByPartNumber(String partNumber) {
-		return pieceRepository.findPartByPartNumber(partNumber).orElseThrow();
+		return pieceRepository.findByPartNumber(partNumber).orElseThrow();
 	}
 
 	@Override

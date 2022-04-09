@@ -6,6 +6,7 @@ import java.util.Objects;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "activationTokens")
 public class ActivationToken {
 
 	@Id

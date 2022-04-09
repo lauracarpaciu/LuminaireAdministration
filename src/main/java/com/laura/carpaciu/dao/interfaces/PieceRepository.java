@@ -30,4 +30,8 @@ public interface PieceRepository extends CrudRepository<Piece, Integer> {
 
 	void updatePieceCount(int count, String partNumber);
 
+	Optional<Piece> findByPartNumber(String partNumber);
+
+	void create(Piece part);
+
 }

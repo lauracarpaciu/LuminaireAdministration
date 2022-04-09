@@ -13,6 +13,7 @@ import java.util.*;
 
 @SuppressWarnings("deprecation")
 @Entity
+@Table(name = "users")
 public class User {
 
 	@Id

@@ -5,6 +5,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 @Entity
+@Table(name = "workPrices")
 public class WorkPrice {
 
 	@Id

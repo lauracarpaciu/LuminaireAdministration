@@ -22,10 +22,10 @@ public class PersonServiceImpl implements PersonService {
 	@Transactional
 	public void createPerson(Person person) {
 
-		Optional<Person> optPerson = personRepository.findPersonByCnp(person.getCnp());
+		Optional<Person> optPerson = personRepository.findByCnp(person.getCnp());
 
 		if (optPerson.empty() != null) {
-			personRepository.createPerson(person);
+			personRepository.create(person);
 			return;
 		}
 
@@ -41,7 +41,7 @@ public class PersonServiceImpl implements PersonService {
 	@Transactional
 	public Person findPersonByCnp(String cnp) {
 
-		return personRepository.findPersonByCnp(cnp).orElseThrow();
+		return personRepository.findByCnp(cnp).orElseThrow();
 
 	}
 

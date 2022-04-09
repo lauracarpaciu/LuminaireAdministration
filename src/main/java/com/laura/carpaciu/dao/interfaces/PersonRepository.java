@@ -20,4 +20,8 @@ public interface PersonRepository extends CrudRepository<Person, Integer>{
 
 	void createPerson(Person person);
 
+	Optional<Person> findByCnp(String cnp);
+
+	void create(Person person);
+
 }

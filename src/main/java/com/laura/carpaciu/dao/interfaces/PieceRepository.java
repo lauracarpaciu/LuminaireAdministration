@@ -9,28 +9,13 @@ import com.laura.carpaciu.entity.luminaire.Piece;
 
 public interface PieceRepository extends CrudRepository<Piece, Integer> {
 
-	Optional<Piece> findPartByPartNumber(String partNumber);
-//	void createPart(Piece part);
-//
-//	Optional<Piece> findPartByName(String partName);
-//
-//	Optional<Piece> findPartByPartNumber(String partNumber);
-//
-//	int updatePieceCount(int count, String partNumber);
-//
-//	int updatePieceCountAndPrice(int increment, double price, String partNumber);
-//
-//	int decreasePieceCount(int decrement, String partNumber);
+	Optional<Piece> findByPartNumber(String partNumber);
 
-	void createPart(Piece part);
-
-	void updatePieceCountAndPrice(Integer count, Double price, String partNumber);
+	int updatePieceCountAndPrice(Integer count, Double price, String partNumber);
 
 	int decreasePieceCount(int decrement, String partNumber);
 
-	void updatePieceCount(int count, String partNumber);
-
-	Optional<Piece> findByPartNumber(String partNumber);
+	int updatePieceCount(int count, String partNumber);
 
 	void create(Piece part);
 

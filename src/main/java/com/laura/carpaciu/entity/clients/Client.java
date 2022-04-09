@@ -9,6 +9,7 @@ import java.util.Set;
 
 @Entity //This tells Hibernate to make a table out of this class
 @Inheritance(strategy = InheritanceType.JOINED)
+@Table(name = "clients")
 public class Client {
 
 	@Id

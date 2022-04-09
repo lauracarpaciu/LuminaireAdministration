@@ -1,9 +1,12 @@
 package com.laura.carpaciu.entity.clients;
 
 import javax.persistence.Embeddable;
+import javax.persistence.Table;
+
 import java.util.Objects;
 
 @Embeddable
+@Table(name = "adresses")
 public class Adress {
 
 	private String streetNumber;

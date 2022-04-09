@@ -11,6 +11,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
+@Table(name = "persons")
 public class Person extends Client {
 
 	@Id

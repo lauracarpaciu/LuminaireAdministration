@@ -7,6 +7,7 @@ import com.laura.carpaciu.entity.order.ServiceOrder;
 import java.util.Objects;
 
 @Entity
+@Table(name = "invoices")
 public class Invoice {
 
 	@Id

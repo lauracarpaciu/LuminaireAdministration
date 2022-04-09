@@ -10,6 +10,7 @@ import com.laura.carpaciu.utility.OrderStatus;
 import java.util.*;
 
 @Entity
+@Table(name = "serviceOrders")
 public class ServiceOrder {
 
 	@Id
@@ -232,7 +233,7 @@ public class ServiceOrder {
 			return this;
 		}
 
-		public Builder withOrderStatus(String open) {
+		public Builder withOrderStatus(OrderStatus open) {
 			serviceOrder.orderStatus = open;
 			return this;
 		}

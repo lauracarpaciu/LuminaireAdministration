@@ -1,5 +1,8 @@
 package com.laura.carpaciu.dao.interfaces;
 
+//Spring Data JPA also lets you define other query methods by declaring their method signature.
+//You need not write an implementation of the repository interface. Spring Data JPA creates an implementation when you run the application.
+
 import java.util.Optional;
 
 import org.springframework.data.repository.CrudRepository;

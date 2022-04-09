@@ -9,6 +9,7 @@ import com.laura.carpaciu.entity.work.Work;
 public interface WorkRepository extends CrudRepository<Work, Integer> {
 
 	void create(Work work);
+
 	List<Work> findAllWorks();
 
 	List<Work> findByName(String workDescription);
@@ -18,6 +19,5 @@ public interface WorkRepository extends CrudRepository<Work, Integer> {
 	int updateWorkTimeAndDescription(double timedWork, String workDescription, int id);
 
 	int deleteWork(int id);
-
 
 }

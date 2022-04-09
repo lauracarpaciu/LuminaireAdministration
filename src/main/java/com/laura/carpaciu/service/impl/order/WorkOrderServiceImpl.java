@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.laura.carpaciu.convertor.WorkConvertor;
 import com.laura.carpaciu.dao.interfaces.OrderRepository;
 import com.laura.carpaciu.dao.interfaces.WorkOrderRepository;
+import com.laura.carpaciu.dao.interfaces.WorkPriceRepository;
 import com.laura.carpaciu.entity.order.ServiceOrder;
 import com.laura.carpaciu.entity.order.WorkOrder;
 import com.laura.carpaciu.entity.work.Work;
@@ -24,17 +25,18 @@ import java.util.Optional;
 @Service
 public class WorkOrderServiceImpl implements WorkOrderService{
 	
-    private final WorkOrderRepository workOrderDao ;
-    private final WorkPriceServiceImpl workPriceService ;
-    private final OrderRepository serviceOrderDao ;
+    private final WorkOrderRepository workOrderRepository ;
+    private final WorkPriceRepository workPriceRepository ;
+    private final OrderRepository orderRepository;
 
 
-    public WorkOrderServiceImpl(WorkOrderRepository workOrderDao, WorkPriceServiceImpl workPriceService,
-			OrderRepository serviceOrderDao) {
+
+	public WorkOrderServiceImpl(WorkOrderRepository workOrderRepository, WorkPriceRepository workPriceRepository,
+			OrderRepository orderRepository) {
 		super();
-		this.workOrderDao = workOrderDao;
-		this.workPriceService = workPriceService;
-		this.serviceOrderDao = serviceOrderDao;
+		this.workOrderRepository = workOrderRepository;
+		this.workPriceRepository = workPriceRepository;
+		this.orderRepository = orderRepository;
 	}
 
 	@Transactional
@@ -50,7 +52,7 @@ public class WorkOrderServiceImpl implements WorkOrderService{
          WorkOrder workServiceOrder = WorkConvertor.convert(work,workPrice, order);
 
 
-         workOrderDao.createWorkServiceOrder(workServiceOrder);
+         workOrderRepository.createWorkServiceOrder(workServiceOrder);
          serviceOrderDao.updateOrderStatus(OrderStatus.READY, order.getId());
 
     }
@@ -59,7 +61,7 @@ public class WorkOrderServiceImpl implements WorkOrderService{
 
 
         String workCategory = work.getCategory().toString();
-        Optional<WorkPrice>  workPrice = workPriceService.getOptWorkPrice();
+        Optional<WorkPrice>  workPrice = workPriceRepository.getOptWorkPrice();
 
         if(workPrice.isPresent()){
 
@@ -100,10 +102,10 @@ public class WorkOrderServiceImpl implements WorkOrderService{
             throw new WorkOrderException("Order is CLOSED, can't add any more labors to it!");
         }
 
-        Optional<WorkOrder> workOrder = workOrderDao.findWorkOrderById(id);
+        Optional<WorkOrder> workOrder = workOrderRepository.findWorkOrderById(id);
 
         if(workOrder.isPresent()){
-            workOrderDao.deleteWorkFromOrder(id);
+        	workOrderRepository.deleteWorkFromOrder(id);
             return;
         }
 

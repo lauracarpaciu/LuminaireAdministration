@@ -19,16 +19,18 @@ import com.laura.carpaciu.utility.OrderStatus;
 
 
 public class PieceOrderServiceImpl implements PieceOrderService {
-	private final PieceOrderRepository partOrderDao;
-	private final PieceRepository partDao;
-	private final OrderRepository orderDao;
+	private final PieceOrderRepository pieceOrderRepository;
+	private final PieceRepository pieceRepository;
+	private final OrderRepository orderRepository;
 
 
-	public PieceOrderServiceImpl(PieceOrderRepository partOrderDao, PieceRepository partDao, OrderRepository orderDao) {
+
+	public PieceOrderServiceImpl(PieceOrderRepository pieceOrderRepository, PieceRepository pieceRepository,
+			OrderRepository orderRepository) {
 		super();
-		this.partOrderDao = partOrderDao;
-		this.partDao = partDao;
-		this.orderDao = orderDao;
+		this.pieceOrderRepository = pieceOrderRepository;
+		this.pieceRepository = pieceRepository;
+		this.orderRepository = orderRepository;
 	}
 
 	@Override
@@ -39,24 +41,24 @@ public class PieceOrderServiceImpl implements PieceOrderService {
 			throw new PartOrderException("Order is CLOSED, can't add any more parts to it!");
 		}
 
-		Optional<PieceOrder> optPartOrder = partOrderDao.findPartOrderByPartName(part.getPartNumber(), serviceOrder);
+		Optional<PieceOrder> optPartOrder = pieceOrderRepository.findPartOrderByPartName(part.getPartNumber(), serviceOrder);
 		PieceOrder partServiceOrder = PieceConvertor.convert(part, serviceOrder, count);
 
 		if ((count <= part.getCount())) {
 
 			if (optPartOrder.empty() != null) {
 
-				partOrderDao.createPieceOrder(partServiceOrder);
+				pieceOrderRepository.createPieceOrder(partServiceOrder);
 
 			} else {
 
-				partOrderDao.updatePartOrderCount(optPartOrder.get().getId(), count);
+				pieceOrderRepository.updatePartOrderCount(optPartOrder.get().getId(), count);
 			}
 
 			int id = serviceOrder.getId();
 
-			orderDao.updateOrderStatus(OrderStatus.READY, id);
-			partDao.decreasePieceCount(count, part.getPartNumber());
+			orderRepository.updateOrderStatus(OrderStatus.READY, id);
+			pieceRepository.decreasePieceCount(count, part.getPartNumber());
 			return;
 
 		}
@@ -73,8 +75,8 @@ public class PieceOrderServiceImpl implements PieceOrderService {
 			throw new PartOrderException("Order is CLOSED can't remove parts from it!");
 		}
 
-		partDao.updatePieceCount(count, partNumber);
-		return partOrderDao.deletePartFromServiceOrder(partNumber);
+		pieceRepository.updatePieceCount(count, partNumber);
+		return pieceOrderRepository.deletePartFromServiceOrder(partNumber);
 
 	}
 

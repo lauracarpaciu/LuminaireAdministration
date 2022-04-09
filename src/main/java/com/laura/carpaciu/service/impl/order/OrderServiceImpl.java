@@ -27,8 +27,8 @@ import lombok.AllArgsConstructor;
 @Service
 public class OrderServiceImpl implements OrderService {
 
-	private final OrderRepository serviceOrderDao;
-	private final PieceRepository partDao;
+	private final OrderRepository orderRepository;
+	private final PieceRepository pieceRepository;
 	private final PdfService pdfService;
 	private final InvoiceService invoiceService;
 

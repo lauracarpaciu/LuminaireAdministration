@@ -25,7 +25,7 @@ public class PieceServiceImpl implements PieceService {
 
 	@Override
 	@Transactional
-	public void addPart(Piece part) {
+	public void addPiece(Piece part) {
 		Optional<Piece> optionalPart = pieceRepository.findByPartNumber(part.getPartNumber());
 
 		if (optionalPart.empty() != null) {
@@ -41,12 +41,12 @@ public class PieceServiceImpl implements PieceService {
 	}
 
 	@Override
-	public Piece findPartByPartNumber(String partNumber) {
+	public Piece findPieceByPartNumber(String partNumber) {
 		return pieceRepository.findByPartNumber(partNumber).orElseThrow();
 	}
 
 	@Override
-	public int decreasePartCount(int decrement, String partNumber) {
+	public int decreasePieceCount(int decrement, String partNumber) {
 		return pieceRepository.decreasePieceCount(decrement, partNumber);
 	}
 

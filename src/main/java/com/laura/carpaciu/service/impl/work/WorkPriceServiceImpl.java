@@ -16,12 +16,12 @@ import com.laura.carpaciu.services.WorkPriceService;
 
 public class WorkPriceServiceImpl implements WorkPriceService {
 
-	private final WorkPriceRepository workPriceDao;
+	private final WorkPriceRepository workPriceRepository;
 	private Optional<WorkPrice> optWorkPrice;
 
 	@Autowired
-	public WorkPriceServiceImpl(WorkPriceRepository workPriceDao) {
-		this.workPriceDao = workPriceDao;
+	public WorkPriceServiceImpl(WorkPriceRepository workPriceRepository) {
+		this.workPriceRepository = workPriceRepository;
 	}
 
 	@EventListener(ContextRefreshedEvent.class)
@@ -31,7 +31,7 @@ public class WorkPriceServiceImpl implements WorkPriceService {
 
 	@Override
 	public void findWorkPrices() {
-		optWorkPrice = workPriceDao.findAllWorkPrices();
+		optWorkPrice = workPriceRepository.findAllWorkPrices();
 
 	}
 
@@ -43,7 +43,7 @@ public class WorkPriceServiceImpl implements WorkPriceService {
 	@Override
 	public void createAllWorkPrices(WorkPrice workPrice) {
 		if (optWorkPrice.empty() != null) {
-			workPriceDao.createAllWorkPrices(workPrice);
+			workPriceRepository.createAllWorkPrices(workPrice);
 			findWorkPrices();
 			return;
 		}
@@ -63,18 +63,18 @@ public class WorkPriceServiceImpl implements WorkPriceService {
 			switch (workCategory) {
 
 			case "MECHANICAL":
-				workPriceDao.updateMechanicalWorkPrice(newPrice, id);
+				workPriceRepository.updateMechanicalWorkPrice(newPrice, id);
 				break;
 
 			case "HOUSE":
-				workPriceDao.updateHouseWorkPrice(newPrice, id);
+				workPriceRepository.updateHouseWorkPrice(newPrice, id);
 				break;
 			case "ELECTRIC":
-				workPriceDao.updateElectricalWorkPrice(newPrice, id);
+				workPriceRepository.updateElectricalWorkPrice(newPrice, id);
 				break;
 
 			case "NORMAL":
-				workPriceDao.updateNormalWorkPrice(newPrice, id);
+				workPriceRepository.updateNormalWorkPrice(newPrice, id);
 				break;
 
 			default:

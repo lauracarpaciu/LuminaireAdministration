@@ -17,4 +17,6 @@ public interface InvoiceRepository extends CrudRepository<Invoice, Integer>{
 
 	void saveInvoiceToDatabase(Invoice invoice);
 
+	Invoice findByServiceOrder(ServiceOrder serviceOrder);
+
 }

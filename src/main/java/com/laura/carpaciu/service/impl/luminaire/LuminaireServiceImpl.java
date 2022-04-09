@@ -24,10 +24,10 @@ public class LuminaireServiceImpl implements LuminaireService {
 
 	@Override
 	public void createLuminaire(Luminaire luminaire) {
-		Optional<Luminaire> optLuminaire = luminaireRepository.findLuminaireBySerialNumber(luminaire.getSerialNumber());
+		Optional<Luminaire> optLuminaire = luminaireRepository.findBySerialNumber(luminaire.getSerialNumber());
 
 		if (optLuminaire.empty() != null) {
-			luminaireRepository.createLuminaire(luminaire);
+			luminaireRepository.create(luminaire);
 			return;
 		}
 
@@ -37,7 +37,7 @@ public class LuminaireServiceImpl implements LuminaireService {
 
 	@Override
 	public Luminaire findLuminaireBySerialNumber(String serialNumber) {
-		return luminaireRepository.findLuminaireBySerialNumber(serialNumber).orElseThrow();
+		return luminaireRepository.findBySerialNumber(serialNumber).orElseThrow();
 	}
 
 }

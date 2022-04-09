@@ -16,4 +16,8 @@ public interface LuminaireRepository extends CrudRepository<Luminaire, Integer> 
 
 	void createLuminaire(Luminaire luminaire);
 
+	Optional<Luminaire> findBySerialNumber(String serialNumber);
+
+	void create(Luminaire luminaire);
+
 }

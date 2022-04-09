@@ -24,10 +24,10 @@ public class CompanyServiceImpl implements CompanyService {
 	@Transactional
 	public void createCompany(Company company) {
 
-		Optional<Company> optCompany = companyRepository.findCompanyByCui(company.getCui());
+		Optional<Company> optCompany = companyRepository.findByCui(company.getCui());
 
 		if (optCompany.empty() != null) {
-			companyRepository.createCompany(company);
+			companyRepository.create(company);
 			return;
 		}
 
@@ -43,7 +43,7 @@ public class CompanyServiceImpl implements CompanyService {
 	@Transactional(readOnly = true)
 	public Company findCompanyByCui(String cui) {
 
-		return companyRepository.findCompanyByCui(cui).orElseThrow();
+		return companyRepository.findByCui(cui).orElseThrow();
 
 	}
 }

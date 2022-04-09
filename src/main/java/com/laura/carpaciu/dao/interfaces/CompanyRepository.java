@@ -18,6 +18,10 @@ public interface CompanyRepository extends CrudRepository<Company, Integer>  {
 	Optional<Company> findCompanyByCui(String cui);
 
 	void createCompany(Company company);
+
+	Optional<Company> findByCui(String cui);
+
+	void create(Company company);
 	
 //	void createCompany(Company company);
 //

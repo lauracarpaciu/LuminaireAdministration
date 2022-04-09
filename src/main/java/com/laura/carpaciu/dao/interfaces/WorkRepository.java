@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.data.repository.CrudRepository;
 import com.laura.carpaciu.entity.work.Work;
 
-public interface WorkRepository extends CrudRepository<Work, Integer> {
+public interface WorkRepository extends CrudRepository<Work, Long> {
 
 	void create(Work work);
 

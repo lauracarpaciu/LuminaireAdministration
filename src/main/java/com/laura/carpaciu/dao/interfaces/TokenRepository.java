@@ -1,6 +1,6 @@
 package com.laura.carpaciu.dao.interfaces;
 
-public interface TokenRepository {
+public interface TokenRepository  {
 
 	int updateToken(int userId, String token);
 

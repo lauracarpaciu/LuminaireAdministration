@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import com.laura.carpaciu.entity.order.PieceOrder;
 import com.laura.carpaciu.entity.order.ServiceOrder;
 
-public interface PieceOrderRepository extends CrudRepository<PieceOrder, Integer> {
+public interface PieceOrderRepository extends CrudRepository<PieceOrder, Long> {
 
 	Optional<PieceOrder> findByPartNumb(String partNumber, ServiceOrder serviceOrder);
 

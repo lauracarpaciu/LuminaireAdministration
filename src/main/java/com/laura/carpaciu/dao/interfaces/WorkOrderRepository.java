@@ -6,7 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.laura.carpaciu.entity.order.WorkOrder;
 
-public interface WorkOrderRepository extends CrudRepository<WorkOrder, Integer> {
+public interface WorkOrderRepository extends CrudRepository<WorkOrder, Long> {
 	Optional<WorkOrder> findById(int id);
 
 	void create(WorkOrder workOrder);

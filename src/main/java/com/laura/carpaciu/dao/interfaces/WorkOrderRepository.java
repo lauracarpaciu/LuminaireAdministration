@@ -4,26 +4,13 @@ import java.util.Optional;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.laura.carpaciu.entity.clients.Company;
 import com.laura.carpaciu.entity.order.WorkOrder;
-import com.laura.carpaciu.entity.user.User;
 
 public interface WorkOrderRepository extends CrudRepository<WorkOrder, Integer> {
+	Optional<WorkOrder> findById(int id);
 
-	void createWorkServiceOrder(WorkOrder workServiceOrder);
+	void create(WorkOrder workOrder);
 
-	Optional<WorkOrder> findWorkOrderById(int id);
-
-	void deleteWorkFromOrder(int id);
-	
-//	void createUser(User user);
-//
-//	Optional<User> findUserByUsername(String username);
-//
-//	Optional<User> findUserByEmail(String email);
-//
-//	int activateUserAccount(User user);
-//
-//	Optional<User> findUserWithToken(String email);
+	int deleteWorkFromOrder(int id);
 
 }

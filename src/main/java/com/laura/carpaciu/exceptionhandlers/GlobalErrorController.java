@@ -8,19 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class GlobalErrorController implements ErrorController {
 
+	@RequestMapping("/error")
+	public void handleError(HttpServletRequest request) throws Throwable {
 
-    @RequestMapping("/error")
-    public void handleError(HttpServletRequest request) throws Throwable {
+		if (request.getAttribute("javax.servlet.error.exception") != null) {
+			throw (Throwable) request.getAttribute("javax.servlet.error.exception");
+		}
+	}
 
-        if (request.getAttribute("javax.servlet.error.exception") != null) {
-            throw (Throwable) request.getAttribute("javax.servlet.error.exception");
-        }
-    }
-
-
-
-    @Override
-    public String getErrorPath() {
-        return null;
-    }
+	@Override
+	public String getErrorPath() {
+		return null;
+	}
 }

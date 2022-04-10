@@ -1,10 +1,5 @@
 package com.laura.carpaciu.utility;
 
-public class WorkCategory {
-
-	public static Object values() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+public enum WorkCategory {
+ MECHANICAL,HOUSE, ELECTRIC, NORMAL;
 }

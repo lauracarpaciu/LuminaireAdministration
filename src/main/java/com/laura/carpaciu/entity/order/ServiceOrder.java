@@ -142,9 +142,6 @@ public class ServiceOrder {
 		return orderStatus;
 	}
 
-	public void setOrderStatus(OrderStatus orderStatus) {
-		this.orderStatus = orderStatus;
-	}
 
 	public List<PieceOrder> getParts() {
 		return parts;
@@ -267,6 +264,11 @@ public class ServiceOrder {
 	@Override
 	public String toString() {
 		return "ServiceOrder{" + "id=" + id + ", totalPrice=" + totalPrice + ", client=" + client + '}';
+	}
+
+	public void setOrderStatus(String close) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

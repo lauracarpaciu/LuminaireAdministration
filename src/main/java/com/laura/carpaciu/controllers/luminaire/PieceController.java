@@ -40,7 +40,7 @@ public class PieceController {
 			return "auto/piece-page";
 		}
 
-		pieceService.addPart(piece);
+		pieceService.addPiece(piece);
 		return "redirect:/parts/part";
 	}
 

@@ -220,16 +220,6 @@ public class ServiceOrder {
 			return this;
 		}
 
-		public Builder withVehicle(Luminaire luminaire) {
-			serviceOrder.luminaire = luminaire;
-			return this;
-		}
-
-		public Builder withOrderStatus(OrderStatus open) {
-			serviceOrder.orderStatus = open;
-			return this;
-		}
-
 		public Builder withPart(List<PieceOrder> parts) {
 			serviceOrder.parts = parts;
 			return this;
@@ -242,6 +232,11 @@ public class ServiceOrder {
 
 		public ServiceOrder build() {
 			return serviceOrder;
+		}
+
+		public Builder withLuminaire(Luminaire retrieveLuminaire) {
+			serviceOrder.luminaire = retrieveLuminaire;
+			return this;
 		}
 
 	}

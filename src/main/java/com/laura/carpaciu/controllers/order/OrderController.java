@@ -18,7 +18,6 @@ import com.laura.carpaciu.utility.OrderStatus;
 
 import lombok.AllArgsConstructor;
 
-
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,76 +33,68 @@ import java.util.Optional;
 @RequestMapping("/serviceOrder")
 public class OrderController {
 
+	private final OrderService serviceOrderService;
+	private final UserService userService;
+	private final MiniCache miniCache;
 
-    private final OrderService serviceOrderService;
-    private final UserService userService;
-    private final MiniCache miniCache;
-
-
-    public OrderController(OrderService serviceOrderService, UserService userService, MiniCache miniCache) {
+	public OrderController(OrderService serviceOrderService, UserService userService, MiniCache miniCache) {
 		super();
 		this.serviceOrderService = serviceOrderService;
 		this.userService = userService;
 		this.miniCache = miniCache;
 	}
 
-
 	@GetMapping("/serviceOrder")
-    public String showServiceOrderPage(Model model){
+	public String showServiceOrderPage(Model model) {
 
-        Optional.ofNullable(miniCache.retrieveLuminaire())
-                    .ifPresentOrElse(vehicle -> model.addAttribute("vehicle", vehicle),
-                                          () -> model.addAttribute("vehicle", miniCache.getEmptyLuminaire()));
+		Optional.ofNullable(miniCache.retrieveLuminaire()).ifPresentOrElse(
+				vehicle -> model.addAttribute("vehicle", vehicle),
+				() -> model.addAttribute("vehicle", miniCache.getEmptyLuminaire()));
 
-        Optional.ofNullable(miniCache.retrievePerson())
-                    .ifPresentOrElse(person -> model.addAttribute("person", person),
-                                         () -> model.addAttribute("person", miniCache.loadEmptyPerson()));
+		Optional.ofNullable(miniCache.retrievePerson()).ifPresentOrElse(person -> model.addAttribute("person", person),
+				() -> model.addAttribute("person", miniCache.loadEmptyPerson()));
 
-        Optional.ofNullable(miniCache.retrieveCompany())
-                    .ifPresentOrElse(company -> model.addAttribute("company", company),
-                                          () -> model.addAttribute("company", miniCache.loadEmptyCompany()));
+		Optional.ofNullable(miniCache.retrieveCompany()).ifPresentOrElse(
+				company -> model.addAttribute("company", company),
+				() -> model.addAttribute("company", miniCache.loadEmptyCompany()));
 
-        return "order/serviceOrder-page";
-    }
+		return "order/serviceOrder-page";
+	}
 
+	@GetMapping("/searchLuminaire")
+	public String searchCarByVin(HttpServletRequest request, Model model) {
 
-    @GetMapping("/searchCar")
-    public String searchCarByVin(HttpServletRequest request, Model model){
+		String serialNumber = request.getParameter("serialNumber");
+		Luminaire luminaire = miniCache.findLuminaireBySerialNumber(serialNumber);
+		model.addAttribute("luminaire", luminaire);
 
-       String serialNumber = request.getParameter("serialNumber");
-        Luminaire luminaire = miniCache.findLuminaireBySerialNumber(serialNumber);
-        model.addAttribute("luminaire", luminaire);
+		return "redirect:/serviceOrder/serviceOrder";
+	}
 
-        return "redirect:/serviceOrder/serviceOrder";
-    }
+	@GetMapping("/findPerson")
+	public String searchPersonByCnp(HttpServletRequest request, Model model) {
 
+		String cnp = request.getParameter("cnp");
+		Person person = miniCache.findPersonByCnp(cnp);
+		model.addAttribute("person", person);
+		miniCache.resetCompanySearch();
 
+		return "redirect:/serviceOrder/serviceOrder";
 
-    @GetMapping("/findPerson")
-    public String searchPersonByCnp(HttpServletRequest request, Model model){
+	}
 
-        String cnp = request.getParameter("cnp");
-        Person  person = miniCache.findPersonByCnp(cnp);
-        model.addAttribute("person", person);
-        miniCache.resetCompanySearch();                                     // -> resetez company daca am dat search person
+	@GetMapping("/findCompany")
+	public String searchCompany(HttpServletRequest request, Model model) {
 
-        return "redirect:/serviceOrder/serviceOrder";
+		String cui = request.getParameter("cui");
+		Company company = miniCache.findCompanyByCui(cui);
+		model.addAttribute("company", company);
+		miniCache.resetPersonSearch();
 
-    }
+		return "redirect:/serviceOrder/serviceOrder";
+	}
 
-    @GetMapping("/findCompany")
-    public String searchCompany(HttpServletRequest request, Model model){
-
-        String cui = request.getParameter("cui");
-        Company company = miniCache.findCompanyByCui(cui);
-        model.addAttribute("company", company);
-        miniCache.resetPersonSearch();                                      // -> resetez person daca am dat search company
-
-        return "redirect:/serviceOrder/serviceOrder";
-    }
-
-
-    @PostMapping("/carProblems")    
+	@PostMapping("/luminaireProblems")    
     public String createServiceOrder(HttpServletRequest request){
 
 
@@ -125,12 +116,12 @@ public class OrderController {
                         problems.setProblems(luminaireProblems);
 
 
-            ServiceOrder serviceOrder = new ServiceOrder.Builder()
-                                                .withOrderStatus(OrderStatus.OPEN)
-                                                .withLuminaireProblems(problems)
-                                                .withVehicle(miniCache.retrieveLuminaire())
-                                                .withUser(user)
-                                                .build();
+            ServiceOrder serviceOrder =  new ServiceOrder.Builder()
+            							.withLuminaireProblems(problems)
+            							.withLuminaire(miniCache.retrieveLuminaire())
+            							.withUser(user)
+            							.build();
+            								
 
 
 

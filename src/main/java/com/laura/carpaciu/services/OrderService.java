@@ -30,7 +30,7 @@ public interface OrderService {
 	ServiceOrder findServiceOrderParts(int id);
 
 	@Transactional
-	List<PieceOrder> getPartsFormServiceOrder(int id);
+	List<PieceOrder> getPartsFormServiceOrder(Long id);
 
 	@Transactional
 	ServiceOrder findCompleteServiceOrderById(int id);

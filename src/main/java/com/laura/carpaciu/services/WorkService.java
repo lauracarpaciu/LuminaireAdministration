@@ -23,7 +23,7 @@ public interface WorkService  {
 	Work findWorkById(int id);
 
 	@Transactional
-	int updateWorkTimeAndDescription(double timedWork, String workDescription, int id);
+	int updateWorkTimeAndDescription(double timedWork, String workDescription, Long long1);
 
 	@Transactional
 	int deleteWork(int id);

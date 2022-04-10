@@ -47,7 +47,7 @@ public class PieceOrderController {
 			throw new SelectOrderException("No order selected!");
 		}
 
-		int id = miniCache.getCompleteServiceOrder().getId();
+		Long id = miniCache.getCompleteServiceOrder().getId();
 
 		List<PieceOrder> partServiceOrders = serviceOrderService.getPartsFormServiceOrder(id);
 

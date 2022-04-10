@@ -25,18 +25,20 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class UserServiceImpl implements UserService {
 
-	private final UserRepository userDao;
+	private final UserRepository userRepository;
 	private final PasswordEncoder passwordEncoder;
 	private final EmailSender emailSender;
-	private final TokenRepository tokenDao;
+	private final TokenRepository tokenRepository;
 
-	public UserServiceImpl(UserRepository userDao, PasswordEncoder passwordEncoder, EmailSender emailSender,
-			TokenRepository tokenDao) {
+
+
+	public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, EmailSender emailSender,
+			TokenRepository tokenRepository) {
 		super();
-		this.userDao = userDao;
+		this.userRepository = userRepository;
 		this.passwordEncoder = passwordEncoder;
 		this.emailSender = emailSender;
-		this.tokenDao = tokenDao;
+		this.tokenRepository = tokenRepository;
 	}
 
 	@Override
@@ -44,11 +46,11 @@ public class UserServiceImpl implements UserService {
 	@Transactional
 	public Future<User> createUser(User user) {
 
-		Optional<User> user1 = userDao.findUserByUsername(user.getUsername());
+		Optional<User> user1 = userRepository.findByUsername(user.getUsername());
 
 		if (user1.empty() != null) {
 
-			user1 = userDao.findUserByEmail(user.getEmail());
+			user1 = userRepository.findByEmail(user.getEmail());
 
 			if (user1.empty() != null) {
 
@@ -59,7 +61,7 @@ public class UserServiceImpl implements UserService {
 				ActivationToken activationToken = createActivationToken(token, user);
 				user.setActivationToken(activationToken);
 
-				userDao.createUser(user);
+				userRepository.createUser(user);
 				emailSender.sendEmail(user);
 
 				return new AsyncResult<>(user);
@@ -91,7 +93,7 @@ public class UserServiceImpl implements UserService {
 		String token = UUID.randomUUID().toString();
 		user.getActivationToken().setToken(token);
 
-		tokenDao.updateToken(user.getId(), token);
+		tokenRepository.updateToken(user.getId(), token);
 		emailSender.sendEmail(user);
 
 	}
@@ -99,13 +101,13 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional(readOnly = true)
 	public Optional<User> findUserWithToken(String email) {
-		return userDao.findUserWithToken(email);
+		return userRepository.findWithToken(email);
 	}
 
 	@Override
 	@Transactional
 	public int activateUserAccount(User user) {
-		return userDao.activateUserAccount(user);
+		return userRepository.activateUserAccount(user);
 
 	}
 
@@ -113,7 +115,7 @@ public class UserServiceImpl implements UserService {
 	@Transactional
 	public User findUseByUsername(String username) {
 
-		return userDao.findUserByUsername(username)
+		return userRepository.findByUsername(username)
 				.orElseThrow(() -> new RuntimeException("User not Found in security context"));
 	}
 

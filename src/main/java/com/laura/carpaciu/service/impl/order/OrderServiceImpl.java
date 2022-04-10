@@ -93,7 +93,7 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	@Transactional
-	public List<WorkOrder> findAllWorksInOrder(int id) {
+	public List<WorkOrder> findA llWorksInOrder(int id) {
 
 		return orderRepository.findAllWorksInOrder(id);
 
@@ -158,6 +158,18 @@ public class OrderServiceImpl implements OrderService {
 		return serviceOrder.getWorks().stream().mapToDouble(l -> l.getWorkPrice())
 				.map(price -> TwoDigitsDouble.formatPrice(price)).sum();
 
+	}
+
+	@Override
+	public List<PieceOrder> getPartsFormServiceOrder(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<WorkOrder> findAllWorksInOrder(Long long1) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

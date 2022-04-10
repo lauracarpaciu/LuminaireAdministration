@@ -261,8 +261,8 @@ public class ServiceOrder {
 		return "ServiceOrder{" + "id=" + id + ", totalPrice=" + totalPrice + ", client=" + client + '}';
 	}
 
-	public void setOrderStatus(String close) {
-		// TODO Auto-generated method stub
+	public void setOrderStatus(OrderStatus orderStatus) {
+		this.orderStatus = orderStatus;
 		
 	}
 

@@ -39,6 +39,6 @@ public interface OrderService {
 	int closeOrder(ServiceOrder serviceOrder) throws OrderIsClosedException;
 
 	@Transactional
-	List<WorkOrder> findAllWorksInOrder(int id);
+	List<WorkOrder> findAllWorksInOrder(Long long1);
 
 }

@@ -5,6 +5,9 @@ import org.aspectj.lang.annotation.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
+import com.laura.carpaciu.entity.user.User;
+import com.laura.carpaciu.util.Logs;
+
 @Aspect
 @Component
 public class LogUserAspect {

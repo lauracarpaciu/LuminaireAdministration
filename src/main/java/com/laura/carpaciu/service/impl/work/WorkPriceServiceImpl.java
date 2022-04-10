@@ -43,7 +43,7 @@ public class WorkPriceServiceImpl implements WorkPriceService {
 	@Override
 	public void createAllWorkPrices(WorkPrice workPrice) {
 		if (optWorkPrice.empty() != null) {
-			workPriceRepository.createAllWorkPrices(workPrice);
+			workPriceRepository.create(workPrice);
 			findWorkPrices();
 			return;
 		}
@@ -59,7 +59,7 @@ public class WorkPriceServiceImpl implements WorkPriceService {
 		}
 
 		if (optWorkPrice.isPresent()) {
-			Integer id = optWorkPrice.get().getId();
+			Long id = optWorkPrice.get().getId();
 			switch (workCategory) {
 
 			case "MECHANICAL":

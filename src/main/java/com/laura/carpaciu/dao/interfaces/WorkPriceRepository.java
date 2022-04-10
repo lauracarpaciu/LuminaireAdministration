@@ -12,12 +12,12 @@ public interface WorkPriceRepository extends CrudRepository<WorkPrice, Long> {
 
 	void create(WorkPrice workPrice);
 
-	void updateMechanicalWorkPrice(double newPrice, Integer id);
+	void updateMechanicalWorkPrice(double newPrice, Long id);
 
-	void updateHouseWorkPrice(double newPrice, Integer id);
+	void updateHouseWorkPrice(double newPrice, Long id);
 
-	void updateElectricalWorkPrice(double newPrice, Integer id);
+	void updateElectricalWorkPrice(double newPrice, Long id);
 
-	void updateNormalWorkPrice(double newPrice, Integer id);
+	void updateNormalWorkPrice(double newPrice, Long id);
 
 }

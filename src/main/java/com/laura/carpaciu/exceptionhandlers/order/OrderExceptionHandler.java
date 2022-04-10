@@ -3,11 +3,17 @@ package com.laura.carpaciu.exceptionhandlers.order;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import com.laura.carpaciu.errors.invoice.InvoiceException;
+import com.laura.carpaciu.errors.luminaire.PieceNotFoundException;
+import com.laura.carpaciu.errors.luminaire.PieceOrderException;
 import com.laura.carpaciu.errors.order.BadIntegerNumberException;
 import com.laura.carpaciu.errors.order.ClientNotSelectedException;
+import com.laura.carpaciu.errors.order.LuminaireNotSelectedException;
 import com.laura.carpaciu.errors.order.NotEnoughPartsException;
 import com.laura.carpaciu.errors.order.OrderIsClosedException;
+import com.laura.carpaciu.errors.order.SelectOrderException;
 import com.laura.carpaciu.errors.order.SelectPartException;
+import com.laura.carpaciu.errors.work.WorkOrderException;
 
 @ControllerAdvice
 public class OrderExceptionHandler {
@@ -74,17 +80,17 @@ public class OrderExceptionHandler {
     }
 
 
-    @ExceptionHandler(PartOrderException.class)
-    public String processPartOrderException(PartOrderException e){
+    @ExceptionHandler(PieceOrderException.class)
+    public String processPartOrderException(PieceOrderException e){
         e.printStackTrace();
         return "redirect:/orderPart/addPart-page";
     }
 
 
-    @ExceptionHandler(LaborOrderException.class)
-    public String processLaborOrderException(LaborOrderException e){
+    @ExceptionHandler(WorkOrderException.class)
+    public String processWorkOrderException(WorkOrderException e){
         e.printStackTrace();
-        return "redirect:/laborOrder/laborOrderPage";
+        return "redirect:/workOrder/workOrderPage";
     }
 
 

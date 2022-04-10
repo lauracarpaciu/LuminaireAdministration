@@ -12,5 +12,4 @@ public class PersonNotFoundException extends RuntimeException {
 		// TODO Auto-generated constructor stub
 	}
 
-
 }

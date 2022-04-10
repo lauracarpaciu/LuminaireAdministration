@@ -24,9 +24,6 @@ public interface OrderService {
 	List<ServiceOrderIdAndStatusDto> allServiceOrderIdAndStatus();
 
 	@Transactional
-	ServiceOrder findServiceOrderById(int id);
-
-	@Transactional
 	ServiceOrder updateServiceOrder(ServiceOrder serviceOrder, int decrement, String partNumber);
 
 	@Transactional

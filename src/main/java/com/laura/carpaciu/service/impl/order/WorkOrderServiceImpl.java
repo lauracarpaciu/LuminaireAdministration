@@ -15,6 +15,7 @@ import com.laura.carpaciu.errors.order.WorkNotFoundException;
 import com.laura.carpaciu.errors.work.WorkOrderException;
 import com.laura.carpaciu.service.impl.work.WorkPriceServiceImpl;
 import com.laura.carpaciu.services.WorkOrderService;
+import com.laura.carpaciu.services.WorkPriceService;
 import com.laura.carpaciu.util.TwoDigitsDouble;
 import com.laura.carpaciu.utility.OrderStatus;
 
@@ -52,8 +53,8 @@ public class WorkOrderServiceImpl implements WorkOrderService{
          WorkOrder workServiceOrder = WorkConvertor.convert(work,workPrice, order);
 
 
-         workOrderRepository.createWorkServiceOrder(workServiceOrder);
-         serviceOrderDao.updateOrderStatus(OrderStatus.READY, order.getId());
+         workOrderRepository.create(workServiceOrder);
+         workOrderRepository.update(OrderStatus.READY, order.getId());
 
     }
     
@@ -61,7 +62,7 @@ public class WorkOrderServiceImpl implements WorkOrderService{
 
 
         String workCategory = work.getCategory().toString();
-        Optional<WorkPrice>  workPrice = workPriceRepository.getOptWorkPrice();
+        Optional<WorkPrice>  workPrice = WorkPriceService.;
 
         if(workPrice.isPresent()){
 

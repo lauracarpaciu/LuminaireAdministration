@@ -13,4 +13,6 @@ public interface WorkOrderRepository extends CrudRepository<WorkOrder, Long> {
 
 	int deleteWorkFromOrder(int id);
 
+	void update(String ready, Long id);
+
 }

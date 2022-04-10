@@ -32,11 +32,11 @@ public class OrderServiceImpl implements OrderService {
 	private final PdfService pdfService;
 	private final InvoiceService invoiceService;
 
-	public OrderServiceImpl(OrderRepository serviceOrderDao, PieceRepository partDao, PdfService pdfService,
+	public OrderServiceImpl(OrderRepository orderRepository, PieceRepository pieceRepository, PdfService pdfService,
 			InvoiceService invoiceService) {
 		super();
-		this.serviceOrderDao = serviceOrderDao;
-		this.partDao = partDao;
+		this.orderRepository = orderRepository;
+		this.pieceRepository = pieceRepository;
 		this.pdfService = pdfService;
 		this.invoiceService = invoiceService;
 	}
@@ -44,7 +44,7 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	@Transactional
 	public List<ServiceOrderIdAndStatusDto> allServiceOrderIdAndStatus() {
-		return serviceOrderDao.allServiceOrderIdAndStatus();
+		return orderRepository.allServiceOrderIdAndStatus();
 	}
 
 	@Override
@@ -62,48 +62,40 @@ public class OrderServiceImpl implements OrderService {
 			throw new ClientNotSelectedException("Client not selected at order creation!");
 		}
 
-		serviceOrderDao.createServiceOrder(serviceOrder);
+		orderRepository.create(serviceOrder);
 	}
 
 	@Override
 	@Transactional
 	public Set<ServiceOrder> findAllServiceOrder() {
-		return serviceOrderDao.findAllServiceOrders();
-	}
-
-	@Override
-	@Transactional
-	public ServiceOrder findServiceOrderById(int id) {
-
-		return (ServiceOrder) ( serviceOrderDao.findServiceOrderById( id));
-
+		return orderRepository.findAllServiceOrders();
 	}
 
 	@Override
 	@Transactional
 	public ServiceOrder updateServiceOrder(ServiceOrder serviceOrder, int decrement, String partNumber) {
 
-		partDao.decreasePieceCount(decrement, partNumber);
-		return serviceOrderDao.updateServiceOrder(serviceOrder);
+		pieceRepository.decreasePieceCount(decrement, partNumber);
+		return orderRepository.update(serviceOrder);
 	}
 
 	@Override
 	@Transactional
 	public ServiceOrder findServiceOrderParts(int id) {
-		return serviceOrderDao.findServiceOrderParts(id);
+		return orderRepository.findParts(id);
 	}
 
 	@Override
 	@Transactional
 	public List<PieceOrder> getPartsFormServiceOrder(int id) {
-		return serviceOrderDao.getPartsFromServiceOrder(id);
+		return orderRepository.getPartsFromServiceOrder(id);
 	}
 
 	@Override
 	@Transactional
 	public List<WorkOrder> findAllWorksInOrder(int id) {
 
-		return serviceOrderDao.findAllWorksInOrder(id);
+		return orderRepository.findAllWorksInOrder(id);
 
 	}
 
@@ -112,7 +104,7 @@ public class OrderServiceImpl implements OrderService {
 	public int closeOrder(ServiceOrder serviceOrder) throws OrderIsClosedException {
 
 		OrderStatus orderStatus = serviceOrder.getOrderStatus();
-		Integer orderId = serviceOrder.getId();
+		Long orderId = serviceOrder.getId();
 
 		if (orderStatus.equals(OrderStatus.CLOSE)) {
 			throw new OrderIsClosedException();
@@ -122,14 +114,14 @@ public class OrderServiceImpl implements OrderService {
 		pdfService.createPDFInvoice(serviceOrder);
 		invoiceService.saveInvoiceToDatabase(serviceOrder);
 
-		return serviceOrderDao.updateOrderStatus(OrderStatus.CLOSE, orderId);
+		return orderRepository.update(OrderStatus.CLOSE, orderId);
 	}
 
 	@Override
 	@Transactional
 	public ServiceOrder findCompleteServiceOrderById(int id) {
 
-		ServiceOrder serviceOrder = serviceOrderDao.findCompleteServiceOrderById(id);
+		ServiceOrder serviceOrder = orderRepository.findCompleteServiceOrderById(id);
 
 		double partsTotalPrice = this.getPartsTotalPrice(serviceOrder);
 		double partsTotalPriceVAT = TwoDigitsDouble.formatPrice(partsTotalPrice * 1.19);
@@ -167,4 +159,5 @@ public class OrderServiceImpl implements OrderService {
 				.map(price -> TwoDigitsDouble.formatPrice(price)).sum();
 
 	}
+
 }

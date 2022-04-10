@@ -10,12 +10,13 @@ import com.laura.carpaciu.services.WorkService;
 
 
 public class WorkServiceImpl implements WorkService{
-	private final WorkRepository workDao ;
+	private final WorkRepository workRepository ;
 
 
-    public WorkServiceImpl(WorkRepository workDao) {
+
+	public WorkServiceImpl(WorkRepository workRepository) {
 		super();
-		this.workDao = workDao;
+		this.workRepository = workRepository;
 	}
 
 
@@ -23,7 +24,7 @@ public class WorkServiceImpl implements WorkService{
     @Transactional
     public void createWork(Work work)
 
-    		{ workDao.createWork(work);
+    		{ workRepository.create(work);
     }
 
 
@@ -31,7 +32,7 @@ public class WorkServiceImpl implements WorkService{
     @Transactional
     public List<Work> findAllWorks(){
 
-       return workDao.findAllWorks();
+       return workRepository.findAllWorks();
     }
 
 
@@ -39,7 +40,7 @@ public class WorkServiceImpl implements WorkService{
     @Transactional
     public List<Work> findWorkByName(String workDescription){
 
-        return workDao.findWorkByName(workDescription);
+        return workRepository.findByName(workDescription);
     }
 
     @Override
@@ -47,7 +48,7 @@ public class WorkServiceImpl implements WorkService{
     public Work findWorkById(int id){
 
 
-       return workDao.findWorkById(id)
+       return workRepository.findById(id)
                       .orElseThrow(() -> new RuntimeException("Labor id not found"));
 
     }
@@ -55,7 +56,7 @@ public class WorkServiceImpl implements WorkService{
     @Transactional
     public int updateWorkTimeAndDescription(double timedWork, String workDescription, int id){
 
-        return workDao.updateWorkTimeAndDescription(timedWork, workDescription, id);
+        return workRepository.updateWorkTimeAndDescription(timedWork, workDescription, id);
 
     }
 
@@ -63,10 +64,10 @@ public class WorkServiceImpl implements WorkService{
     @Transactional
     public int deleteWork(int id){
 
-    	java.util.Optional<Work> work = workDao.findWorkById(id);
+    	java.util.Optional<Work> work = workRepository.findById(id);
 
         if(work.isPresent()){
-            return workDao.deleteWork(id);
+            return workRepository.deleteWork(id);
         }
 
         throw new RuntimeException("Work not found");

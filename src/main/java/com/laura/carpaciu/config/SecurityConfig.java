@@ -36,137 +36,108 @@ import com.laura.carpaciu.security.provider.UserNamePasswordProvider;
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private  UserNamePasswordProvider userNamePasswordProvider;
-    @Autowired
-    private  EmailProvider emailProvider;
-    @Autowired
-    private  TokenProvider tokenProvider;
-    @Autowired
-    private ResendTokenProvider resendTokenProvider;
+	@Autowired
+	private UserNamePasswordProvider userNamePasswordProvider;
+	@Autowired
+	private EmailProvider emailProvider;
+	@Autowired
+	private TokenProvider tokenProvider;
+	@Autowired
+	private ResendTokenProvider resendTokenProvider;
 
+	@Bean
+	public LogoutHandler logoutHandler() {
+		return new SecurityLogoutHandler();
+	}
 
+	@Bean
+	public LogoutHandler cacheLogoutHandler() {
+		return new CacheLogoutHandler();
+	}
 
+	@Bean
+	public LogoutSuccessHandler logoutSuccessHandler() {
+		return new SuccessfulLogoutHandler();
+	}
 
+	@Bean
+	public LogoutFilter logoutFilter() {
 
-    @Bean
-    public LogoutHandler logoutHandler(){
-        return new SecurityLogoutHandler();
-    }
+		LogoutFilter logoutFilter = new LogoutFilter(logoutSuccessHandler(), cacheLogoutHandler(), logoutHandler());
+		logoutFilter.setFilterProcessesUrl("/logout3");
+		return logoutFilter;
+	}
 
-    @Bean
-    public LogoutHandler cacheLogoutHandler(){
-        return new CacheLogoutHandler();
-    }
+	@Bean
+	public UsernameAndPasswordFilter usernameAndPasswordFilter() {
+		try {
+			return new UsernameAndPasswordFilter(authenticationManagerBean());
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("Exception in: ----------------> AuthenticationManager");
+		}
+	}
 
-    @Bean
-    public LogoutSuccessHandler logoutSuccessHandler(){
-        return new SuccessfulLogoutHandler();
-    }
+	@Bean
+	public TokenFilter tokenFilter() {
 
+		try {
+			return new TokenFilter(authenticationManagerBean());
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("Exception in: ----------------> AuthenticationManager");
+		}
+	}
 
-    @Bean
-    public LogoutFilter logoutFilter(){
+	@Bean
+	public ResendTokenFilter resendTokenFilter() {
 
-        LogoutFilter logoutFilter = new LogoutFilter(logoutSuccessHandler(), cacheLogoutHandler(), logoutHandler());
-        logoutFilter.setFilterProcessesUrl("/logout3");
-        return logoutFilter;
-    }
+		try {
+			return new ResendTokenFilter(authenticationManagerBean());
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("Exception in: ----------------> AuthenticationManager");
+		}
+	}
 
+	@Override
+	@Bean
+	public AuthenticationManager authenticationManagerBean() throws Exception {
+		return super.authenticationManagerBean();
+	}
 
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth.authenticationProvider(userNamePasswordProvider);
+		auth.authenticationProvider(emailProvider);
+		auth.authenticationProvider(tokenProvider);
+		auth.authenticationProvider(resendTokenProvider);
 
-    @Bean
-    public UsernameAndPasswordFilter usernameAndPasswordFilter(){
-        try {
-            return new UsernameAndPasswordFilter(authenticationManagerBean());
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException("Exception in: ----------------> AuthenticationManager");
-        }
-    }
+	}
 
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
 
-    @Bean
-    public TokenFilter tokenFilter(){
+		String[] roles = Arrays.stream(Authorities.values()).map(Enum::toString).toArray(String[]::new);
 
-        try {
-            return new TokenFilter(authenticationManagerBean());
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException("Exception in: ----------------> AuthenticationManager");
-        }
-    }
+		http.addFilterAt(usernameAndPasswordFilter(), BasicAuthenticationFilter.class)
+				.addFilterBefore(tokenFilter(), BasicAuthenticationFilter.class)
+				.addFilterBefore(resendTokenFilter(), BasicAuthenticationFilter.class)
+				.addFilterAt(logoutFilter(), LogoutFilter.class);
 
+		http.authorizeRequests().mvcMatchers("/app/**").hasAnyRole(roles).mvcMatchers("/parts/**").hasAnyRole(roles)
+				.mvcMatchers("/clients/**").hasAnyRole(roles).mvcMatchers("/luminaires/**").hasAnyRole(roles)
+				.mvcMatchers("/workss/**").hasAnyRole(roles).mvcMatchers("/prices/**").hasAnyRole("MANAGER")
+				.mvcMatchers("/workOrder/**").hasAnyRole(roles).mvcMatchers("/serviceOrder/**").hasAnyRole(roles)
+				.mvcMatchers("/orderPart/**").hasAnyRole(roles).mvcMatchers("/app2/**").hasAnyRole(roles)
+				.mvcMatchers("/restPart/**").hasAnyRole(roles).mvcMatchers("/").permitAll().mvcMatchers("/create-user")
+				.permitAll().and().formLogin().loginPage("/login").permitAll();
 
-    @Bean
-    public ResendTokenFilter resendTokenFilter(){
+		http.headers().httpStrictTransportSecurity().disable();
+	}
 
-        try {
-            return new ResendTokenFilter(authenticationManagerBean());
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException("Exception in: ----------------> AuthenticationManager");
-        }
-    }
-
-
-    @Override
-    @Bean
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
-    }
-
-
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(userNamePasswordProvider);
-        auth.authenticationProvider(emailProvider);
-        auth.authenticationProvider(tokenProvider);
-        auth.authenticationProvider(resendTokenProvider);
-
-    }
-
-
-
-
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-
-        String[] roles = Arrays.stream(Authorities.values())
-                                    .map(Enum::toString)
-                                    .toArray(String[]::new);
-
-
-        http.addFilterAt(usernameAndPasswordFilter(), BasicAuthenticationFilter.class)
-                .addFilterBefore(tokenFilter(),BasicAuthenticationFilter.class)
-                .addFilterBefore(resendTokenFilter(), BasicAuthenticationFilter.class)
-                .addFilterAt(logoutFilter(), LogoutFilter.class);
-
-
-        http.authorizeRequests()
-                        .mvcMatchers("/app/**").hasAnyRole(roles)
-                        .mvcMatchers("/parts/**").hasAnyRole(roles)
-                        .mvcMatchers("/clients/**").hasAnyRole(roles)
-                        .mvcMatchers("/luminaires/**").hasAnyRole(roles)
-                        .mvcMatchers("/workss/**").hasAnyRole(roles)
-                        .mvcMatchers("/prices/**").hasAnyRole("MANAGER")
-                        .mvcMatchers("/workOrder/**").hasAnyRole(roles)
-                        .mvcMatchers("/serviceOrder/**").hasAnyRole(roles)
-                        .mvcMatchers("/orderPart/**").hasAnyRole(roles)
-                        .mvcMatchers("/app2/**").hasAnyRole(roles)
-                        .mvcMatchers("/restPart/**").hasAnyRole(roles)
-                        .mvcMatchers("/").permitAll()
-                        .mvcMatchers("/create-user").permitAll()
-                                    .and()
-                                    .formLogin()
-                                    .loginPage("/login").permitAll();
-
-        http.headers().httpStrictTransportSecurity() 
-                      .disable();
-    }
-
-
-    @Bean
-    public PasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
-    }}
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+}

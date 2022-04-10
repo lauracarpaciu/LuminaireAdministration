@@ -2,6 +2,7 @@ package com.laura.carpaciu.service.impl.client;
 
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,7 +16,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @Service
 public class PersonServiceImpl implements PersonService {
-
+	@Autowired
 	private final PersonRepository personRepository;
 
 	@Override

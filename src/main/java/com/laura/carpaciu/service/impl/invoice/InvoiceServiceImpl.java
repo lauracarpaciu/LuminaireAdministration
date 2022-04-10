@@ -10,6 +10,7 @@ import java.nio.file.Paths;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.MimeTypeUtils;
@@ -24,13 +25,14 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @Service
 public class InvoiceServiceImpl implements InvoiceService {
-
-	private final InvoiceRepository invoiceRepository;
-
 	public InvoiceServiceImpl(InvoiceRepository invoiceRepository) {
 		super();
 		this.invoiceRepository = invoiceRepository;
 	}
+
+	@Autowired
+	private final InvoiceRepository invoiceRepository;
+
 
 	@Override
 	@Transactional

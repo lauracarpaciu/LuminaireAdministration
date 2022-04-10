@@ -16,14 +16,10 @@ import com.laura.carpaciu.errors.order.PartOrderException;
 import com.laura.carpaciu.services.PieceOrderService;
 import com.laura.carpaciu.utility.OrderStatus;
 
-
-
 public class PieceOrderServiceImpl implements PieceOrderService {
 	private final PieceOrderRepository pieceOrderRepository;
 	private final PieceRepository pieceRepository;
 	private final OrderRepository orderRepository;
-
-
 
 	public PieceOrderServiceImpl(PieceOrderRepository pieceOrderRepository, PieceRepository pieceRepository,
 			OrderRepository orderRepository) {
@@ -41,23 +37,23 @@ public class PieceOrderServiceImpl implements PieceOrderService {
 			throw new PartOrderException("Order is CLOSED, can't add any more parts to it!");
 		}
 
-		Optional<PieceOrder> optPartOrder = pieceOrderRepository.findPartOrderByPartName(part.getPartNumber(), serviceOrder);
+		Optional<PieceOrder> optPartOrder = pieceOrderRepository.findByPartNumb(part.getPartNumber(), serviceOrder);
 		PieceOrder partServiceOrder = PieceConvertor.convert(part, serviceOrder, count);
 
 		if ((count <= part.getCount())) {
 
 			if (optPartOrder.empty() != null) {
 
-				pieceOrderRepository.createPieceOrder(partServiceOrder);
+				pieceOrderRepository.create(partServiceOrder);
 
 			} else {
 
-				pieceOrderRepository.updatePartOrderCount(optPartOrder.get().getId(), count);
+				pieceOrderRepository.updatePartOrderCount(count, count)
 			}
 
-			int id = serviceOrder.getId();
+			Long id = serviceOrder.getId();
 
-			orderRepository.updateOrderStatus(OrderStatus.READY, id);
+			orderRepository.updateServiceOrder(OrderStatus.READY, id);
 			pieceRepository.decreasePieceCount(count, part.getPartNumber());
 			return;
 
@@ -76,7 +72,7 @@ public class PieceOrderServiceImpl implements PieceOrderService {
 		}
 
 		pieceRepository.updatePieceCount(count, partNumber);
-		return pieceOrderRepository.deletePartFromServiceOrder(partNumber);
+		return pieceOrderRepository.delete(partNumber);
 
 	}
 

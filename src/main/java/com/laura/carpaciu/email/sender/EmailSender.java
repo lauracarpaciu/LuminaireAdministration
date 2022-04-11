@@ -2,11 +2,7 @@ package com.laura.carpaciu.email.sender;
 
 import com.laura.carpaciu.entity.user.User;
 
-public class EmailSender {
+public interface EmailSender {
 
-	public void sendEmail(User user) {
-		// TODO Auto-generated method stub
-		
-	}
-
+	void sendEmail(User user);
 }

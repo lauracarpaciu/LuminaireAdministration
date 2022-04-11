@@ -1,15 +1,12 @@
 package com.laura.carpaciu.services;
 
 import java.util.List;
-import java.util.Optional;
 
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.laura.carpaciu.entity.clients.Company;
 import com.laura.carpaciu.entity.work.Work;
 
-public interface WorkService  {
+public interface WorkService {
 	@Transactional
 	void createWork(Work work);
 

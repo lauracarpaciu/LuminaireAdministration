@@ -4,14 +4,13 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import javax.persistence.criteria.Order;
-
 import org.springframework.data.repository.CrudRepository;
 
 import com.laura.carpaciu.dto.ServiceOrderIdAndStatusDto;
 import com.laura.carpaciu.entity.order.PieceOrder;
 import com.laura.carpaciu.entity.order.ServiceOrder;
 import com.laura.carpaciu.entity.order.WorkOrder;
+import com.laura.carpaciu.utility.OrderStatus;
 
 public interface OrderRepository extends CrudRepository<ServiceOrder, Long> {
 
@@ -23,9 +22,9 @@ public interface OrderRepository extends CrudRepository<ServiceOrder, Long> {
 
 	ServiceOrder findParts(int id);
 
-	List<PieceOrder> getPartsFromServiceOrder(int id);
+	List<PieceOrder> getPartsFromServiceOrder(Long id);
 
-	List<WorkOrder> findAllWorksInOrder(int id);
+	List<WorkOrder> findAllWorksInOrder(Long id);
 
 	ServiceOrder findCompleteServiceOrderById(int id);
 
@@ -33,6 +32,6 @@ public interface OrderRepository extends CrudRepository<ServiceOrder, Long> {
 
 	Optional<ServiceOrder> findById(int id);
 
-	int update(String close, Long orderId);
+	int update(OrderStatus ready, Long orderId);
 
 }

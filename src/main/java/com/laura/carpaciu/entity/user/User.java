@@ -4,16 +4,16 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotBlank;
-
 import com.laura.carpaciu.entity.order.ServiceOrder;
+
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.*;
 
-@SuppressWarnings("deprecation")
+@Getter
+@Setter
 @Entity
-@Table(name = "users")
 public class User {
 
 	@Id
@@ -35,11 +35,9 @@ public class User {
 	private String username;
 
 	@Column(name = "email")
-	@Email(message = "required")
 	private String email;
 
 	@Column(name = "password")
-	@NotBlank(message = "required")
 	@Size(min = 3, message = "password must have at least 3 characters")
 	private String password;
 
@@ -50,6 +48,14 @@ public class User {
 	@Size(min = 1, message = "select at lest one")
 	private Set<String> authorities = new HashSet<>();
 
+	public Set<String> getAuthorities() {
+		return authorities;
+	}
+
+	public void setAuthorities(Set<String> authorities) {
+		this.authorities = authorities;
+	}
+
 	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.REMOVE }, fetch = FetchType.LAZY, mappedBy = "user")
 	private ActivationToken activationToken;
 
@@ -59,13 +65,10 @@ public class User {
 	public User() {
 	}
 
-
-
 	public User(Long id, @NotNull(message = "required") @Size(min = 2, max = 20) String firstName,
 			@NotNull(message = "required") @Size(min = 2, message = "must have atleast 2 characters") String lastName,
 			@NotNull(message = "required") @Size(min = 2, message = "must have atlest 2 characterrs") String username,
-			@Email(message = "required") String email,
-			@NotBlank(message = "required") @Size(min = 3, message = "password must have at least 3 characters") String password,
+			String email, @Size(min = 3, message = "password must have at least 3 characters") String password,
 			boolean isEnabled, boolean isNonLoked,
 			@Size(min = 1, message = "select at lest one") Set<String> authorities, ActivationToken activationToken,
 			Set<ServiceOrder> serviceOrders) {
@@ -82,8 +85,6 @@ public class User {
 		this.activationToken = activationToken;
 		this.serviceOrders = serviceOrders;
 	}
-
-
 
 	@Override
 	public boolean equals(Object o) {
@@ -156,8 +157,7 @@ public class User {
 
 	public Object getId() {
 		// TODO Auto-generated method stub
-		return null;
+		return id;
 	}
-
 
 }

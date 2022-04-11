@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 
 import com.laura.carpaciu.entity.user.User;
 import com.laura.carpaciu.errors.logout.AccountAlreadyActiveException;
-import com.laura.carpaciu.errors.logout.EmailIsNotRegisteredException;
 import com.laura.carpaciu.security.authentication.ResendTokenAuthentication;
 import com.laura.carpaciu.services.UserService;
 import lombok.AllArgsConstructor;

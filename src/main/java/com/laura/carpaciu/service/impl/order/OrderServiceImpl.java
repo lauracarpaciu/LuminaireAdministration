@@ -87,20 +87,6 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	@Transactional
-	public List<PieceOrder> getPartsFormServiceOrder(int id) {
-		return orderRepository.getPartsFromServiceOrder(id);
-	}
-
-	@Override
-	@Transactional
-	public List<WorkOrder> findA llWorksInOrder(int id) {
-
-		return orderRepository.findAllWorksInOrder(id);
-
-	}
-
-	@Override
-	@Transactional
 	public int closeOrder(ServiceOrder serviceOrder) throws OrderIsClosedException {
 
 		OrderStatus orderStatus = serviceOrder.getOrderStatus();
@@ -161,15 +147,17 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
+	@Transactional
 	public List<PieceOrder> getPartsFormServiceOrder(Long id) {
 		// TODO Auto-generated method stub
-		return null;
+		return orderRepository.getPartsFromServiceOrder(id);
 	}
 
 	@Override
-	public List<WorkOrder> findAllWorksInOrder(Long long1) {
+	@Transactional
+	public List<WorkOrder> findAllWorksInOrder(Long id) {
 		// TODO Auto-generated method stub
-		return null;
+		return orderRepository.findAllWorksInOrder(id);
 	}
 
 }

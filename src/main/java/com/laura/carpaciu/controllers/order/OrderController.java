@@ -14,19 +14,16 @@ import com.laura.carpaciu.entity.order.ServiceOrder;
 import com.laura.carpaciu.entity.user.User;
 import com.laura.carpaciu.services.OrderService;
 import com.laura.carpaciu.services.UserService;
-import com.laura.carpaciu.utility.OrderStatus;
 
 import lombok.AllArgsConstructor;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Optional;
 
 @AllArgsConstructor
 @Controller
@@ -94,54 +91,38 @@ public class OrderController {
 		return "redirect:/serviceOrder/serviceOrder";
 	}
 
-	@PostMapping("/luminaireProblems")    
-    public String createServiceOrder(HttpServletRequest request){
+	@PostMapping("/luminaireProblems")
+	public String createServiceOrder(HttpServletRequest request) {
 
+		if (miniCache.retrieveLuminaire().getId() != 0
+				&& ((miniCache.retrievePerson().getId() != 0) || (miniCache.retrieveCompany().getId() != 0))) {
 
-        if(miniCache.retrieveLuminaire().getId() != 0 &&
-                ((miniCache.retrievePerson().getId() != 0) || (miniCache.retrieveCompany().getId() != 0))){
+			String luminaireProblems = request.getParameter("luminaireProblems");
 
+			String username = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
 
-            String luminaireProblems = request.getParameter("luminaireProblems");
+			User user = userService.findUseByUsername(username);
+			LuminaireCases problems = new LuminaireCases();
+			problems.setProblems(luminaireProblems);
 
-            String username = SecurityContextHolder
-                                                .getContext()
-                                                .getAuthentication()
-                                                .getPrincipal()
-                                                .toString();
+			ServiceOrder serviceOrder = new ServiceOrder.Builder().withLuminaireProblems(problems)
+					.withLuminaire(miniCache.retrieveLuminaire()).withUser(user).build();
 
+			if (miniCache.retrievePerson().getId() == 0) {
+				serviceOrder.setClient(miniCache.retrieveCompany());
+			}
 
-            User user = userService.findUseByUsername(username);
-            LuminaireCases problems = new LuminaireCases();
-                        problems.setProblems(luminaireProblems);
+			if (miniCache.retrieveCompany().getId() == 0) {
+				serviceOrder.setClient(miniCache.retrievePerson());
+			}
 
-
-            ServiceOrder serviceOrder =  new ServiceOrder.Builder()
-            							.withLuminaireProblems(problems)
-            							.withLuminaire(miniCache.retrieveLuminaire())
-            							.withUser(user)
-            							.build();
-            								
-
-
-
-            if(miniCache.retrievePerson().getId() == 0){
-                serviceOrder.setClient(miniCache.retrieveCompany());
-            }
-
-            if(miniCache.retrieveCompany().getId() == 0){
-                serviceOrder.setClient(miniCache.retrievePerson());
-            }
-
-
-            serviceOrderService.createServiceOrder(serviceOrder);
+			serviceOrderService.createServiceOrder(serviceOrder);
 
 			miniCache.resetCarSearch();
 			miniCache.resetPersonSearch();
-            miniCache.resetCompanySearch();
-        }
+			miniCache.resetCompanySearch();
+		}
 
-
-        return "redirect:/serviceOrder/serviceOrder";
-    }
+		return "redirect:/serviceOrder/serviceOrder";
+	}
 }

@@ -28,13 +28,13 @@ public class UserSecurityService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String usernameOrEmail) throws UsernameNotFoundException {
 		if (usernameOrEmail.contains("@")) {
 
-			User user = userDao.findUserByEmail(usernameOrEmail)
+			User user = userDao.findByEmail(usernameOrEmail)
 					.orElseThrow(() -> new UsernameNotFoundException("Email not found"));
 
 			return new SecurityUser(user);
 		}
 
-		User user = userDao.findUserByUsername(usernameOrEmail)
+		User user = userDao.findByUsername(usernameOrEmail)
 				.orElseThrow(() -> new UsernameNotFoundException("Username not found"));
 
 		return new SecurityUser(user);

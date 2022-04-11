@@ -5,11 +5,9 @@ import java.util.concurrent.Future;
 
 import javax.transaction.Transactional;
 
-import org.springframework.data.repository.CrudRepository;
-
 import com.laura.carpaciu.entity.user.User;
 
-public interface UserService  {
+public interface UserService {
 	Future<User> createUser(User user);
 
 	void updateUserToken(User user);

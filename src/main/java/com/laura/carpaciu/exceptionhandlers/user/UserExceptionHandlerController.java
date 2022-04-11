@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import com.laura.carpaciu.errors.invoice.TokenHasExpiredException;
 import com.laura.carpaciu.errors.logout.AccountAlreadyActiveException;
 import com.laura.carpaciu.errors.logout.AccountIsNotActiveException;
-import com.laura.carpaciu.errors.logout.EmailIsNotRegisteredException;
 import com.laura.carpaciu.errors.luminaire.InvalidTokenException;
 import com.laura.carpaciu.errors.user.UserAlreadyExists;
 

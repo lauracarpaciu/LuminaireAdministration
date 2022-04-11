@@ -2,12 +2,7 @@ package com.laura.carpaciu.config;
 
 import java.util.Arrays;
 
-import org.apache.catalina.connector.Connector;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.embedded.tomcat.TomcatConnectorCustomizer;
-import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
-import org.springframework.boot.web.servlet.server.ConfigurableServletWebServerFactory;
-import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -108,9 +103,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.authenticationProvider(userNamePasswordProvider);
+		auth.authenticationProvider(null);
 		auth.authenticationProvider(emailProvider);
-		auth.authenticationProvider(tokenProvider);
+		auth.authenticationProvider(null);
 		auth.authenticationProvider(resendTokenProvider);
 
 	}

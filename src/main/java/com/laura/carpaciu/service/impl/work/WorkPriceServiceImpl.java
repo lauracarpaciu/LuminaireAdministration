@@ -2,8 +2,6 @@ package com.laura.carpaciu.service.impl.work;
 
 import java.util.Optional;
 
-import javax.servlet.annotation.WebListener;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;

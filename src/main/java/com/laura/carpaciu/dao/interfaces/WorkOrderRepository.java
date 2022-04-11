@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.data.repository.CrudRepository;
 
 import com.laura.carpaciu.entity.order.WorkOrder;
+import com.laura.carpaciu.utility.OrderStatus;
 
 public interface WorkOrderRepository extends CrudRepository<WorkOrder, Long> {
 	Optional<WorkOrder> findById(int id);
@@ -13,6 +14,6 @@ public interface WorkOrderRepository extends CrudRepository<WorkOrder, Long> {
 
 	int deleteWorkFromOrder(int id);
 
-	void update(String ready, Long id);
+	void update(OrderStatus ready, Long id);
 
 }

@@ -16,7 +16,7 @@ public interface WorkRepository extends CrudRepository<Work, Long> {
 
 	Optional<Work> findById(int id);
 
-	int updateWorkTimeAndDescription(double timedWork, String workDescription, int id);
+	int updateWorkTimeAndDescription(double timedWork, String workDescription, Long id);
 
 	int deleteWork(int id);
 

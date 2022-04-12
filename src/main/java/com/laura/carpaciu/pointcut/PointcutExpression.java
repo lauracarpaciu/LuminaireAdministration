@@ -1,4 +1,4 @@
-package com.laura.carpaciu.poitcut;
+package com.laura.carpaciu.pointcut;
 
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;

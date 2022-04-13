@@ -26,22 +26,22 @@ public class PieceController {
 	}
 
 	@GetMapping("/piece")
-	public String getPartPage(Model model) {
+	public String getPiecePage(Model model) {
 
-		model.addAttribute("part", new Piece());
+		model.addAttribute("piece", new Piece());
 
-		return "auto/piece-page";
+		return "luminaire/piece-page";
 	}
 
 	@PostMapping("/createPice")
 	public String createPiece(@Valid @ModelAttribute("part") Piece piece, BindingResult bindingResult) {
 
 		if (bindingResult.hasErrors()) {
-			return "auto/piece-page";
+			return "luminaire/piece-page";
 		}
 
 		pieceService.addPiece(piece);
-		return "redirect:/parts/part";
+		return "redirect:/piecess/piece";
 	}
 
 }

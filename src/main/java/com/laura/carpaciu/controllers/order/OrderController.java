@@ -45,8 +45,8 @@ public class OrderController {
 	public String showServiceOrderPage(Model model) {
 
 		Optional.ofNullable(miniCache.retrieveLuminaire()).ifPresentOrElse(
-				vehicle -> model.addAttribute("vehicle", vehicle),
-				() -> model.addAttribute("vehicle", miniCache.getEmptyLuminaire()));
+				luminaire -> model.addAttribute("luminaire", luminaire),
+				() -> model.addAttribute("luminaire", miniCache.getEmptyLuminaire()));
 
 		Optional.ofNullable(miniCache.retrievePerson()).ifPresentOrElse(person -> model.addAttribute("person", person),
 				() -> model.addAttribute("person", miniCache.loadEmptyPerson()));
@@ -59,7 +59,7 @@ public class OrderController {
 	}
 
 	@GetMapping("/searchLuminaire")
-	public String searchCarByVin(HttpServletRequest request, Model model) {
+	public String searchLuminaireByVin(HttpServletRequest request, Model model) {
 
 		String serialNumber = request.getParameter("serialNumber");
 		Luminaire luminaire = miniCache.findLuminaireBySerialNumber(serialNumber);

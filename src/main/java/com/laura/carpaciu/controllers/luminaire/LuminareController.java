@@ -32,7 +32,7 @@ public class LuminareController {
 
 		model.addAttribute("luminaire", new Luminaire());
 
-		return "auto/luminaire-page";
+		return "luminaire/luminaire-page";
 	}
 
 	@PostMapping("/create-luminaire")
@@ -40,7 +40,7 @@ public class LuminareController {
 			BindingResult bindingResult) {
 
 		if (bindingResult.hasErrors()) {
-			return "auto/luminaire-page";
+			return "luminaire/luminaire-page";
 		}
 
 		luminaireService.createLuminaire(luminaire);

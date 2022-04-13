@@ -25,7 +25,7 @@ import java.util.Optional;
 
 @AllArgsConstructor
 @Controller
-@RequestMapping("/orderPart")
+@RequestMapping("/orderPiece")
 public class PieceOrderController {
 
 	private final PieceOrderService partOrderService;
@@ -40,8 +40,8 @@ public class PieceOrderController {
 		this.miniCache = miniCache;
 	}
 
-	@GetMapping("/addPart-page")
-	public String addPartsToServiceOrder(Model model) {
+	@GetMapping("/addPiece-page")
+	public String addPiecesToServiceOrder(Model model) {
 
 		if (miniCache.getCompleteServiceOrder() == null) {
 			throw new SelectOrderException("No order selected!");
@@ -51,33 +51,33 @@ public class PieceOrderController {
 
 		List<PieceOrder> partServiceOrders = serviceOrderService.getPartsFormServiceOrder(id);
 
-		Optional.ofNullable(miniCache.retrievePart()).ifPresentOrElse(part -> model.addAttribute("part", part),
-				() -> model.addAttribute("part", new Piece()));
+		Optional.ofNullable(miniCache.retrievePart()).ifPresentOrElse(piece -> model.addAttribute("piece", piece),
+				() -> model.addAttribute("piece", new Piece()));
 
 		Optional.ofNullable(miniCache.getCompleteServiceOrder()).ifPresentOrElse(
 				order -> model.addAttribute("order", order), () -> model.addAttribute("order", new ServiceOrder()));
 
 		model.addAttribute("serviceOrderParts", partServiceOrders);
 
-		return "order/partOrder-page";
+		return "order/pieceOrder-page";
 	}
 
 	@GetMapping("/findPart")
 	public String findPart(HttpServletRequest request, Model model) {
 
 		String partNumber = request.getParameter("partNumber");
-		Piece part;
+		Piece piece;
 
 		try {
-			part = miniCache.findPartByPartNumber(partNumber);
+			piece = miniCache.findPartByPartNumber(partNumber);
 		} catch (PartNotFoundException e) {
 			e.printStackTrace();
 
 			throw new PartNotFoundException();
 		}
 
-		model.addAttribute("part", part);
-		return "redirect:/orderPart/addPart-page";
+		model.addAttribute("piece", piece);
+		return "redirect:/orderPart/addPiece-page";
 	}
 
 	@PostMapping("/addPartToOrder")
@@ -101,7 +101,7 @@ public class PieceOrderController {
 
 		String partNumber = miniCache.retrievePart().getPartNumber();
 		miniCache.findPartByPartNumber(partNumber);
-		return "redirect:/orderPart/addPart-page";
+		return "redirect:/orderPart/addPiece-page";
 	}
 
 	@GetMapping("/deletePart")
@@ -110,7 +110,7 @@ public class PieceOrderController {
 
 		partOrderService.deletePartFromServiceOrder(partNumber, count, miniCache.getCompleteServiceOrder());
 		miniCache.findPartByPartNumber(partNumber);
-		return "redirect:/orderPart/addPart-page";
+		return "redirect:/orderPart/addPiece-page";
 	}
 
 }

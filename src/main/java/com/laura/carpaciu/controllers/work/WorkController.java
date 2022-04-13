@@ -49,7 +49,7 @@ public class WorkController {
 		}
 
 		workService.createWork(work);
-		return "redirect:/workss/work";
+		return "redirect:/works/work";
 	}
 
 	@GetMapping("/worksList")

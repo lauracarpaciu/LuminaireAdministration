@@ -6,9 +6,13 @@ import com.laura.carpaciu.entity.order.ServiceOrder;
 
 public class PieceConvertor {
 
-	public static PieceOrder convert(Piece part, ServiceOrder serviceOrder, int count) {
+	private PieceConvertor() {
+
+	}
+
+	public static PieceOrder convert(Piece piece, ServiceOrder serviceOrder, int count) {
 		// TODO Auto-generated method stub
-		return null;
+		return new PieceOrder(null, piece.getPartNumber(), piece.getPartName(), count, piece.getPrice(), serviceOrder);
 	}
 
 }

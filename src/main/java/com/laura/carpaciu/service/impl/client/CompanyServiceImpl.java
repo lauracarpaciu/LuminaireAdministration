@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.laura.carpaciu.dao.interfaces.CompanyRepository;
 import com.laura.carpaciu.entity.clients.Company;
 import com.laura.carpaciu.errors.client.CompanyAlreadyExistsException;
+import com.laura.carpaciu.errors.user.PersonNotFoundException;
 import com.laura.carpaciu.services.CompanyService;
 
 import lombok.AllArgsConstructor;
@@ -44,7 +45,7 @@ public class CompanyServiceImpl implements CompanyService {
 	@Transactional(readOnly = true)
 	public Company findCompanyByCui(String cui) {
 
-		return companyRepository.findByCui(cui).orElseThrow();
+		return companyRepository.findByCui(cui).orElseThrow(() -> new PersonNotFoundException("Person not found!"));
 
 	}
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.laura.carpaciu.dao.interfaces.PieceRepository;
 import com.laura.carpaciu.entity.luminaire.Piece;
+import com.laura.carpaciu.errors.user.PersonNotFoundException;
 import com.laura.carpaciu.services.PieceService;
 
 import lombok.AllArgsConstructor;
@@ -42,7 +43,7 @@ public class PieceServiceImpl implements PieceService {
 
 	@Override
 	public Piece findPieceByPartNumber(String partNumber) {
-		return pieceRepository.findByPartNumber(partNumber).orElseThrow();
+		return pieceRepository.findByPartNumber(partNumber).orElseThrow(() -> new PersonNotFoundException("Person not found!"));
 	}
 
 	@Override

@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.laura.carpaciu.dao.interfaces.PersonRepository;
 import com.laura.carpaciu.entity.clients.Person;
 import com.laura.carpaciu.errors.client.PersonAlreadyExistsException;
+import com.laura.carpaciu.errors.user.PersonNotFoundException;
 import com.laura.carpaciu.services.PersonService;
 
 import lombok.AllArgsConstructor;
@@ -42,7 +43,7 @@ public class PersonServiceImpl implements PersonService {
 	@Transactional
 	public Person findPersonByCnp(String cnp) {
 
-		return personRepository.findByCnp(cnp).orElseThrow();
+		return personRepository.findByCnp(cnp).orElseThrow(() -> new PersonNotFoundException("Person not found!"));
 
 	}
 

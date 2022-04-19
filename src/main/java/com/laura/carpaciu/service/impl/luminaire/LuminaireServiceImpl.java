@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.laura.carpaciu.dao.interfaces.LuminaireRepository;
 import com.laura.carpaciu.entity.luminaire.Luminaire;
 import com.laura.carpaciu.errors.luminaire.LuminaireAlreadyExistsException;
+import com.laura.carpaciu.errors.user.PersonNotFoundException;
 import com.laura.carpaciu.services.LuminaireService;
 
 import lombok.AllArgsConstructor;
@@ -37,7 +38,7 @@ public class LuminaireServiceImpl implements LuminaireService {
 
 	@Override
 	public Luminaire findLuminaireBySerialNumber(String serialNumber) {
-		return luminaireRepository.findBySerialNumber(serialNumber).orElseThrow();
+		return luminaireRepository.findBySerialNumber(serialNumber).orElseThrow(() -> new PersonNotFoundException("Person not found!"));
 	}
 
 }

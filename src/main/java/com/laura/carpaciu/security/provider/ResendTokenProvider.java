@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import com.laura.carpaciu.entity.user.User;
 import com.laura.carpaciu.errors.logout.AccountAlreadyActiveException;
+import com.laura.carpaciu.errors.user.PersonNotFoundException;
 import com.laura.carpaciu.security.authentication.ResendTokenAuthentication;
 import com.laura.carpaciu.services.UserService;
 import lombok.AllArgsConstructor;
@@ -29,7 +30,7 @@ public class ResendTokenProvider implements AuthenticationProvider {
 
 		String email = authentication.getName();
 
-		User user = userService.findUserWithToken(email).orElseThrow();
+		User user = userService.findUserWithToken(email).orElseThrow(() -> new PersonNotFoundException("Person not found!"));
 
 		return Optional.of(user).filter(u -> u.getActivationToken().getActivatedAt() == null)
 				.map(this::resendTokenAuthentication)

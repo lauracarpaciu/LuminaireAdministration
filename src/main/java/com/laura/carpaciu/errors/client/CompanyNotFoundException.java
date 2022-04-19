@@ -2,6 +2,11 @@ package com.laura.carpaciu.errors.client;
 
 public class CompanyNotFoundException extends RuntimeException {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public CompanyNotFoundException() {
 	}
 

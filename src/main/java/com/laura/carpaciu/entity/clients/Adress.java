@@ -29,7 +29,7 @@ public class Adress {
 
 	public Adress() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public Adress(String streetNumber, String streetName) {

@@ -2,6 +2,11 @@ package com.laura.carpaciu.errors.user;
 
 public class UserAlreadyExists extends RuntimeException {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public UserAlreadyExists() {
 		
 	}

@@ -6,6 +6,11 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.GrantedAuthority;
 
 public class ResendTokenAuthentication extends UsernamePasswordAuthenticationToken {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public ResendTokenAuthentication(Object principal, Object credentials) {
 		super(principal, credentials);
 	}

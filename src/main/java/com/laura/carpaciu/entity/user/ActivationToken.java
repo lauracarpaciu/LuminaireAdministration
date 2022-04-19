@@ -40,7 +40,7 @@ public class ActivationToken {
 
 	public ActivationToken() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public String getToken() {

@@ -2,6 +2,11 @@ package com.laura.carpaciu.errors.order;
 
 public class PartNotFoundException extends RuntimeException {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public PartNotFoundException() {
 		
 	}

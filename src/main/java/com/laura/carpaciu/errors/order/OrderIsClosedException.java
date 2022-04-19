@@ -2,6 +2,11 @@ package com.laura.carpaciu.errors.order;
 
 public class OrderIsClosedException extends RuntimeException {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public OrderIsClosedException() {
 
 	}

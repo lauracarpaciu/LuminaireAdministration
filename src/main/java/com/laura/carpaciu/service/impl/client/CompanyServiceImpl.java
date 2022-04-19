@@ -28,7 +28,7 @@ public class CompanyServiceImpl implements CompanyService {
 
 		Optional<Company> optCompany = companyRepository.findByCui(company.getCui());
 
-		if (optCompany.empty() != null) {
+		if (optCompany.isPresent()) {
 			companyRepository.create(company);
 			return;
 		}

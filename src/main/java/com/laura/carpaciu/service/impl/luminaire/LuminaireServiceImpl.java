@@ -27,7 +27,7 @@ public class LuminaireServiceImpl implements LuminaireService {
 	public void createLuminaire(Luminaire luminaire) {
 		Optional<Luminaire> optLuminaire = luminaireRepository.findBySerialNumber(luminaire.getSerialNumber());
 
-		if (optLuminaire.empty() != null) {
+		if (optLuminaire.isPresent()) {
 			luminaireRepository.create(luminaire);
 			return;
 		}

@@ -51,12 +51,6 @@ public class PieceOrderController {
 
 		List<PieceOrder> partServiceOrders = serviceOrderService.getPartsFormServiceOrder(id);
 
-		Optional.ofNullable(miniCache.retrievePart()).ifPresentOrElse(piece -> model.addAttribute("piece", piece),
-				() -> model.addAttribute("piece", new Piece()));
-
-		Optional.ofNullable(miniCache.getCompleteServiceOrder()).ifPresentOrElse(
-				order -> model.addAttribute("order", order), () -> model.addAttribute("order", new ServiceOrder()));
-
 		model.addAttribute("serviceOrderParts", partServiceOrders);
 
 		return "order/pieceOrder-page";

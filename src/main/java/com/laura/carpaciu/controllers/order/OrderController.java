@@ -41,22 +41,6 @@ public class OrderController {
 		this.miniCache = miniCache;
 	}
 
-	@GetMapping("/serviceOrder")
-	public String showServiceOrderPage(Model model) {
-
-		Optional.ofNullable(miniCache.retrieveLuminaire()).ifPresentOrElse(
-				luminaire -> model.addAttribute("luminaire", luminaire),
-				() -> model.addAttribute("luminaire", miniCache.getEmptyLuminaire()));
-
-		Optional.ofNullable(miniCache.retrievePerson()).ifPresentOrElse(person -> model.addAttribute("person", person),
-				() -> model.addAttribute("person", miniCache.loadEmptyPerson()));
-
-		Optional.ofNullable(miniCache.retrieveCompany()).ifPresentOrElse(
-				company -> model.addAttribute("company", company),
-				() -> model.addAttribute("company", miniCache.loadEmptyCompany()));
-
-		return "order/serviceOrder-page";
-	}
 
 	@GetMapping("/searchLuminaire")
 	public String searchLuminaireByVin(HttpServletRequest request, Model model) {

@@ -29,7 +29,7 @@ public class PieceServiceImpl implements PieceService {
 	public void addPiece(Piece part) {
 		Optional<Piece> optionalPart = pieceRepository.findByPartNumber(part.getPartNumber());
 
-		if (optionalPart.empty() != null) {
+		if (optionalPart.isPresent()) {
 			pieceRepository.create(part);
 			return;
 		}

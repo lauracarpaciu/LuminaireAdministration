@@ -42,7 +42,7 @@ public class PieceOrderServiceImpl implements PieceOrderService {
 
 		if ((count <= part.getCount())) {
 
-			if (optPartOrder.empty() != null) {
+			if (optPartOrder.isPresent()) {
 
 				pieceOrderRepository.create(partServiceOrder);
 

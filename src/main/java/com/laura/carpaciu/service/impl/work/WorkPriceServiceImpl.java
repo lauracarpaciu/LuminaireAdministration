@@ -40,7 +40,7 @@ public class WorkPriceServiceImpl implements WorkPriceService {
 
 	@Override
 	public void createAllWorkPrices(WorkPrice workPrice) {
-		if (optWorkPrice.empty() != null) {
+		if (optWorkPrice.isPresent()) {
 			workPriceRepository.create(workPrice);
 			findWorkPrices();
 			return;

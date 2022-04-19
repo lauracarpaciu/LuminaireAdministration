@@ -26,7 +26,7 @@ public class PersonServiceImpl implements PersonService {
 
 		Optional<Person> optPerson = personRepository.findByCnp(person.getCnp());
 
-		if (optPerson.empty() != null) {
+		if (optPerson.isPresent()) {
 			personRepository.create(person);
 			return;
 		}

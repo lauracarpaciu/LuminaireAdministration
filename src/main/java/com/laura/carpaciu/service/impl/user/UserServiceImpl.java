@@ -48,11 +48,11 @@ public class UserServiceImpl implements UserService {
 
 		Optional<User> user1 = userRepository.findByUsername(user.getUsername());
 
-		if (user1.empty() != null) {
+		if (user1.isPresent()) {
 
 			user1 = userRepository.findByEmail(user.getEmail());
 
-			if (user1.empty() != null) {
+			if (user1.isPresent()) {
 
 				String encodedPassword = passwordEncoder.encode(user.getPassword());
 				user.setPassword(encodedPassword);

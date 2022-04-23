@@ -9,6 +9,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Import;
@@ -32,7 +33,8 @@ import com.laura.carpaciu.config.PdfGeneratorConfig;
 @EnableJpaAuditing
 @ComponentScan(basePackages = { "com.laura.carpaciu.*" })
 @EntityScan("com.laura.carpaciu.*")
-public class LuminaireApplication {
+
+public class LuminaireApplication extends SpringBootServletInitializer{
 	public static void main(String[] args) {
 		SpringApplication.run(LuminaireApplication.class, args);
 	}

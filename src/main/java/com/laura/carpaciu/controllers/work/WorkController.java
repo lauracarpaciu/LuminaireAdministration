@@ -18,12 +18,12 @@ import java.util.List;
 @Controller
 @RequestMapping("/works")
 public class WorkController {
-
+	@Autowired
 	private final WorkService workService;
 
 	private List<Work> works = new ArrayList<>();
 
-	@Autowired
+	
 	public WorkController(WorkService workService) {
 
 		this.workService = workService;

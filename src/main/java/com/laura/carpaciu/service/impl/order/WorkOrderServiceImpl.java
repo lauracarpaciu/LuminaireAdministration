@@ -1,5 +1,6 @@
 package com.laura.carpaciu.service.impl.order;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,14 +18,13 @@ import com.laura.carpaciu.services.WorkOrderService;
 import com.laura.carpaciu.util.TwoDigitsDouble;
 import com.laura.carpaciu.utility.OrderStatus;
 
-import lombok.AllArgsConstructor;
 import java.util.Optional;
 
-@AllArgsConstructor
 @Service
 public class WorkOrderServiceImpl implements WorkOrderService {
-
+	@Autowired
 	private final WorkOrderRepository workOrderRepository;
+	@Autowired
 	private final WorkPriceServiceImpl workPriceService;
 
 	public WorkOrderServiceImpl(WorkOrderRepository workOrderRepository, WorkPriceServiceImpl workPriceService,

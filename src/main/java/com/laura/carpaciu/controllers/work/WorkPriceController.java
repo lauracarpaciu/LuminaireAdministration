@@ -1,7 +1,7 @@
 package com.laura.carpaciu.controllers.work;
 
-import lombok.AllArgsConstructor;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,11 +18,10 @@ import com.laura.carpaciu.utility.WorkCategory;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-@AllArgsConstructor
 @Controller
 @RequestMapping("/prices")
 public class WorkPriceController {
-
+	@Autowired
 	private final WorkPriceService workPriceService;
 
 	public WorkPriceController(WorkPriceService workPriceService) {

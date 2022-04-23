@@ -2,6 +2,7 @@ package com.laura.carpaciu.service.impl.order;
 
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.laura.carpaciu.convertor.PieceConvertor;
@@ -17,8 +18,11 @@ import com.laura.carpaciu.services.PieceOrderService;
 import com.laura.carpaciu.utility.OrderStatus;
 
 public class PieceOrderServiceImpl implements PieceOrderService {
+	@Autowired
 	private final PieceOrderRepository pieceOrderRepository;
+	@Autowired
 	private final PieceRepository pieceRepository;
+	@Autowired
 	private final OrderRepository orderRepository;
 
 	public PieceOrderServiceImpl(PieceOrderRepository pieceOrderRepository, PieceRepository pieceRepository,

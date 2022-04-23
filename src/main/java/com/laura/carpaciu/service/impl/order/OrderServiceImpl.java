@@ -3,6 +3,7 @@ package com.laura.carpaciu.service.impl.order;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,8 +27,9 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @Service
 public class OrderServiceImpl implements OrderService {
-
+	@Autowired
 	private final OrderRepository orderRepository;
+	@Autowired
 	private final PieceRepository pieceRepository;
 	private final PdfService pdfService;
 	private final InvoiceService invoiceService;

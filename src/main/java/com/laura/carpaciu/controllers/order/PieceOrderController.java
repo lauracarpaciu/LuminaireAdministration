@@ -1,6 +1,6 @@
 package com.laura.carpaciu.controllers.order;
 
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,15 +21,16 @@ import com.laura.carpaciu.services.PieceOrderService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.Optional;
 
-@AllArgsConstructor
+
 @Controller
 @RequestMapping("/orderPiece")
 public class PieceOrderController {
-
+	@Autowired
 	private final PieceOrderService partOrderService;
+	@Autowired
 	private final OrderService serviceOrderService;
+	@Autowired
 	private final MiniCache miniCache;
 
 	public PieceOrderController(PieceOrderService partOrderService, OrderService serviceOrderService,

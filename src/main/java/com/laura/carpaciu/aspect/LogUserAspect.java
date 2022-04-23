@@ -12,24 +12,24 @@ import com.laura.carpaciu.util.Logs;
 @Component
 public class LogUserAspect {
 
-	@AfterReturning(pointcut = ("com.laura.carpacu.poitcut.PointcutExpression.userLoginWithEmail() || com.gini.iordache.poitcut.PointcutExpression.userLoginWithUsername()"), returning = "auth")
+	@AfterReturning(pointcut = ("com.laura.carpaciu.pointcut.PointcutExpression.userLoginWithEmail() || com.laura.carpaciu.pointcut.PointcutExpression.userLoginWithUsername()"), returning = "auth")
 	public void logTheLogins(JoinPoint joinPoint, Authentication auth) {
 		Logs.loginLogoutUser(auth, "logged at");
 	}
 
-	@AfterReturning(pointcut = ("com.laura.carpacu.poitcut.PointcutExpression.createUser()"), returning = "user")
+	@AfterReturning(pointcut = ("com.laura.carpaciu.pointcut.PointcutExpression.createUser()"), returning = "user")
 	public void logCreateUser(JoinPoint joinPoint, User user) {
 		Logs.createUser(user, "created at");
 		Logs.sendEmail(user, "sent email at:");
 	}
 
-	@AfterThrowing(pointcut = "execution(* ro.laura.carpacu..email.sender.impl.EmailService.sendEmail(..))", throwing = "exc")
+	@AfterThrowing(pointcut = "execution(* ro.laura.carpaciu.email.sender.impl.EmailService.sendEmail(..))", throwing = "exc")
 	public void logSendMail(JoinPoint JoinPoint, Throwable exc) {
 		String message = exc.getMessage();
 		Logs.writeEmailException(message);
 	}
 
-	@Before("execution(* ro.laura.carpacu..security.handler.SecurityLogoutHandler.logout(..))")
+	@Before("execution(* ro.laura.carpaciu.security.handler.SecurityLogoutHandler.logout(..))")
 	public void logLogout(JoinPoint joinPoint) {
 
 		Object[] obj = joinPoint.getArgs();
@@ -37,7 +37,7 @@ public class LogUserAspect {
 		Logs.loginLogoutUser(auth, "logged out at:");
 	}
 
-	@AfterThrowing(value = "com.laura.carpacu.poitcut.PointcutExpression.modulesExceptions()", throwing = "exc")
+	@AfterThrowing(value = "com.laura.carpaciu.pointcut.PointcutExpression.modulesExceptions()", throwing = "exc")
 	public void logAllExceptions(JoinPoint joinPoint, Throwable exc) {
 
 		String methodSignature = joinPoint.getSignature().toString();

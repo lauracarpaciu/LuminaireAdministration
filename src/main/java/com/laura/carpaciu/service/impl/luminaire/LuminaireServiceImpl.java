@@ -2,6 +2,7 @@ package com.laura.carpaciu.service.impl.luminaire;
 
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.laura.carpaciu.dao.interfaces.LuminaireRepository;
@@ -20,7 +21,7 @@ public class LuminaireServiceImpl implements LuminaireService {
 		super();
 		this.luminaireRepository = luminaireRepository;
 	}
-
+	@Autowired
 	private final LuminaireRepository luminaireRepository;
 
 	@Override

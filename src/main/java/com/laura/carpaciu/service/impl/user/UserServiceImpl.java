@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.Future;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,15 +20,14 @@ import com.laura.carpaciu.entity.user.User;
 import com.laura.carpaciu.errors.user.UserAlreadyExists;
 import com.laura.carpaciu.services.UserService;
 
-import lombok.AllArgsConstructor;
 
 @Service
-@AllArgsConstructor
 public class UserServiceImpl implements UserService {
-
+	@Autowired
 	private final UserRepository userRepository;
 	private final PasswordEncoder passwordEncoder;
 	private final EmailSender emailSender;
+	@Autowired
 	private final TokenRepository tokenRepository;
 
 
@@ -98,11 +98,12 @@ public class UserServiceImpl implements UserService {
 
 	}
 
-	@Override
-	@Transactional(readOnly = true)
-	public Optional<User> findUserWithToken(String email) {
-		return userRepository.findWithToken(email);
-	}
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<User> findUserWithToken(String email){
+        return userRepository.findWithToken(email);
+    }
 
 	@Override
 	@Transactional

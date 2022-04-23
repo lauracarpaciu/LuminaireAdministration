@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.laura.carpaciu.dao.interfaces.PieceRepository;
@@ -16,7 +17,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @Service
 public class PieceServiceImpl implements PieceService {
-
+	@Autowired
 	private final PieceRepository pieceRepository;
 
 	public PieceServiceImpl(PieceRepository pieceRepository) {

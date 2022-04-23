@@ -1,6 +1,5 @@
 package com.laura.carpaciu.controllers.order;
 
-import java.util.Optional;
 
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +16,7 @@ import com.laura.carpaciu.services.UserService;
 
 import lombok.AllArgsConstructor;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 
@@ -29,9 +29,11 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @RequestMapping("/serviceOrder")
 public class OrderController {
-
+	@Autowired
 	private final OrderService serviceOrderService;
+	@Autowired
 	private final UserService userService;
+	@Autowired
 	private final MiniCache miniCache;
 
 	public OrderController(OrderService serviceOrderService, UserService userService, MiniCache miniCache) {

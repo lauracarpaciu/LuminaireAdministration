@@ -13,11 +13,12 @@ import com.laura.carpaciu.errors.work.WorkPriceException;
 import com.laura.carpaciu.services.WorkPriceService;
 
 public class WorkPriceServiceImpl implements WorkPriceService {
-
+	@Autowired
 	private final WorkPriceRepository workPriceRepository;
+	@Autowired
 	private Optional<WorkPrice> optWorkPrice;
 
-	@Autowired
+
 	public WorkPriceServiceImpl(WorkPriceRepository workPriceRepository) {
 		this.workPriceRepository = workPriceRepository;
 	}

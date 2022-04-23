@@ -3,6 +3,8 @@ package com.laura.carpaciu.controllers.home;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import lombok.AllArgsConstructor;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,9 +24,11 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 @RequestMapping("/app")
 public class HomeController {
-
+	@Autowired
 	private final OrderService orderService;
+	@Autowired
 	private final InvoiceService invoiceService;
+	@Autowired
 	private final MiniCache miniCache;
 
 	public HomeController(OrderService orderService, InvoiceService invoiceService, MiniCache miniCache) {

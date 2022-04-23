@@ -2,6 +2,7 @@ package com.laura.carpaciu.service.impl.work;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.laura.carpaciu.dao.interfaces.WorkRepository;
@@ -9,6 +10,7 @@ import com.laura.carpaciu.entity.work.Work;
 import com.laura.carpaciu.services.WorkService;
 
 public class WorkServiceImpl implements WorkService {
+	@Autowired
 	private final WorkRepository workRepository;
 
 	public WorkServiceImpl(WorkRepository workRepository) {

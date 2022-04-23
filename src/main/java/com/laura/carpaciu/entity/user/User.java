@@ -5,14 +5,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.laura.carpaciu.entity.order.ServiceOrder;
-
-import lombok.Getter;
-import lombok.Setter;
-
 import java.util.*;
 
-@Getter
-@Setter
 @Entity
 public class User {
 
@@ -159,5 +153,7 @@ public class User {
 		// TODO Auto-generated method stub
 		return id;
 	}
+
+
 
 }

@@ -21,20 +21,20 @@ public class PointcutExpression {
 
 	}
 
-	@Pointcut("execution(* ro.gini.iordache.security.provider.*.*(..))")
-	private void securityModule() {
-
-	}
-
-	@Pointcut("execution(* com.laura.carpaciu.*.*.*.*.*(..))")
-	private void persistenceModule() {
-
-	}
-
-	@Pointcut("execution(* com.laura.carpaciu.service.*.*(..))")
-	private void invoiceModule() {
-
-	}
+//	@Pointcut("execution(* ro.laura.carpaciu.security.provider.*.*(..))")
+//	private void securityModule() {
+//
+//	}
+//
+//	@Pointcut("execution(* com.laura.carpaciu.*.*.*.*.*(..))")
+//	private void persistenceModule() {
+//
+//	}
+//
+//	@Pointcut("execution(* com.laura.carpaciu.service.*.*(..))")
+//	private void invoiceModule() {
+//
+//	}
 
 	@Pointcut("securityModule() || persistenceModule() || invoiceModule()")
 	public void modulesExceptions() {

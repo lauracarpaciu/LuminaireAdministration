@@ -4,6 +4,7 @@ import java.util.concurrent.ExecutionException;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -24,7 +25,7 @@ import lombok.AllArgsConstructor;
 @Controller
 @AllArgsConstructor
 public class UserController {
-
+	@Autowired
 	private final UserService userService;
 
 	public UserController(UserService userService) {

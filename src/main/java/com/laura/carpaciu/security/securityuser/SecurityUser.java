@@ -13,57 +13,54 @@ import com.laura.carpaciu.entity.user.User;
 
 public class SecurityUser implements UserDetails {
 
-	/**
+    /**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private final User user;
 
-	public SecurityUser(User user) {
-		this.user = user;
-	}
+    public SecurityUser(User user) {
+        this.user = user;
+    }
 
-	@Override
-	public String getPassword() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
 
-	@Override
-	public String getUsername() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	@Override
-	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+        List<GrantedAuthority> userAuthorities = user.getAuthorities().stream()
+                                                                .map( auth -> new SimpleGrantedAuthority("ROLE_"+ auth))
+                                                                .collect(Collectors.toList());
 
-	@Override
-	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+        return userAuthorities;
+    }
 
-	@Override
-	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    @Override
+    public String getPassword() {
+        return user.getPassword();
+    }
 
-	@Override
-	public boolean isEnabled() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    @Override
+    public String getUsername() {
+        return user.getUsername();
+    }
 
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		List<GrantedAuthority> userAuthorities = user.getAuthorities().stream()
-				.map(auth -> new SimpleGrantedAuthority("ROLE_" + auth)).collect(Collectors.toList());
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
 
-		return userAuthorities;
-	}
+    @Override
+    public boolean isAccountNonLocked() {
+        return user.isNonLoked();
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return user.isEnabled();
+    }
 }

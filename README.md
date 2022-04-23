@@ -1,17 +1,12 @@
 # LuminaireAdministration
-Store Web application sample
-A project demonstrating the following features of SeedStack:
 
-    REST resources,
-    JPA persistence,
-    JavaMail,
-    Pagination,
-    Static resources serving,
-    Simple business code.
-    
- Running it
- 
- If you have Maven 3 installed, you can clone the repository and run it locally:
-mvn demo:run
+A project demonstrating the following features :
 
-https://img.shields.io/depfu/dependencies/github/https://github.com/lauracarpaciu/LuminaireAdministration
+    Building an Application with Spring Boot
+    Building a RESTful Web Service,
+    Consuming a RESTful Web Service
+    Spring Security Architecture - using filters and, more generally, by using method annotations. 
+    Securing a Web Application,
+    Accessing data with MySQL  - it uses Spring Data JPA to access the database
+
+

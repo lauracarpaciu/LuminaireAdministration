@@ -2,7 +2,7 @@
 
 A project demonstrating the following features :
 
-    Building an Application with Spring Boot
+    Building an Application with Spring Boot - helps you accelerate application development
     Building a RESTful Web Service,
     Consuming a RESTful Web Service
     Spring Security Architecture - using filters and, more generally, by using method annotations. 

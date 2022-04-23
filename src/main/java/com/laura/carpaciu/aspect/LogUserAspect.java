@@ -23,13 +23,13 @@ public class LogUserAspect {
 		Logs.sendEmail(user, "sent email at:");
 	}
 
-	@AfterThrowing(pointcut = "execution(* ro.laura.carpaciu.email.sender.impl.EmailService.sendEmail(..))", throwing = "exc")
+	@AfterThrowing(pointcut = "execution(* com.laura.carpaciu.email.sender.impl.EmailService.sendEmail(..))", throwing = "exc")
 	public void logSendMail(JoinPoint JoinPoint, Throwable exc) {
 		String message = exc.getMessage();
 		Logs.writeEmailException(message);
 	}
 
-	@Before("execution(* ro.laura.carpaciu.security.handler.SecurityLogoutHandler.logout(..))")
+	@Before("execution(* com.laura.carpaciu.security.handler.SecurityLogoutHandler.logout(..))")
 	public void logLogout(JoinPoint joinPoint) {
 
 		Object[] obj = joinPoint.getArgs();

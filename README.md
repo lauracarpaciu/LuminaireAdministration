@@ -13,3 +13,5 @@ A project demonstrating the following features of SeedStack:
  
  If you have Maven 3 installed, you can clone the repository and run it locally:
 mvn demo:run
+
+https://img.shields.io/depfu/dependencies/github/https://github.com/lauracarpaciu/LuminaireAdministration

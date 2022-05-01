@@ -1,12 +1,8 @@
 # LuminaireAdministration
-
+A Spring Boot Web Application.
 A project demonstrating the following features :
 
-    Building an Application with Spring Boot - helps you accelerate application development
-    Building a RESTful Web Service,
-    Consuming a RESTful Web Service
-    Spring Security Architecture - using filters and, more generally, by using method annotations. 
-    Securing a Web Application,
-    Accessing data with MySQL  - it uses Spring Data JPA to access the database
+
+Framework and dependecies used: Spring boot 1.5.9, Spring security, Spring web, Spring Data Jpa, mysql-connector-java, Hibernate validator, mySQL database.
 
 

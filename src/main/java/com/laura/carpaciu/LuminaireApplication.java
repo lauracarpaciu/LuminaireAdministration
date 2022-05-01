@@ -33,8 +33,7 @@ import com.laura.carpaciu.config.PdfGeneratorConfig;
 @EnableJpaAuditing
 @ComponentScan(basePackages = { "com.laura.carpaciu.*" })
 @EntityScan("com.laura.carpaciu.*")
-
-public class LuminaireApplication extends SpringBootServletInitializer{
+public class LuminaireApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(LuminaireApplication.class, args);
 	}

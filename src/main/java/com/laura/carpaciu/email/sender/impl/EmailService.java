@@ -1,6 +1,8 @@
 package com.laura.carpaciu.email.sender.impl;
 
 import lombok.AllArgsConstructor;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -16,12 +18,12 @@ import javax.mail.internet.MimeMessage;
 @AllArgsConstructor
 public class EmailService implements EmailSender {
 
-
+	
     private final JavaMailSenderImpl mailSender;
     private final EmailHtmlRenderer emailHtmlRenderer;
 
 
-
+    @Autowired
     public EmailService(JavaMailSenderImpl mailSender, EmailHtmlRenderer emailHtmlRenderer) {
 		super();
 		this.mailSender = mailSender;

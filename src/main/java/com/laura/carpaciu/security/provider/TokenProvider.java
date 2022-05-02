@@ -1,6 +1,8 @@
 package com.laura.carpaciu.security.provider;
 
 import lombok.AllArgsConstructor;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
@@ -22,12 +24,14 @@ import java.util.Optional;
 @AllArgsConstructor
 public class TokenProvider implements AuthenticationProvider {
 
+
+	private final UserService userService;
+	@Autowired
 	public TokenProvider(UserService userService) {
 		super();
 		this.userService = userService;
 	}
 
-	private final UserService userService;
 
 	// method 1
 	@Override
@@ -54,7 +58,7 @@ public class TokenProvider implements AuthenticationProvider {
 
 	// method 2
 	private Authentication authenticate(User user) {
-		userService.activateUserAccount(user);
+//		userService.activateUserAccount(user);
 		return new TokenAuthentication(user.getActivationToken().getToken(), null, null);
 	}
 

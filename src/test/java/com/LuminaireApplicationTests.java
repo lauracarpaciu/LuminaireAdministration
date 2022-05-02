@@ -1,5 +1,8 @@
 package com;
+
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -15,12 +18,21 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.laura.carpaciu.LuminaireApplication;
 import com.laura.carpaciu.controllers.luminaire.PieceController;
+import com.laura.carpaciu.dao.interfaces.CompanyRepository;
+import com.laura.carpaciu.dao.interfaces.InvoiceRepository;
 import com.laura.carpaciu.services.PieceService;
 
+import junit.framework.Assert;
+
+@SuppressWarnings("deprecation")
 @ActiveProfiles(profiles = "test")
 @RunWith(SpringRunner.class)
 @SpringBootTest(properties = "spring.main.lazy-initialization=true", classes = LuminaireApplication.class)
 public class LuminaireApplicationTests {
+	@Autowired
+	CompanyRepository companyRepository;
+	@Autowired
+	private InvoiceRepository invoiceRepository;
 
 	private Logger log = LoggerFactory.getLogger(LuminaireApplicationTests.class);
 
@@ -38,15 +50,17 @@ public class LuminaireApplicationTests {
 	@Autowired
 	public PieceController pieceController;
 
-	@Test
-	@DisplayName("check been injection")
-	public void checkBean() {
-		assertNotNull(pieceController, "mesaj");
-	}
-
-	@Test
-	@DisplayName("verify if the PieceService bean is injected from Spring Context")
-	public void checkPartServiceInjection() {
-		assertNotNull(pieceService, "mesaj");
-	}
+//	@SuppressWarnings("deprecation")
+//	@Test
+//	@DisplayName("check been injection")
+//	public void checkBean() {
+//		Assert.assertTrue(pieceController, "mesaj");
+//	}
+//
+//	@Test
+//	@DisplayName("verify if the PieceService bean is injected from Spring Context")
+//	public void checkPartServiceInjection() {
+//		Assert.assertTrue(pieceService, "mesaj");
+//	}
+//	
 }

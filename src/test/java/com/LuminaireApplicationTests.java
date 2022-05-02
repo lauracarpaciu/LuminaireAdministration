@@ -1,4 +1,5 @@
 package com;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -16,11 +17,9 @@ import com.laura.carpaciu.LuminaireApplication;
 import com.laura.carpaciu.controllers.luminaire.PieceController;
 import com.laura.carpaciu.services.PieceService;
 
-import junit.framework.Assert;
-
-@RunWith(SpringRunner.class)
 @ActiveProfiles(profiles = "test")
-@SpringBootTest(classes = LuminaireApplication.class)
+@RunWith(SpringRunner.class)
+@SpringBootTest(properties = "spring.main.lazy-initialization=true", classes = LuminaireApplication.class)
 public class LuminaireApplicationTests {
 
 	private Logger log = LoggerFactory.getLogger(LuminaireApplicationTests.class);
@@ -42,12 +41,12 @@ public class LuminaireApplicationTests {
 	@Test
 	@DisplayName("check been injection")
 	public void checkBean() {
-		Assert.assertNotNull(pieceController);
+		assertNotNull(pieceController, "mesaj");
 	}
 
 	@Test
-	@DisplayName("verify if the PartService bean is injected from Spring Context")
+	@DisplayName("verify if the PieceService bean is injected from Spring Context")
 	public void checkPartServiceInjection() {
-		Assert.assertNotNull(pieceService);
+		assertNotNull(pieceService, "mesaj");
 	}
 }

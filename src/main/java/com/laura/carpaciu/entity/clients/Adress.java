@@ -1,6 +1,7 @@
 package com.laura.carpaciu.entity.clients;
 
 import javax.persistence.Embeddable;
+import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import java.util.Objects;

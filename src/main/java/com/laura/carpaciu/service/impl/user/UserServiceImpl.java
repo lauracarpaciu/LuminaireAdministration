@@ -25,12 +25,11 @@ import com.laura.carpaciu.services.UserService;
 public class UserServiceImpl implements UserService {
 	@Autowired
 	private final UserRepository userRepository;
-	private final PasswordEncoder passwordEncoder;
-	private final EmailSender emailSender;
 	@Autowired
 	private final TokenRepository tokenRepository;
-
-
+	private final PasswordEncoder passwordEncoder;
+	private final EmailSender emailSender;
+	
 
 	public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, EmailSender emailSender,
 			TokenRepository tokenRepository) {
@@ -92,10 +91,9 @@ public class UserServiceImpl implements UserService {
 
 		String token = UUID.randomUUID().toString();
 		user.getActivationToken().setToken(token);
-
 		tokenRepository.updateToken(user.getId(), token);
 		emailSender.sendEmail(user);
-
+	
 	}
 
 

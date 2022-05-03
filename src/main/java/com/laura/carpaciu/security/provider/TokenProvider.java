@@ -24,9 +24,9 @@ import java.util.Optional;
 @AllArgsConstructor
 public class TokenProvider implements AuthenticationProvider {
 
-
-	private final UserService userService;
 	@Autowired
+	private final UserService userService;
+
 	public TokenProvider(UserService userService) {
 		super();
 		this.userService = userService;
@@ -58,7 +58,7 @@ public class TokenProvider implements AuthenticationProvider {
 
 	// method 2
 	private Authentication authenticate(User user) {
-//		userService.activateUserAccount(user);
+		userService.activateUserAccount(user);
 		return new TokenAuthentication(user.getActivationToken().getToken(), null, null);
 	}
 

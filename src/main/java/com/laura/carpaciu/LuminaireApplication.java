@@ -29,7 +29,7 @@ import com.laura.carpaciu.config.PdfGeneratorConfig;
         "com.laura.carpaciu"
 })
 @EnableAutoConfiguration
-@EnableJpaRepositories("com.laura.carpaciu.dao")
+@EnableJpaRepositories("com.laura.carpaciu.*")
 @EnableJpaAuditing
 @ComponentScan(basePackages = { "com.laura.carpaciu.*" })
 @EntityScan("com.laura.carpaciu.*")

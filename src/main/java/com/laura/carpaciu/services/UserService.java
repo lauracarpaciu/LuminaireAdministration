@@ -14,7 +14,7 @@ public interface UserService {
 
 	Optional<User> findUserWithToken(String email);
 
-//	int activateUserAccount(User user);
+	Optional<User> activateUserAccount(User user);
 
 	@Transactional
 	User findUseByUsername(String username);

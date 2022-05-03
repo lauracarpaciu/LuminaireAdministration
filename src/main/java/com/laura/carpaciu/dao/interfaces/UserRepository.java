@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 import com.laura.carpaciu.entity.user.User;
 @Repository
 public interface UserRepository extends CrudRepository<User, Long> {
-
 //	int activateUserAccount(User user);
 
 //	void createUser(User user);

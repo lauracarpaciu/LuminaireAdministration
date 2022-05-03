@@ -61,7 +61,7 @@ public class UserServiceImpl implements UserService {
 				ActivationToken activationToken = createActivationToken(token, user);
 				user.setActivationToken(activationToken);
 
-				userRepository.save(user);;
+				userRepository.save(user);
 				emailSender.sendEmail(user);
 
 				return new AsyncResult<>(user);
@@ -105,12 +105,12 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByEmail(email);
     }
 
-//	@Override
-//	@Transactional
-//	public int activateUserAccount(User user) {
-//		return userRepository.activateUserAccount(user);
-//
-//	}
+	@Override
+	@Transactional
+	public Optional<User> activateUserAccount(User user) {
+		return userRepository.findByEmail(user.getEmail());
+
+	}
 
 	@Override
 	@Transactional

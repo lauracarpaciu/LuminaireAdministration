@@ -7,6 +7,7 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -88,7 +89,7 @@ public class InvoiceServiceImpl implements InvoiceService {
 	@Transactional
 	public void getInvoiceFromDataBase(ServiceOrder serviceOrder, HttpServletResponse response) {
 
-		Invoice invoice = (Invoice) invoiceRepository.findByServiceOrder(serviceOrder);
+		Invoice invoice =invoiceRepository.findInvoiceByServiceOrder(serviceOrder);
 		byte[] pdfBytes = invoice.getInvoice();
 
 		response.setContentType(MimeTypeUtils.APPLICATION_OCTET_STREAM.getType());

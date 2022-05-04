@@ -6,16 +6,19 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.laura.carpaciu.entity.luminaire.Piece;
 
-public interface PieceRepository extends CrudRepository<Piece, Long> {
+public interface PieceRepository  {
 
-	Optional<Piece> findByPartNumber(String partNumber);
+	void createPiece(Piece part);
 
-	int updatePieceCountAndPrice(Integer count, Double price, String partNumber);
 
-	int decreasePieceCount(int decrement, String partNumber);
+    Optional<Piece> findPieceByName(String partName);
 
-	int updatePieceCount(int count, String partNumber);
+    Optional<Piece> findPieceByPartNumber(String partNumber);
 
-	void create(Piece part);
 
+    int updatePieceCount(int count, String partNumber);
+
+    int updatePieceCountAndPrice(int increment, double price, String partNumber);
+
+    int decreasePieceCount(int decrement, String partNumber);
 }

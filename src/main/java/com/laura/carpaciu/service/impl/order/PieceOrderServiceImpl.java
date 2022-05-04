@@ -57,7 +57,7 @@ public class PieceOrderServiceImpl implements PieceOrderService {
 
 			Long id = serviceOrder.getId();
 
-			orderRepository.update(OrderStatus.READY, id);
+			orderRepository.updateOrderStatus(OrderStatus.OPEN, id);
 			pieceRepository.decreasePieceCount(count, part.getPartNumber());
 			return;
 

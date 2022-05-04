@@ -38,7 +38,7 @@ public class WorkOrderController {
 			throw new SelectOrderException("No order selected!");
 		}
 
-		miniCache.loadWorksOrder();
+//		miniCache.loadWorksOrder();
 
 		model.addAttribute("works", miniCache.retrieveWorks());
 		model.addAttribute("orderWorks", miniCache.retrieveWorkFromOrder());

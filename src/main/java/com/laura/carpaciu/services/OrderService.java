@@ -27,18 +27,17 @@ public interface OrderService {
 	ServiceOrder updateServiceOrder(ServiceOrder serviceOrder, int decrement, String partNumber);
 
 	@Transactional
-	ServiceOrder findServiceOrderParts(int id);
+	ServiceOrder findServiceOrderParts(Long id);
 
 	@Transactional
 	List<PieceOrder> getPartsFormServiceOrder(Long id);
 
 	@Transactional
-	ServiceOrder findCompleteServiceOrderById(int id);
+	ServiceOrder findCompleteServiceOrderById(Long id);
 
 	@Transactional
 	int closeOrder(ServiceOrder serviceOrder) throws OrderIsClosedException;
-
+	
 	@Transactional
-	List<WorkOrder> findAllWorksInOrder(Long long1);
-
+	List<WorkOrder> findAllWorksInOrder(Long id);
 }

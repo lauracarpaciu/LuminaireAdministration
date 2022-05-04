@@ -12,11 +12,9 @@ import com.laura.carpaciu.entity.order.WorkOrder;
 import com.laura.carpaciu.entity.work.Work;
 
 public interface MiniCache {
-	ServiceOrder loadCompleteServiceOrderById(int id);
+	ServiceOrder loadCompleteServiceOrderById(Long id);
 
 	ServiceOrder getCompleteServiceOrder();
-
-	void loadWorksOrder();
 
 	List<WorkOrder> retrieveWorkFromOrder();
 
@@ -65,4 +63,5 @@ public interface MiniCache {
 	Map<String, Person> getPerson();
 
 	Map<String, Company> getCompany();
+	void loadWorksOrder();
 }

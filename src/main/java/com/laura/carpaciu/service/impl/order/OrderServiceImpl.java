@@ -64,7 +64,7 @@ public class OrderServiceImpl implements OrderService {
 			throw new ClientNotSelectedException("Client not selected at order creation!");
 		}
 
-		orderRepository.create(serviceOrder);
+		orderRepository.createServiceOrder(serviceOrder);
 	}
 
 	@Override
@@ -78,13 +78,13 @@ public class OrderServiceImpl implements OrderService {
 	public ServiceOrder updateServiceOrder(ServiceOrder serviceOrder, int decrement, String partNumber) {
 
 		pieceRepository.decreasePieceCount(decrement, partNumber);
-		return orderRepository.update(serviceOrder);
+		return orderRepository.updateServiceOrder(serviceOrder);
 	}
 
 	@Override
 	@Transactional
-	public ServiceOrder findServiceOrderParts(int id) {
-		return orderRepository.findParts(id);
+	public ServiceOrder findServiceOrderParts(Long id) {
+		return orderRepository.findServiceOrderParts(id);
 	}
 
 	@Override
@@ -102,12 +102,12 @@ public class OrderServiceImpl implements OrderService {
 		pdfService.createPDFInvoice(serviceOrder);
 		invoiceService.saveInvoiceToDatabase(serviceOrder);
 
-		return orderRepository.update(OrderStatus.CLOSE, orderId);
+		return orderRepository.updateOrderStatus(orderStatus.CLOSE, orderId);
 	}
 
 	@Override
 	@Transactional
-	public ServiceOrder findCompleteServiceOrderById(int id) {
+	public ServiceOrder findCompleteServiceOrderById(Long id) {
 
 		ServiceOrder serviceOrder = orderRepository.findCompleteServiceOrderById(id);
 
@@ -152,13 +152,14 @@ public class OrderServiceImpl implements OrderService {
 	@Transactional
 	public List<PieceOrder> getPartsFormServiceOrder(Long id) {
 		// TODO Auto-generated method stub
-		return orderRepository.getPartsFromServiceOrder(id);
+		return orderRepository.getPartsFormServiceOrder(id);
 	}
 
+
 	@Override
-	@Transactional
 	public List<WorkOrder> findAllWorksInOrder(Long id) {
 		// TODO Auto-generated method stub
+		
 		return orderRepository.findAllWorksInOrder(id);
 	}
 

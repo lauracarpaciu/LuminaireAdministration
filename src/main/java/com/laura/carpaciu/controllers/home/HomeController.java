@@ -54,7 +54,7 @@ public class HomeController {
 	}
 
 	@GetMapping("/order-stats") // method 1
-	public String findOrderStats(@RequestParam("orderId") int id, Model model) {
+	public String findOrderStats(@RequestParam("orderId") Long id, Model model) {
 
 		ServiceOrder serviceOrder = miniCache.loadCompleteServiceOrderById(id);
 		allModelAtributes(serviceOrder, model);

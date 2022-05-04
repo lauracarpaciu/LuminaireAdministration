@@ -12,26 +12,30 @@ import com.laura.carpaciu.entity.order.ServiceOrder;
 import com.laura.carpaciu.entity.order.WorkOrder;
 import com.laura.carpaciu.utility.OrderStatus;
 
-public interface OrderRepository extends CrudRepository<ServiceOrder, Long> {
+public interface OrderRepository  {
 
-	void create(ServiceOrder serviceOrder);
+	void createServiceOrder(ServiceOrder serviceOrder);
 
-	Set<ServiceOrder> findAllServiceOrders();
 
-	ServiceOrder update(ServiceOrder serviceOrder);
+    Set<ServiceOrder> findAllServiceOrders();
 
-	ServiceOrder findParts(int id);
+    List<ServiceOrderIdAndStatusDto> allServiceOrderIdAndStatus();
 
-	List<PieceOrder> getPartsFromServiceOrder(Long id);
+    Optional<ServiceOrder> findServiceOrderById(Long id);
 
-	List<WorkOrder> findAllWorksInOrder(Long id);
+    ServiceOrder updateServiceOrder(ServiceOrder serviceOrder);
 
-	ServiceOrder findCompleteServiceOrderById(int id);
 
-	List<ServiceOrderIdAndStatusDto> allServiceOrderIdAndStatus();
+    ServiceOrder findServiceOrderParts(Long id);
 
-	Optional<ServiceOrder> findById(int id);
+    List<PieceOrder> getPartsFormServiceOrder(Long id);
 
-	int update(OrderStatus ready, Long orderId);
+    List<WorkOrder> findAllWorksInOrder(Long id);
+
+
+    ServiceOrder findCompleteServiceOrderById(Long id);
+
+
+    int updateOrderStatus(OrderStatus orderStatus, Long id);
 
 }

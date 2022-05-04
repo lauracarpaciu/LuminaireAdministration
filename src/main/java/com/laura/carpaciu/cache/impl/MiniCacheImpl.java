@@ -55,7 +55,7 @@ public class MiniCacheImpl implements MiniCache {
 	}
 
 	@Override
-	public ServiceOrder loadCompleteServiceOrderById(int id) {
+	public ServiceOrder loadCompleteServiceOrderById(Long id) {
 		ServiceOrder serviceOrder = serviceOrderService.findCompleteServiceOrderById(id);
 
 		order.put(username(), serviceOrder);
@@ -68,11 +68,6 @@ public class MiniCacheImpl implements MiniCache {
 		return order.get(username());
 	}
 
-	@Override
-	public void loadWorksOrder() {
-		orderWorks.put(username(), serviceOrderService.findAllWorksInOrder(getCompleteServiceOrder().getId()));
-
-	}
 
 	@Override
 	public List<WorkOrder> retrieveWorkFromOrder() {
@@ -205,5 +200,12 @@ public class MiniCacheImpl implements MiniCache {
 	@Override
 	public Map<String, Company> getCompany() {
 		return company;
+	}
+
+	@Override
+	public void loadWorksOrder() {
+		orderWorks.put(username(), serviceOrderService.
+                findAllWorksInOrder(getCompleteServiceOrder().getId()));
+		
 	}
 }

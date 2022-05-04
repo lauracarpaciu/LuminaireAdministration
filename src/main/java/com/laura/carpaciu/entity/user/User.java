@@ -149,9 +149,12 @@ public class User {
 		this.password = password;
 	}
 
-	public Object getId() {
-		// TODO Auto-generated method stub
+	public Long getId() {
 		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 

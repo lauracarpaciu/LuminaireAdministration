@@ -1,7 +1,8 @@
 package com.laura.carpaciu.dao.interfaces;
 
-public interface TokenRepository  {
 
-	int updateToken(Object object, String token);
+public interface TokenRepository{
+
+	int updateToken(Long id, String token);
 
 }

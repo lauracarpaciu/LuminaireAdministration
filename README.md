@@ -14,23 +14,24 @@ Functionality
         
 
     Control panel
+    
 
-	     visual representation of the product range;
+visual representation of the product range;
 
-       products and categories: add, edit, delete;
+products and categories: add, edit, delete;
 
-	      selecting a product: add, delete, change a quantity;
+selecting a product: add, delete, change a quantity;
 
-        placing an order;
+placing an order;
 
-        viewing information about placed orders;
+viewing information about placed orders;
         
         
     Secured access to the application
+    
+registration and authorization of client;
 
-        registration and authorization of client;
-
-        restricted access to the control panel;
+restricted access to the control panel;
 
 
 

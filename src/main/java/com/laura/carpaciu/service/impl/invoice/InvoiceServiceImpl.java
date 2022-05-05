@@ -89,7 +89,7 @@ public class InvoiceServiceImpl implements InvoiceService {
 	@Transactional
 	public void getInvoiceFromDataBase(ServiceOrder serviceOrder, HttpServletResponse response) {
 
-		Invoice invoice =invoiceRepository.findInvoiceByServiceOrder(serviceOrder);
+		Invoice invoice = (Invoice) invoiceRepository.findByServiceOrder(serviceOrder);
 		byte[] pdfBytes = invoice.getInvoice();
 
 		response.setContentType(MimeTypeUtils.APPLICATION_OCTET_STREAM.getType());

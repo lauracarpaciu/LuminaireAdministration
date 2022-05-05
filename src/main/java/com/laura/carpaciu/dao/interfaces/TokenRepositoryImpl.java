@@ -1,12 +1,10 @@
-package com.laura.carpaciu.dao.impl.user;
+package com.laura.carpaciu.dao.interfaces;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import java.time.LocalDateTime;
-
-import com.laura.carpaciu.dao.interfaces.TokenRepository;
 
 @Transactional(propagation = Propagation.MANDATORY)
 @Repository

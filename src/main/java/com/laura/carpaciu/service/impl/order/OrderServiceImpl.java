@@ -31,6 +31,7 @@ public class OrderServiceImpl implements OrderService {
 	private final OrderRepository orderRepository;
 	@Autowired
 	private final PieceRepository pieceRepository;
+	@Autowired
 	private final PdfService pdfService;
 	private final InvoiceService invoiceService;
 

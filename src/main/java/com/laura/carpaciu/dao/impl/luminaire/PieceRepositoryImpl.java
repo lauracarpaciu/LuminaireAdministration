@@ -1,9 +1,10 @@
-package com.laura.carpaciu.dao.interfaces;
+package com.laura.carpaciu.dao.impl.luminaire;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.laura.carpaciu.dao.interfaces.PieceRepository;
 import com.laura.carpaciu.entity.luminaire.Piece;
 
 import javax.persistence.EntityManager;

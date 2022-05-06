@@ -1,4 +1,4 @@
-package com.laura.carpaciu.dao.interfaces;
+package com.laura.carpaciu.dao.impl.user;
 
 import java.util.List;
 import java.util.Optional;
@@ -9,6 +9,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
+import com.laura.carpaciu.dao.interfaces.OrderRepository;
 import com.laura.carpaciu.dto.ServiceOrderIdAndStatusDto;
 import com.laura.carpaciu.entity.order.PieceOrder;
 import com.laura.carpaciu.entity.order.ServiceOrder;

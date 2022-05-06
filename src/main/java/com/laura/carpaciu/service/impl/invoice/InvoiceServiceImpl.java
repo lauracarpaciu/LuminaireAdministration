@@ -19,6 +19,7 @@ import org.springframework.util.MimeTypeUtils;
 import com.laura.carpaciu.dao.interfaces.InvoiceRepository;
 import com.laura.carpaciu.entity.invoice.Invoice;
 import com.laura.carpaciu.entity.order.ServiceOrder;
+import com.laura.carpaciu.errors.invoice.InvoiceException;
 import com.laura.carpaciu.services.InvoiceService;
 
 import lombok.AllArgsConstructor;
@@ -26,13 +27,14 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @Service
 public class InvoiceServiceImpl implements InvoiceService {
+
+	@Autowired
+	private final InvoiceRepository invoiceRepository;
+	
 	public InvoiceServiceImpl(InvoiceRepository invoiceRepository) {
 		super();
 		this.invoiceRepository = invoiceRepository;
 	}
-
-	@Autowired
-	private final InvoiceRepository invoiceRepository;
 
 
 	@Override
@@ -89,7 +91,9 @@ public class InvoiceServiceImpl implements InvoiceService {
 	@Transactional
 	public void getInvoiceFromDataBase(ServiceOrder serviceOrder, HttpServletResponse response) {
 
-		Invoice invoice = (Invoice) invoiceRepository.findByServiceOrder(serviceOrder);
+		Invoice invoice = invoiceRepository.findInvoiceByServiceOrder(serviceOrder)
+				.orElseThrow(() -> new InvoiceException("Invoice not found"));
+
 		byte[] pdfBytes = invoice.getInvoice();
 
 		response.setContentType(MimeTypeUtils.APPLICATION_OCTET_STREAM.getType());

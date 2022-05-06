@@ -50,7 +50,7 @@ public class WorkServiceImpl implements WorkService {
 
 	@Override
 	@Transactional
-	public int deleteWork(int id) {
+	public int deleteWork(Long id) {
 
 		java.util.Optional<Work> work = workRepository.findById(id);
 

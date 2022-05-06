@@ -17,12 +17,12 @@ public interface WorkService {
 	List<Work> findWorkByName(String workDescription);
 
 	@Transactional(readOnly = true)
-	Work findWorkById(int id);
+	Work findWorkById(int workId);
 
 	@Transactional
-	int updateWorkTimeAndDescription(double timedWork, String workDescription, Long long1);
+	int updateWorkTimeAndDescription(double timedWork, String workDescription, Long id);
 
 	@Transactional
-	int deleteWork(int id);
+	int deleteWork(Long id);
 
 }

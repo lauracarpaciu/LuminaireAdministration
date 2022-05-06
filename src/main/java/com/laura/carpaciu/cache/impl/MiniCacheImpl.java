@@ -26,12 +26,17 @@ import com.laura.carpaciu.services.WorkService;
 
 @Component
 public class MiniCacheImpl implements MiniCache {
-
+	@Autowired
 	private final OrderService serviceOrderService;
+	@Autowired
 	private final WorkService workService;
+	@Autowired
 	private final PieceService pieceService;
+	@Autowired
 	private final LuminaireService luminaireService;
+	@Autowired
 	private final PersonService personService;
+	@Autowired
 	private final CompanyService companyService;
 
 	private final Map<String, ServiceOrder> order = new HashMap<>();

@@ -24,14 +24,13 @@ import com.laura.carpaciu.config.PdfGeneratorConfig;
 @EnableAsync
 @Import({ SecurityConfig.class, PdfGeneratorConfig.class, FieldsValidationConfig.class })
 @EnableAspectJAutoProxy
-@ComponentScan
 @SpringBootApplication(scanBasePackages = {
         "com.laura.carpaciu"
 })
 @EnableAutoConfiguration
 @EnableJpaRepositories("com.laura.carpaciu.*")
 @EnableJpaAuditing
-@ComponentScan(basePackages = { "com.laura.carpaciu.*" })
+@ComponentScan(basePackages = { "com.laura.carpaciu.cache" })
 @EntityScan("com.laura.carpaciu.*")
 public class LuminaireApplication {
 	public static void main(String[] args) {

@@ -18,6 +18,6 @@ public interface WorkRepository extends CrudRepository<Work, Long> {
 
 	int updateWorkTimeAndDescription(double timedWork, String workDescription, Long id);
 
-	int deleteWork(int id);
+	int deleteWork(Long id);
 
 }

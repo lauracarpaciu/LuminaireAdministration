@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
@@ -26,19 +27,15 @@ import com.laura.carpaciu.services.WorkService;
 
 @Component
 public class MiniCacheImpl implements MiniCache {
-	@Autowired
-	private final OrderService serviceOrderService;
-	@Autowired
+	
+	
+	private final OrderService orderService;
 	private final WorkService workService;
-	@Autowired
 	private final PieceService pieceService;
-	@Autowired
 	private final LuminaireService luminaireService;
-	@Autowired
 	private final PersonService personService;
-	@Autowired
 	private final CompanyService companyService;
-
+	
 	private final Map<String, ServiceOrder> order = new HashMap<>();
 	private final Map<String, List<Work>> works = new HashMap<>();
 	private final Map<String, List<WorkOrder>> orderWorks = new HashMap<>();
@@ -48,10 +45,10 @@ public class MiniCacheImpl implements MiniCache {
 	private final Map<String, Company> company = new HashMap<>();
 
 	@Autowired
-	public MiniCacheImpl(OrderService serviceOrderService, WorkService workService, PieceService pieceService,
+	public MiniCacheImpl(OrderService orderService, WorkService workService, PieceService pieceService,
 			LuminaireService luminaireService, PersonService personService, CompanyService companyService) {
-
-		this.serviceOrderService = serviceOrderService;
+		super();
+		this.orderService = orderService;
 		this.workService = workService;
 		this.pieceService = pieceService;
 		this.luminaireService = luminaireService;
@@ -59,9 +56,10 @@ public class MiniCacheImpl implements MiniCache {
 		this.companyService = companyService;
 	}
 
+
 	@Override
 	public ServiceOrder loadCompleteServiceOrderById(Long id) {
-		ServiceOrder serviceOrder = serviceOrderService.findCompleteServiceOrderById(id);
+		ServiceOrder serviceOrder = orderService.findCompleteServiceOrderById(id);
 
 		order.put(username(), serviceOrder);
 
@@ -209,8 +207,7 @@ public class MiniCacheImpl implements MiniCache {
 
 	@Override
 	public void loadWorksOrder() {
-		orderWorks.put(username(), serviceOrderService.
-                findAllWorksInOrder(getCompleteServiceOrder().getId()));
+		orderWorks.put(username(), orderService.findAllWorksInOrder(getCompleteServiceOrder().getId()));
 		
 	}
 }

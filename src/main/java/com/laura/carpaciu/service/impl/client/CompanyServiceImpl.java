@@ -12,16 +12,20 @@ import com.laura.carpaciu.entity.clients.Company;
 import com.laura.carpaciu.errors.client.CompanyAlreadyExistsException;
 import com.laura.carpaciu.errors.user.PersonNotFoundException;
 import com.laura.carpaciu.services.CompanyService;
+import com.laura.carpaciu.services.LuminaireService;
+import com.laura.carpaciu.services.OrderService;
+import com.laura.carpaciu.services.PersonService;
+import com.laura.carpaciu.services.PieceService;
+import com.laura.carpaciu.services.WorkService;
 
 import lombok.AllArgsConstructor;
-
 @AllArgsConstructor
 @Service
 @Lazy
 public class CompanyServiceImpl implements CompanyService {
-	@Autowired
-	private final CompanyRepository companyRepository;
 
+	private final CompanyRepository companyRepository;
+	
 	@Override
 	@Transactional
 	public void createCompany(Company company) {

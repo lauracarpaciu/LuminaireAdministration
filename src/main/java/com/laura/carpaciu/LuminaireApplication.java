@@ -27,7 +27,6 @@ import com.laura.carpaciu.config.PdfGeneratorConfig;
 @SpringBootApplication(scanBasePackages = {
         "com.laura.carpaciu"
 })
-@EnableAutoConfiguration
 @EnableJpaRepositories("com.laura.carpaciu.*")
 @EnableJpaAuditing
 @ComponentScan(basePackages = { "com.laura.carpaciu.cache" })

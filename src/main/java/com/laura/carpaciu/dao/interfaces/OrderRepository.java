@@ -5,13 +5,14 @@ import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 import com.laura.carpaciu.dto.ServiceOrderIdAndStatusDto;
 import com.laura.carpaciu.entity.order.PieceOrder;
 import com.laura.carpaciu.entity.order.ServiceOrder;
 import com.laura.carpaciu.entity.order.WorkOrder;
 import com.laura.carpaciu.utility.OrderStatus;
-
+@Repository
 public interface OrderRepository  {
 
 	void createServiceOrder(ServiceOrder serviceOrder);

@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
@@ -19,6 +20,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 
 import com.laura.carpaciu.config.FieldsValidationConfig;
 import com.laura.carpaciu.config.PdfGeneratorConfig;
+import com.laura.carpaciu.dao.impl.luminaire.PieceRepositoryImpl;
 
 
 @EnableAsync
@@ -27,10 +29,11 @@ import com.laura.carpaciu.config.PdfGeneratorConfig;
 @SpringBootApplication(scanBasePackages = {
         "com.laura.carpaciu"
 })
-@EnableJpaRepositories("com.laura.carpaciu.*")
+@Configuration
+@EnableJpaRepositories("com.laura.carpaciu.dao.*")
 @EnableJpaAuditing
-@ComponentScan(basePackages = { "com.laura.carpaciu.cache" })
 @EntityScan("com.laura.carpaciu.*")
+@ComponentScan("com.laura.carpaciu.cache")
 public class LuminaireApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(LuminaireApplication.class, args);

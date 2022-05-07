@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.ConstructorBinding;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -26,9 +27,9 @@ import com.laura.carpaciu.services.PieceService;
 import com.laura.carpaciu.services.WorkService;
 
 @Component
+@ConstructorBinding
 public class MiniCacheImpl implements MiniCache {
-	
-	
+
 	private final OrderService orderService;
 	private final WorkService workService;
 	private final PieceService pieceService;
@@ -36,14 +37,6 @@ public class MiniCacheImpl implements MiniCache {
 	private final PersonService personService;
 	private final CompanyService companyService;
 	
-	private final Map<String, ServiceOrder> order = new HashMap<>();
-	private final Map<String, List<Work>> works = new HashMap<>();
-	private final Map<String, List<WorkOrder>> orderWorks = new HashMap<>();
-	private final Map<String, Piece> parts = new HashMap<>();
-	private final Map<String, Luminaire> luminaire = new HashMap<>();
-	private final Map<String, Person> person = new HashMap<>();
-	private final Map<String, Company> company = new HashMap<>();
-
 	@Autowired
 	public MiniCacheImpl(OrderService orderService, WorkService workService, PieceService pieceService,
 			LuminaireService luminaireService, PersonService personService, CompanyService companyService) {
@@ -56,158 +49,188 @@ public class MiniCacheImpl implements MiniCache {
 		this.companyService = companyService;
 	}
 
+	private final Map<String, ServiceOrder> order = new HashMap<>();
+	private final Map<String, List<Work>> works = new HashMap<>();
+	private final Map<String, List<WorkOrder>> orderWorks = new HashMap<>();
+	private final Map<String, Piece> parts = new HashMap<>();
+	private final Map<String, Luminaire> luminaire = new HashMap<>();
+	private final Map<String, Person> person = new HashMap<>();
+	private final Map<String, Company> company = new HashMap<>();
 
-	@Override
-	public ServiceOrder loadCompleteServiceOrderById(Long id) {
-		ServiceOrder serviceOrder = orderService.findCompleteServiceOrderById(id);
+	 @Override
+	    public ServiceOrder loadCompleteServiceOrderById(Long id){
 
-		order.put(username(), serviceOrder);
+	        ServiceOrder serviceOrder = orderService.findCompleteServiceOrderById(id);
 
-		return order.get(username());
-	}
+	        order.put(username(), serviceOrder);
 
-	@Override
-	public ServiceOrder getCompleteServiceOrder() {
-		return order.get(username());
-	}
+	        return order.get(username());
+	    }
 
 
-	@Override
-	public List<WorkOrder> retrieveWorkFromOrder() {
-		return orderWorks.get(username());
-	}
+	    @Override
+	    public ServiceOrder getCompleteServiceOrder(){
+	        return order.get(username());
+	    }
 
-	@Override
-	public void retrieveWorks(String workDescription) {
-		works.put(username(), workService.findWorkByName(workDescription));
 
-	}
+	    @Override
+	    public void loadWorksOrder(){
+	        orderWorks.put(username(), orderService.
+	                                                 findAllWorksInOrder(getCompleteServiceOrder().getId()));
+	    }
 
-	@Override
-	public List<Work> retrieveWorks() {
-		return works.get(username());
-	}
 
-	@Override
-	public Piece findPartByPartNumber(String partNumber) {
-		parts.put(username(), pieceService.findPieceByPartNumber(partNumber));
+	    @Override
+	    public List<WorkOrder> retrieveWorkFromOrder(){
+	        return orderWorks.get(username());
+	    }
 
-		return parts.get(username());
-	}
 
-	@Override
-	public Luminaire findLuminaireBySerialNumber(String serialNumber) {
-		luminaire.put(username(), luminaireService.findLuminaireBySerialNumber(serialNumber));
-		return luminaire.get(username());
-	}
+	    @Override
+	    public void retrieveWorks(String workDescription){
+	        works.put(username(), workService.findWorkByName(workDescription));
+	    }
 
-	@Override
-	public Luminaire retrieveLuminaire() {
-		return luminaire.get(username());
-	}
 
-	@Override
-	public Luminaire getEmptyLuminaire() {
-		luminaire.put(username(), new Luminaire());
-		return luminaire.get(username());
-	}
+	    @Override
+	    public List<Work> retrieveWorks(){
+	       return works.get(username());
+	    }
 
-	@Override
-	public Person findPersonByCnp(String cnp) {
-		person.put(username(), personService.findPersonByCnp(cnp));
-		return person.get(username());
-	}
 
-	@Override
-	public Person loadEmptyPerson() {
-		person.put(username(), new Person());
-		return person.get(username());
-	}
 
-	@Override
-	public Person retrievePerson() {
-		return person.get(username());
-	}
+	    @Override
+	    public Piece findPartByPartNumber(String partNumber){
+	        parts.put(username(),pieceService.findPieceByPartNumber(partNumber));
 
-	@Override
-	public Company findCompanyByCui(String cui) {
-		company.put(username(), companyService.findCompanyByCui(cui));
-		return company.get(username());
-	}
+	        return parts.get(username());
+	    }
 
-	@Override
-	public Company retrieveCompany() {
-		return company.get(username());
-	}
 
-	@Override
-	public Company loadEmptyCompany() {
-		company.put(username(), new Company());
-		return company.get(username());
-	}
+	    @Override
+	    public Luminaire findLuminaireBySerialNumber(String serialNumber){
+	        luminaire.put(username(), luminaireService.findLuminaireBySerialNumber(serialNumber));
+	        return luminaire.get(username());
+	    }
 
-	@Override
-	public Piece retrievePart() {
-		return parts.get(username());
-	}
 
-	@Override
-	public void resetCompanySearch() {
-		company.put(username(), new Company());
-	}
+	    @Override
+	    public Luminaire retrieveLuminaire(){
+	        return luminaire.get(username());
+	    }
 
-	@Override
-	public void resetPersonSearch() {
-		person.put(username(), new Person());
-	}
 
-	@Override
-	public void resetCarSearch() {
-		luminaire.put(username(), new Luminaire());
-	}
+	    @Override
+	    public Luminaire getEmptyLuminaire(){
+	        luminaire.put(username(), new Luminaire());
+	        return luminaire.get(username());
+	    }
 
-	public String username() {
-		return SecurityContextHolder.getContext().getAuthentication().getName();
-	}
 
-	@Override
-	public Map<String, ServiceOrder> getOrder() {
-		return order;
-	}
+	    @Override
+	    public Person findPersonByCnp(String cnp){
+	        person.put(username(), personService.findPersonByCnp(cnp));
+	        return person.get(username());
+	    }
 
-	@Override
-	public Map<String, List<Work>> getWorks() {
-		return works;
-	}
 
-	@Override
-	public Map<String, List<WorkOrder>> getOrderWorks() {
-		return orderWorks;
-	}
+	    @Override
+	    public Person loadEmptyPerson(){
+	        person.put(username(), new Person());
+	        return person.get(username());
+	    }
 
-	@Override
-	public Map<String, Piece> getParts() {
-		return parts;
-	}
+	    @Override
+	    public Person retrievePerson(){
+	        return person.get(username());
+	    }
 
-	@Override
-	public Map<String, Luminaire> getLuminaire() {
-		return luminaire;
-	}
 
-	@Override
-	public Map<String, Person> getPerson() {
-		return person;
-	}
+	    @Override
+	    public Company findCompanyByCui(String cui){
+	        company.put(username(),companyService.findCompanyByCui(cui));
+	        return company.get(username());
+	    }
 
-	@Override
-	public Map<String, Company> getCompany() {
-		return company;
-	}
 
-	@Override
-	public void loadWorksOrder() {
-		orderWorks.put(username(), orderService.findAllWorksInOrder(getCompleteServiceOrder().getId()));
-		
-	}
+	    @Override
+	    public Company retrieveCompany(){
+	        return company.get(username());
+	    }
+
+
+	    @Override
+	    public Company loadEmptyCompany(){
+	        company.put(username(), new Company());
+	        return company.get(username());
+	    }
+
+
+	    @Override
+	    public Piece retrievePart(){
+	        return parts.get(username());
+	    }
+
+
+	    @Override
+	    public void resetCompanySearch(){
+	        company.put(username(), new Company());
+	    }
+
+
+	    @Override
+	    public void resetPersonSearch(){
+	        person.put(username(), new Person());
+	    }
+
+
+	    @Override
+	    public void resetCarSearch(){
+	        luminaire.put(username(), new Luminaire());
+	    }
+
+
+
+
+	    public String username(){
+	        return SecurityContextHolder.getContext().getAuthentication().getName();
+	    }
+
+
+	    @Override
+	    public Map<String, ServiceOrder> getOrder() {
+	        return order;
+	    }
+
+	    @Override
+	    public Map<String, List<Work>> getWorks() {
+	        return works;
+	    }
+
+	    @Override
+	    public Map<String, List<WorkOrder>> getOrderWorks() {
+	        return orderWorks;
+	    }
+
+	    @Override
+	    public Map<String, Piece> getParts() {
+	        return parts;
+	    }
+
+	    @Override
+	    public Map<String, Luminaire> getLuminaire() {
+	        return luminaire;
+	    }
+
+	    @Override
+	    public Map<String, Person> getPerson() {
+	        return person;
+	    }
+
+	    @Override
+	    public Map<String, Company> getCompany() {
+	        return company;
+	    }
+
 }

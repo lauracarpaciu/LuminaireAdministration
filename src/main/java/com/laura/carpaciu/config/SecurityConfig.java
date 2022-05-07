@@ -103,9 +103,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.authenticationProvider(null);
+		auth.authenticationProvider(userNamePasswordProvider);
 		auth.authenticationProvider(emailProvider);
-		auth.authenticationProvider(null);
+		auth.authenticationProvider(tokenProvider);
 		auth.authenticationProvider(resendTokenProvider);
 
 	}
@@ -122,7 +122,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		http.authorizeRequests().mvcMatchers("/app/**").hasAnyRole(roles).mvcMatchers("/parts/**").hasAnyRole(roles)
 				.mvcMatchers("/clients/**").hasAnyRole(roles).mvcMatchers("/luminaires/**").hasAnyRole(roles)
-				.mvcMatchers("/workss/**").hasAnyRole(roles).mvcMatchers("/prices/**").hasAnyRole("MANAGER")
+				.mvcMatchers("/works/**").hasAnyRole(roles).mvcMatchers("/prices/**").hasAnyRole("MANAGER")
 				.mvcMatchers("/workOrder/**").hasAnyRole(roles).mvcMatchers("/serviceOrder/**").hasAnyRole(roles)
 				.mvcMatchers("/orderPart/**").hasAnyRole(roles).mvcMatchers("/app2/**").hasAnyRole(roles)
 				.mvcMatchers("/restPart/**").hasAnyRole(roles).mvcMatchers("/").permitAll().mvcMatchers("/create-user")

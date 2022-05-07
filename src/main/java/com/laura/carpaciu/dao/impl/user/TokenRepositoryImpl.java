@@ -1,9 +1,6 @@
 package com.laura.carpaciu.dao.impl.user;
 
-import java.util.Optional;
-
 import com.laura.carpaciu.dao.interfaces.TokenRepository;
-import com.laura.carpaciu.entity.user.User;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;

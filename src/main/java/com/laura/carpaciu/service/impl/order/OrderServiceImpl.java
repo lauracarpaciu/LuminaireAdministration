@@ -27,14 +27,13 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @Service
 public class OrderServiceImpl implements OrderService {
-	@Autowired
+
 	private final OrderRepository orderRepository;
-	@Autowired
 	private final PieceRepository pieceRepository;
-	@Autowired
 	private final PdfService pdfService;
 	private final InvoiceService invoiceService;
 
+	@Autowired
 	public OrderServiceImpl(OrderRepository orderRepository, PieceRepository pieceRepository, PdfService pdfService,
 			InvoiceService invoiceService) {
 		super();
@@ -156,11 +155,10 @@ public class OrderServiceImpl implements OrderService {
 		return orderRepository.getPartsFormServiceOrder(id);
 	}
 
-
 	@Override
 	public List<WorkOrder> findAllWorksInOrder(Long id) {
 		// TODO Auto-generated method stub
-		
+
 		return orderRepository.findAllWorksInOrder(id);
 	}
 

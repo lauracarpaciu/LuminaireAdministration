@@ -4,8 +4,10 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.repository.CrudRepository;
-import com.laura.carpaciu.entity.work.Work;
+import org.springframework.stereotype.Repository;
 
+import com.laura.carpaciu.entity.work.Work;
+@Repository
 public interface WorkRepository extends CrudRepository<Work, Long> {
 
 	void create(Work work);

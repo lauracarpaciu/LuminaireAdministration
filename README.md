@@ -1,5 +1,8 @@
 # LuminaireAdministration
 
+The project is a web app that is dedicated to the lighting products business for construction area. 
+The main purpose of the app is to create estimate orders for each luminaire, and generate the invoice at the end of the final customers.
+
 Features:
 
    	Spring Boot

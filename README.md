@@ -1,13 +1,21 @@
 # LuminaireAdministration
 
+Features:
 
-Technologies
-
-    servlet: Spring MVC Thymeleaf Spring Security
-
-    data: Spring Data JPA H2 Hibernate
-
-    RESTful service: Spring MVC 
+   	Spring Boot
+   
+   	Data Access: 
+	
+        	transactions management, 
+        	DAO support, 
+        	data acces with JDBC,
+        	Object Relational Mapping (ORM) Data Access,
+        	Marshalling XML.
+	       
+    Spring Security Architecture.
+    
+    Spring MVC web framework.
+    
 
     
 Functionality
@@ -18,13 +26,15 @@ Functionality
 
 visual representation of the product range;
 
-products and categories: add, edit, delete;
+products and categories: find, add, edit,update, delete;
 
 selecting a product: add, delete, change a quantity;
 
 placing an order;
 
 viewing information about placed orders;
+
+generate the invoice.
         
         
     Secured access to the application

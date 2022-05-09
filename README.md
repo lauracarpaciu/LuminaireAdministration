@@ -16,7 +16,7 @@ Features:
         	Marshalling XML.
 	       
     Spring Security Architecture.
-    
+    Spring framework Email
     Spring MVC web framework.
     
 

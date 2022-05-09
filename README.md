@@ -6,7 +6,7 @@ The main purpose of the app is to create estimate orders for each luminaire, and
 Features:
 
    	Spring Boot
-   
+   	Aspect Oriented Programming with Spring
    	Data Access: 
 	
         	transactions management, 

@@ -8,8 +8,7 @@ Features:
    	Spring Boot
    	Aspect Oriented Programming with Spring
    	Data Access: 
-	
-        	transactions management, 
+	       	transactions management, 
         	DAO support, 
         	data acces with JDBC,
         	Object Relational Mapping (ORM) Data Access,

@@ -18,15 +18,18 @@ import com.laura.carpaciu.services.WorkOrderService;
 import com.laura.carpaciu.util.TwoDigitsDouble;
 import com.laura.carpaciu.utility.OrderStatus;
 
+import lombok.AllArgsConstructor;
+
 import java.util.Optional;
 
 @Service
 public class WorkOrderServiceImpl implements WorkOrderService {
-	@Autowired
+
 	private final WorkOrderRepository workOrderRepository;
-	@Autowired
+
 	private final WorkPriceServiceImpl workPriceService;
 
+	@Autowired
 	public WorkOrderServiceImpl(WorkOrderRepository workOrderRepository, WorkPriceServiceImpl workPriceService,
 			OrderRepository orderRepository) {
 		super();

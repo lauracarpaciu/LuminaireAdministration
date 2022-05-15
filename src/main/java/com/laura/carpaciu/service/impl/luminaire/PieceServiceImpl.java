@@ -17,9 +17,10 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @Service
 public class PieceServiceImpl implements PieceService {
-	@Autowired
+
 	private final PieceRepository pieceRepository;
 
+	@Autowired
 	public PieceServiceImpl(PieceRepository pieceRepository) {
 		super();
 		this.pieceRepository = pieceRepository;
@@ -44,7 +45,8 @@ public class PieceServiceImpl implements PieceService {
 
 	@Override
 	public Piece findPieceByPartNumber(String partNumber) {
-		return pieceRepository.findPieceByPartNumber(partNumber).orElseThrow(() -> new PersonNotFoundException("Person not found!"));
+		return pieceRepository.findPieceByPartNumber(partNumber)
+				.orElseThrow(() -> new PersonNotFoundException("Person not found!"));
 	}
 
 	@Override

@@ -24,18 +24,16 @@ import com.laura.carpaciu.services.InvoiceService;
 
 import lombok.AllArgsConstructor;
 
-@AllArgsConstructor
 @Service
 public class InvoiceServiceImpl implements InvoiceService {
 
-	@Autowired
 	private final InvoiceRepository invoiceRepository;
-	
+
+	@Autowired
 	public InvoiceServiceImpl(InvoiceRepository invoiceRepository) {
 		super();
 		this.invoiceRepository = invoiceRepository;
 	}
-
 
 	@Override
 	@Transactional

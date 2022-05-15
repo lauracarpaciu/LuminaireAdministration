@@ -22,15 +22,15 @@ import com.laura.carpaciu.services.OrderService;
 import com.laura.carpaciu.util.TwoDigitsDouble;
 import com.laura.carpaciu.utility.OrderStatus;
 
-import lombok.AllArgsConstructor;
-
-@AllArgsConstructor
 @Service
 public class OrderServiceImpl implements OrderService {
 
 	private final OrderRepository orderRepository;
+
 	private final PieceRepository pieceRepository;
+
 	private final PdfService pdfService;
+
 	private final InvoiceService invoiceService;
 
 	@Autowired
@@ -102,7 +102,7 @@ public class OrderServiceImpl implements OrderService {
 		pdfService.createPDFInvoice(serviceOrder);
 		invoiceService.saveInvoiceToDatabase(serviceOrder);
 
-		return orderRepository.updateOrderStatus(orderStatus.CLOSE, orderId);
+		return orderRepository.updateOrderStatus(orderStatus.READY, orderId);
 	}
 
 	@Override

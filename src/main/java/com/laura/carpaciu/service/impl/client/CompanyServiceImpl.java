@@ -19,13 +19,19 @@ import com.laura.carpaciu.services.PieceService;
 import com.laura.carpaciu.services.WorkService;
 
 import lombok.AllArgsConstructor;
-@AllArgsConstructor
+
 @Service
 @Lazy
 public class CompanyServiceImpl implements CompanyService {
 
 	private final CompanyRepository companyRepository;
-	
+
+	@Autowired
+	public CompanyServiceImpl(CompanyRepository companyRepository) {
+		super();
+		this.companyRepository = companyRepository;
+	}
+
 	@Override
 	@Transactional
 	public void createCompany(Company company) {
@@ -38,11 +44,6 @@ public class CompanyServiceImpl implements CompanyService {
 		}
 
 		throw new CompanyAlreadyExistsException("Company Already exists");
-	}
-
-	public CompanyServiceImpl(CompanyRepository companyRepository) {
-		super();
-		this.companyRepository = companyRepository;
 	}
 
 	@Override

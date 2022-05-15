@@ -20,17 +20,18 @@ import com.laura.carpaciu.entity.user.User;
 import com.laura.carpaciu.errors.user.UserAlreadyExists;
 import com.laura.carpaciu.services.UserService;
 
-
 @Service
 public class UserServiceImpl implements UserService {
-	@Autowired
-	private final UserRepository userRepository;
-	@Autowired
-	private final TokenRepository tokenRepository;
-	private final PasswordEncoder passwordEncoder;
-	private final EmailSender emailSender;
-	
 
+	private final UserRepository userRepository;
+
+	private final TokenRepository tokenRepository;
+
+	private final PasswordEncoder passwordEncoder;
+
+	private final EmailSender emailSender;
+
+	@Autowired
 	public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, EmailSender emailSender,
 			TokenRepository tokenRepository) {
 		super();
@@ -93,15 +94,14 @@ public class UserServiceImpl implements UserService {
 		user.getActivationToken().setToken(token);
 		tokenRepository.updateToken(user.getId(), token);
 		emailSender.sendEmail(user);
-	
+
 	}
 
-
-    @Override
-    @Transactional(readOnly = true)
-    public Optional<User> findUserWithToken(String email){
-        return userRepository.findByEmail(email);
-    }
+	@Override
+	@Transactional(readOnly = true)
+	public Optional<User> findUserWithToken(String email) {
+		return userRepository.findByEmail(email);
+	}
 
 	@Override
 	@Transactional
@@ -117,7 +117,5 @@ public class UserServiceImpl implements UserService {
 		return userRepository.findByUsername(username)
 				.orElseThrow(() -> new RuntimeException("User not Found in security context"));
 	}
-
-	
 
 }

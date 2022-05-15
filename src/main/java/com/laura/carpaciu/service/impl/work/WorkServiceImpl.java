@@ -3,16 +3,19 @@ package com.laura.carpaciu.service.impl.work;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.laura.carpaciu.dao.interfaces.WorkRepository;
 import com.laura.carpaciu.entity.work.Work;
 import com.laura.carpaciu.services.WorkService;
 
+@Service
 public class WorkServiceImpl implements WorkService {
-	@Autowired
+
 	private final WorkRepository workRepository;
 
+	@Autowired
 	public WorkServiceImpl(WorkRepository workRepository) {
 		super();
 		this.workRepository = workRepository;

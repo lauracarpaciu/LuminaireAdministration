@@ -23,17 +23,18 @@ import com.laura.carpaciu.config.PdfGeneratorConfig;
 import com.laura.carpaciu.dao.impl.luminaire.PieceRepositoryImpl;
 
 
-@EnableAsync
-@Import({ SecurityConfig.class, PdfGeneratorConfig.class, FieldsValidationConfig.class })
-@EnableAspectJAutoProxy
+
 @SpringBootApplication(scanBasePackages = {
         "com.laura.carpaciu"
 })
-@Configuration
-@EnableJpaRepositories("com.laura.carpaciu.dao.*")
+@EnableAsync
+@Import({ SecurityConfig.class, PdfGeneratorConfig.class, FieldsValidationConfig.class })
+@EnableAspectJAutoProxy
+@EnableAutoConfiguration
+@EntityScan("com.laura.carpaciu.entity")
+@ComponentScan(basePackages = {"com.laura.carpaciu.security.*", "com.laura.carpaciu.*","com.laura.carpaciu.aspect", "com.laura.carpaciu.email.*", "com.laura.carpaciu.config"})
+@EnableJpaRepositories("com.laura.carpaciu.*")
 @EnableJpaAuditing
-@EntityScan("com.laura.carpaciu.*")
-@ComponentScan("com.laura.carpaciu.cache")
 public class LuminaireApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(LuminaireApplication.class, args);

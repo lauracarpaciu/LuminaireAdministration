@@ -16,11 +16,13 @@ import com.laura.carpaciu.entity.order.ServiceOrder;
 import com.laura.carpaciu.entity.order.WorkOrder;
 import com.laura.carpaciu.utility.OrderStatus;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 @Transactional
 @Repository
 public class OrderRepositoryImpl implements OrderRepository {
-
+	
+	@PersistenceContext
 	private final EntityManager entityManager;
 
 	public OrderRepositoryImpl(EntityManager entityManager) {

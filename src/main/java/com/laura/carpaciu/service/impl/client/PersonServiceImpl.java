@@ -14,11 +14,16 @@ import com.laura.carpaciu.services.PersonService;
 
 import lombok.AllArgsConstructor;
 
-@AllArgsConstructor
 @Service
 public class PersonServiceImpl implements PersonService {
-	@Autowired
+
 	private final PersonRepository personRepository;
+
+	@Autowired
+	public PersonServiceImpl(PersonRepository personRepository) {
+		super();
+		this.personRepository = personRepository;
+	}
 
 	@Override
 	@Transactional
@@ -32,11 +37,6 @@ public class PersonServiceImpl implements PersonService {
 		}
 
 		throw new PersonAlreadyExistsException("Person already exists");
-	}
-
-	public PersonServiceImpl(PersonRepository personRepository) {
-		super();
-		this.personRepository = personRepository;
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package com.laura.carpaciu.service.impl.order;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.laura.carpaciu.convertor.PieceConvertor;
@@ -17,14 +18,18 @@ import com.laura.carpaciu.errors.order.PartOrderException;
 import com.laura.carpaciu.services.PieceOrderService;
 import com.laura.carpaciu.utility.OrderStatus;
 
+import lombok.AllArgsConstructor;
+
+@Service
 public class PieceOrderServiceImpl implements PieceOrderService {
-	@Autowired
+
 	private final PieceOrderRepository pieceOrderRepository;
-	@Autowired
+
 	private final PieceRepository pieceRepository;
-	@Autowired
+
 	private final OrderRepository orderRepository;
 
+	@Autowired
 	public PieceOrderServiceImpl(PieceOrderRepository pieceOrderRepository, PieceRepository pieceRepository,
 			OrderRepository orderRepository) {
 		super();

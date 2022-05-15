@@ -17,12 +17,14 @@ import lombok.AllArgsConstructor;
 @Service
 public class LuminaireServiceImpl implements LuminaireService {
 
+	private final LuminaireRepository luminaireRepository;
+	
+	@Autowired
 	public LuminaireServiceImpl(LuminaireRepository luminaireRepository) {
 		super();
 		this.luminaireRepository = luminaireRepository;
 	}
-	@Autowired
-	private final LuminaireRepository luminaireRepository;
+	
 
 	@Override
 	public void createLuminaire(Luminaire luminaire) {

@@ -44,8 +44,7 @@ generate the invoice.
 registration and authorization of client;
 
 restricted access to the control panel;
-
-![image](https://user-images.githubusercontent.com/30430563/168477918-fc574c7c-c5dc-4c75-aee2-daf758e4eeea.png)
+![image](https://user-images.githubusercontent.com/30430563/168477940-853b6604-4a8b-4f2f-b38c-2f2fc429bd9a.png)
 
 
 

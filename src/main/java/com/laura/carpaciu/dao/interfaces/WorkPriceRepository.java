@@ -13,7 +13,7 @@ public interface WorkPriceRepository  {
 
 	void create(WorkPrice workPrice);
 
-	int updateMechanicalWorkPrice(double mechanicalLaborPrice, Long id);
+	int updateMechanicalWorkPrice(double mechanicalWorkPrice, Long id);
 
 	int updateHouseWorkPrice(double newPrice, Long id);
 

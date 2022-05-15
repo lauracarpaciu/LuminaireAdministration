@@ -16,7 +16,6 @@ import com.laura.carpaciu.security.authentication.ResendTokenAuthentication;
 
 import lombok.AllArgsConstructor;
 
-@AllArgsConstructor
 public class ResendTokenFilter extends OncePerRequestFilter {
 
 	private final AuthenticationManager authenticationManager;

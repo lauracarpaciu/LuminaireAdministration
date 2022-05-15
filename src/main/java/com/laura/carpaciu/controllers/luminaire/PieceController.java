@@ -17,9 +17,10 @@ import com.laura.carpaciu.services.PieceService;
 @Controller // This means that this class is a Controller
 @RequestMapping(path = "/pices") // This means URL's start with /pieces (after Application path)
 public class PieceController {
-	@Autowired
+	
 	private final PieceService pieceService;
-
+	
+	@Autowired
 	public PieceController(PieceService pieceService) {
 		super();
 		this.pieceService = pieceService;

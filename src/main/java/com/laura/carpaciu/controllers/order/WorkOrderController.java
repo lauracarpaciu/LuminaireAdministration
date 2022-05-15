@@ -1,6 +1,6 @@
 package com.laura.carpaciu.controllers.order;
 
-import lombok.AllArgsConstructor;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,15 +16,16 @@ import com.laura.carpaciu.services.WorkOrderService;
 
 import javax.servlet.http.HttpServletRequest;
 
-@AllArgsConstructor
+
 @Controller
 @RequestMapping("/workOrder")
 public class WorkOrderController {
-	@Autowired
+	
 	private final MiniCache miniCache;
-	@Autowired
+	
 	private final WorkOrderService workOrderService;
-
+	
+	@Autowired
 	public WorkOrderController(MiniCache miniCache, WorkOrderService workOrderService) {
 		super();
 		this.miniCache = miniCache;

@@ -1,6 +1,5 @@
 package com.laura.carpaciu.controllers.order;
 
-
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -25,24 +24,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 
-@AllArgsConstructor
 @Controller
 @RequestMapping("/serviceOrder")
 public class OrderController {
-	@Autowired
+
 	private final OrderService serviceOrderService;
-	@Autowired
+
 	private final UserService userService;
-	@Autowired
+
 	private final MiniCache miniCache;
 
+	@Autowired
 	public OrderController(OrderService serviceOrderService, UserService userService, MiniCache miniCache) {
 		super();
 		this.serviceOrderService = serviceOrderService;
 		this.userService = userService;
 		this.miniCache = miniCache;
 	}
-
 
 	@GetMapping("/searchLuminaire")
 	public String searchLuminaireByVin(HttpServletRequest request, Model model) {

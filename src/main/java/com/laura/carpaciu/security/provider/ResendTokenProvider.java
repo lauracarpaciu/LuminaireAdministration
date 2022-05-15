@@ -2,7 +2,7 @@ package com.laura.carpaciu.security.provider;
 
 import java.util.Optional;
 import org.springframework.security.core.AuthenticationException;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
@@ -13,12 +13,12 @@ import com.laura.carpaciu.security.authentication.ResendTokenAuthentication;
 import com.laura.carpaciu.services.UserService;
 import lombok.AllArgsConstructor;
 
-@AllArgsConstructor
 @Component
 public class ResendTokenProvider implements AuthenticationProvider {
 
 	private final UserService userService;
-
+	
+	@Autowired
 	public ResendTokenProvider(UserService userService) {
 		super();
 		this.userService = userService;

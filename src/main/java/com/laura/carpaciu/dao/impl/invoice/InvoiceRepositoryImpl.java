@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import java.util.Optional;
 
-@AllArgsConstructor
 @Transactional(propagation = Propagation.MANDATORY)
 @Repository
 public class InvoiceRepositoryImpl implements InvoiceRepository {

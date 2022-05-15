@@ -1,5 +1,6 @@
 package com.laura.carpaciu.security.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -13,11 +14,11 @@ import com.laura.carpaciu.security.securityuser.SecurityUser;
 import lombok.AllArgsConstructor;
 
 @Service
-@AllArgsConstructor
 public class UserSecurityService implements UserDetailsService {
 
 	private final UserRepository userDao;
-
+	
+	@Autowired
 	public UserSecurityService(UserRepository userDao) {
 		super();
 		this.userDao = userDao;

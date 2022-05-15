@@ -16,7 +16,6 @@ import com.laura.carpaciu.security.authentication.TokenAuthentication;
 
 import lombok.AllArgsConstructor;
 
-@AllArgsConstructor
 public class TokenFilter extends OncePerRequestFilter {
 
 	private final AuthenticationManager authenticationManager;

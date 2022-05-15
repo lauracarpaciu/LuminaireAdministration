@@ -15,7 +15,7 @@ import com.laura.carpaciu.security.authentication.EmailAuthentication;
 import lombok.AllArgsConstructor;
 
 @Component
-@AllArgsConstructor
+
 public class EmailProvider implements AuthenticationProvider {
 
     private final UserDetailsService userSecurityService;

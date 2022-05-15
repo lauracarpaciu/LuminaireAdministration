@@ -17,7 +17,6 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Component
-@AllArgsConstructor
 public class UserNamePasswordProvider implements AuthenticationProvider {
 
 	private final UserSecurityService userSecurityService;

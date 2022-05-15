@@ -23,11 +23,12 @@ import com.laura.carpaciu.services.UserService;
 import lombok.AllArgsConstructor;
 
 @Controller
-@AllArgsConstructor
+
 public class UserController {
-	@Autowired
+
 	private final UserService userService;
 
+	@Autowired
 	public UserController(UserService userService) {
 		super();
 		this.userService = userService;

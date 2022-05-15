@@ -21,12 +21,14 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/luminaires")
 public class LuminareController {
 
+	private final LuminaireService luminaireService;
+	
+	@Autowired
 	public LuminareController(LuminaireService luminaireService) {
 		super();
 		this.luminaireService = luminaireService;
 	}
-	@Autowired
-	private final LuminaireService luminaireService;
+	
 
 	@GetMapping("/luminaire")
 	public String getLuminairePage(Model model) {

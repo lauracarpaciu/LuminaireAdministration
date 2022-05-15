@@ -26,13 +26,14 @@ import java.util.List;
 @Controller
 @RequestMapping("/orderPiece")
 public class PieceOrderController {
-	@Autowired
+	
 	private final PieceOrderService partOrderService;
-	@Autowired
+	
 	private final OrderService serviceOrderService;
-	@Autowired
+	
 	private final MiniCache miniCache;
 
+	@Autowired
 	public PieceOrderController(PieceOrderService partOrderService, OrderService serviceOrderService,
 			MiniCache miniCache) {
 		super();

@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import java.time.LocalDateTime;
 
-@AllArgsConstructor
 @Transactional(propagation = Propagation.MANDATORY)
 @Repository
 public class TokenRepositoryImpl implements TokenRepository {

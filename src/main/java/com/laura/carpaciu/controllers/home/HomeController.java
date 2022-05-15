@@ -20,17 +20,17 @@ import com.laura.carpaciu.utility.OrderStatus;
 
 import javax.servlet.http.HttpServletResponse;
 
-@AllArgsConstructor
 @Controller
 @RequestMapping("/app")
 public class HomeController {
-	@Autowired
+
 	private final OrderService orderService;
-	@Autowired
+
 	private final InvoiceService invoiceService;
-	@Autowired
+
 	private final MiniCache miniCache;
 
+	@Autowired
 	public HomeController(OrderService orderService, InvoiceService invoiceService, MiniCache miniCache) {
 		super();
 		this.orderService = orderService;

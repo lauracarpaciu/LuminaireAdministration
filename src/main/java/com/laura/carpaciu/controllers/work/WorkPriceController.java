@@ -21,9 +21,10 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/prices")
 public class WorkPriceController {
-	@Autowired
+	
 	private final WorkPriceService workPriceService;
 
+	@Autowired
 	public WorkPriceController(WorkPriceService workPriceService) {
 		super();
 		this.workPriceService = workPriceService;

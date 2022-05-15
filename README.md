@@ -45,7 +45,7 @@ registration and authorization of client;
 
 restricted access to the control panel;
 
-![image](https://user-images.githubusercontent.com/30430563/168477798-72d6c642-7f1b-4458-a6e2-ebdc156ed6d2.png)
+![image](https://user-images.githubusercontent.com/30430563/168477918-fc574c7c-c5dc-4c75-aee2-daf758e4eeea.png)
 
 
 

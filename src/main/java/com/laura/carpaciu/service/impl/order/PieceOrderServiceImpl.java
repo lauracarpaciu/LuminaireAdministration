@@ -57,7 +57,7 @@ public class PieceOrderServiceImpl implements PieceOrderService {
 
 			} else {
 
-				pieceOrderRepository.updatePartOrderCount(count, count);
+				pieceOrderRepository.updatePieceOrderCount(count, count);
 			}
 
 			Long id = serviceOrder.getId();

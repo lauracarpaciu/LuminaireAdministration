@@ -90,7 +90,7 @@ public class WorkController {
 	}
 
 	@GetMapping("/delete")
-	public String deleteWork(@RequestParam("workId") Long id) {
+	public String deleteWork(@RequestParam("workId") int id) {
 
 		workService.deleteWork(id);
 

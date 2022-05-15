@@ -28,14 +28,17 @@ public class WorkOrderServiceImpl implements WorkOrderService {
 	private final WorkOrderRepository workOrderRepository;
 
 	private final WorkPriceServiceImpl workPriceService;
+	
+	private final OrderRepository serviceOrderRepository;
+
 
 	@Autowired
 	public WorkOrderServiceImpl(WorkOrderRepository workOrderRepository, WorkPriceServiceImpl workPriceService,
-			OrderRepository orderRepository) {
+			OrderRepository serviceOrderRepository) {
 		super();
 		this.workOrderRepository = workOrderRepository;
 		this.workPriceService = workPriceService;
-
+		this.serviceOrderRepository = serviceOrderRepository;
 	}
 
 	@Transactional
@@ -50,7 +53,7 @@ public class WorkOrderServiceImpl implements WorkOrderService {
 		WorkOrder workServiceOrder = WorkConvertor.convert(work, workPrice, order);
 
 		workOrderRepository.create(workServiceOrder);
-		workOrderRepository.update(OrderStatus.READY, order.getId());
+		serviceOrderRepository.updateOrderStatus(OrderStatus.READY, order.getId());
 
 	}
 

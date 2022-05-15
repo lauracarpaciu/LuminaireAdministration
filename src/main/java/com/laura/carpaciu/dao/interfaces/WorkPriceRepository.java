@@ -7,18 +7,18 @@ import org.springframework.stereotype.Repository;
 
 import com.laura.carpaciu.entity.work.WorkPrice;
 @Repository
-public interface WorkPriceRepository extends CrudRepository<WorkPrice, Long> {
+public interface WorkPriceRepository  {
 
 	Optional<WorkPrice> findAllWorkPrices();
 
 	void create(WorkPrice workPrice);
 
-	void updateMechanicalWorkPrice(double newPrice, Long id);
+	int updateMechanicalWorkPrice(double mechanicalLaborPrice, Long id);
 
-	void updateHouseWorkPrice(double newPrice, Long id);
+	int updateHouseWorkPrice(double newPrice, Long id);
 
-	void updateElectricalWorkPrice(double newPrice, Long id);
+	int updateElectricalWorkPrice(double newPrice, Long id);
 
-	void updateNormalWorkPrice(double newPrice, Long id);
+	int updateNormalWorkPrice(double newPrice, Long id);
 
 }

@@ -12,7 +12,7 @@ import com.laura.carpaciu.entity.clients.Company;
 //This will be AUTO IMPLEMENTED by Spring into a Bean called companyRepository
 //CRUD refers Create, Read, Update, Delete
 @Repository
-public interface CompanyRepository extends CrudRepository<Company, Long>  {
+public interface CompanyRepository {
 
 	Optional<Company> findByCui(String cui);
 

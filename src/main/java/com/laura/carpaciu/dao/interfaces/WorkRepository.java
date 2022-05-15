@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.laura.carpaciu.entity.work.Work;
 @Repository
-public interface WorkRepository extends CrudRepository<Work, Long> {
+public interface WorkRepository {
 
 	void create(Work work);
 
@@ -20,6 +20,6 @@ public interface WorkRepository extends CrudRepository<Work, Long> {
 
 	int updateWorkTimeAndDescription(double timedWork, String workDescription, Long id);
 
-	int deleteWork(Long id);
+	int deleteWork(int id);
 
 }

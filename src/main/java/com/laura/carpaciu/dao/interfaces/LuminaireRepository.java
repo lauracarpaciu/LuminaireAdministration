@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.laura.carpaciu.entity.luminaire.Luminaire;
 @Repository
-public interface LuminaireRepository extends CrudRepository<Luminaire, Long> {
+public interface LuminaireRepository  {
 	Optional<Luminaire> findBySerialNumber(String serialNumber);
 
 	void create(Luminaire luminaire);

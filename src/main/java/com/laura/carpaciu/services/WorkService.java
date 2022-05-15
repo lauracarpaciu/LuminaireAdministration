@@ -23,6 +23,6 @@ public interface WorkService {
 	int updateWorkTimeAndDescription(double timedWork, String workDescription, Long id);
 
 	@Transactional
-	int deleteWork(Long id);
+	int deleteWork(int id);
 
 }

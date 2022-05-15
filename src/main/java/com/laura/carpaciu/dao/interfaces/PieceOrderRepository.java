@@ -8,13 +8,13 @@ import org.springframework.stereotype.Repository;
 import com.laura.carpaciu.entity.order.PieceOrder;
 import com.laura.carpaciu.entity.order.ServiceOrder;
 @Repository
-public interface PieceOrderRepository extends CrudRepository<PieceOrder, Long> {
+public interface PieceOrderRepository  {
 
 	Optional<PieceOrder> findByPartNumb(String partNumber, ServiceOrder serviceOrder);
 
 	void create(PieceOrder partServiceOrder);
 
-	int updatePartOrderCount(int id, int count);
+	int updatePieceOrderCount(int id, int increment);
 
 	int delete(String partNumber);
 

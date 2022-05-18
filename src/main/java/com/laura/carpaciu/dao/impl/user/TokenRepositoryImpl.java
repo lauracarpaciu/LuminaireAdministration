@@ -8,12 +8,15 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import java.time.LocalDateTime;
 
 @Transactional(propagation = Propagation.MANDATORY)
 @Repository
 public class TokenRepositoryImpl implements TokenRepository {
 
+	@PersistenceContext
 	private final EntityManager entityManager;
 
 	public TokenRepositoryImpl(EntityManager entityManager) {

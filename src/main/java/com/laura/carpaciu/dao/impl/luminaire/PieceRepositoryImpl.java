@@ -8,13 +8,16 @@ import com.laura.carpaciu.dao.interfaces.PieceRepository;
 import com.laura.carpaciu.entity.luminaire.Piece;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import java.util.Optional;
 
 @Transactional(propagation = Propagation.MANDATORY)
 @Repository
 public class PieceRepositoryImpl implements PieceRepository {
 	
-	 private final EntityManager entityManager;
+	@PersistenceContext
+	private final EntityManager entityManager;
 
 	public PieceRepositoryImpl(EntityManager entityManager) {
 		super();

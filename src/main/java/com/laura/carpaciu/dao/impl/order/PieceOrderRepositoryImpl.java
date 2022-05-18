@@ -13,6 +13,8 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import java.util.Optional;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -25,6 +27,7 @@ import java.util.Optional;
 @Transactional(propagation = Propagation.MANDATORY)
 public class PieceOrderRepositoryImpl implements PieceOrderRepository {
 
+	@PersistenceContext
 	private final EntityManager entityManager;
 
 	public PieceOrderRepositoryImpl(EntityManager entityManager) {

@@ -11,12 +11,15 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import java.util.Optional;
 
 @Transactional(propagation = Propagation.MANDATORY)
 @Repository
 public class InvoiceRepositoryImpl implements InvoiceRepository {
 
+	@PersistenceContext
 	private final EntityManager entityManager;
 
 	public InvoiceRepositoryImpl(EntityManager entityManager) {

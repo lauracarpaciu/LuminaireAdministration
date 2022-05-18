@@ -10,12 +10,14 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 
 @Transactional(propagation = Propagation.MANDATORY)
 @Repository
 public class LuminaireRepositoryImpl implements LuminaireRepository {
 
+	@PersistenceContext
 	private final EntityManager entityManager;
 
 	public LuminaireRepositoryImpl(EntityManager entityManager) {

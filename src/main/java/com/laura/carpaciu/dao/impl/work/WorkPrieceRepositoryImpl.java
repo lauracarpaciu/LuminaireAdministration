@@ -8,12 +8,15 @@ import com.laura.carpaciu.dao.interfaces.WorkPriceRepository;
 import com.laura.carpaciu.entity.work.WorkPrice;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import java.util.Optional;
 
 @Transactional(propagation = Propagation.MANDATORY)
 @Service
 public class WorkPrieceRepositoryImpl implements WorkPriceRepository {
 
+	@PersistenceContext
 	private final EntityManager entityManager;
 
 	public WorkPrieceRepositoryImpl(EntityManager entityManager) {

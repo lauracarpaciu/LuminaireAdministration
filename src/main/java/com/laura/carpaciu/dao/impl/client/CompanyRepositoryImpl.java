@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import java.util.Optional;
 
@@ -15,6 +16,7 @@ import java.util.Optional;
 @Repository
 public class CompanyRepositoryImpl implements CompanyRepository {
 
+	@PersistenceContext
 	private final EntityManager entityManager;
 
 	public CompanyRepositoryImpl(EntityManager entityManager) {

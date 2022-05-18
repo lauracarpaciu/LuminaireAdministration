@@ -5,20 +5,19 @@ The main purpose of the app is to create estimate orders for each luminaire, and
 
 Features:
 
-   	Spring Boot
+   	Spring boot 1.5.9,
    	Aspect Oriented Programming with Spring
    	Data Access: 
 	       	transactions management, 
         	DAO support, 
-        	data acces with JDBC,
+        	Spring Data Jpa
         	Object Relational Mapping (ORM) Data Access,
         	Marshalling XML.
 	       
     Spring Security Architecture.
     Spring framework Email
     Spring MVC web framework.
-    
-
+    mysql-connector-java, Hibernate validator, mySQL database.
     
 Functionality
         

@@ -7,6 +7,8 @@ import com.laura.carpaciu.entity.luminaire.Piece;
 import com.laura.carpaciu.entity.order.ServiceOrder;
 
 public interface PieceOrderService {
+	
+	
 
 	@Transactional
 	void addPartToServiceOrder(Piece part, ServiceOrder serviceOrder, int count);

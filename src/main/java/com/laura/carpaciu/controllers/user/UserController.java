@@ -1,28 +1,18 @@
 package com.laura.carpaciu.controllers.user;
 
-import java.util.concurrent.ExecutionException;
-
-import javax.validation.Valid;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-
-import com.laura.carpaciu.entity.user.Authorities;
-import com.laura.carpaciu.entity.user.User;
-import com.laura.carpaciu.errors.user.UserAlreadyExists;
+import com.laura.carpaciu.entity.user.User
 import com.laura.carpaciu.services.UserService;
 
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.Future;
 
 public class UserController {
 
@@ -34,51 +24,39 @@ public class UserController {
 		this.userService = userService;
 	}
 
-	@GetMapping("/login")
-	public String showLoginPage() {
-		return "user/login-user";
+	@RequestMapping(value = "/users", method = RequestMethod.POST)
+	public ResponseEntity<?> createUser(User user) throws Exception {
+		return Optional.ofNullable(userService.createUser(user))
+				.map(a -> new ResponseEntity<Future<User>>(a, HttpStatus.OK))
+				.orElseThrow(() -> new Exception("Not found"));
 	}
 
-	@PostMapping("/login-processing")
-	public String loginProcessing() {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-		if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
-
-			return "redirect:/login";
-		}
-
-		return "redirect:/app/main";
+	@RequestMapping(value = "/users", method = RequestMethod.GET)
+	public ResponseEntity<?> updateUserToken(User user) throws Exception {
+		return Optional.ofNullable(userService.updateUserToken(user))
+				.map(a -> new ResponseEntity<List<Employee>>(a, HttpStatus.OK))
+				.orElseThrow(() -> new Exception("Not found"));
 	}
 
-	@GetMapping("/createUserPage")
-	public String showCreateUserPage(Model model) {
-		model.addAttribute("newUser", new User());
-		model.addAttribute("authority", Authorities.values());
-		return "user/create-user";
+	@RequestMapping(value = "/users", method = RequestMethod.POST)
+	public ResponseEntity<?> findUserWithToken(String email) throws Exception {
+		return Optional.ofNullable(userService.findUserWithToken(email))
+				.map(a -> new ResponseEntity<Optional<User>>(a, HttpStatus.OK))
+				.orElseThrow(() -> new Exception("Not found"));
 	}
 
-	@PostMapping("/create-user")
-	public String createUser(@Valid @ModelAttribute("newUser") User user, BindingResult bindingResult, Model model) {
-
-		if (bindingResult.hasErrors()) {
-			model.addAttribute("authority", Authorities.values());
-			return "user/create-user";
-		}
-
-		try {
-			userService.createUser(user).get();
-		} catch (InterruptedException | ExecutionException e) {
-			e.printStackTrace();
-			throw new UserAlreadyExists("User already exists");
-		}
-
-		return "redirect:/login";
+	@RequestMapping(value = "/users", method = RequestMethod.GET)
+	public ResponseEntity<?> activateUserAccount(User user) throws Exception {
+		return Optional.ofNullable(userService.activateUserAccount(user))
+				.map(a -> new ResponseEntity<Optional<User>>(a, HttpStatus.OK))
+				.orElseThrow(() -> new Exception("Not found"));
 	}
 
-	@GetMapping("/activate")
-	public String activateAccount() {
-		return "activation/confirmAccount-activation";
+	@RequestMapping(value = "/users", method = RequestMethod.GET)
+	public ResponseEntity<?> findUseByUsername(String username) throws Exception {
+		return Optional.ofNullable(userService.findUseByUsername(username))
+				.map(a -> new ResponseEntity<Optional<User>>(HttpStatus.OK))
+				.orElseThrow(() -> new Exception("Not found"));
 	}
 
 }

@@ -5,6 +5,8 @@ import com.laura.carpaciu.dto.ServiceOrderIdAndStatusDto;
 import com.laura.carpaciu.entity.order.PieceOrder;
 import com.laura.carpaciu.entity.order.ServiceOrder;
 import com.laura.carpaciu.entity.order.WorkOrder;
+import com.laura.carpaciu.services.OrderService;
+import com.laura.carpaciu.services.UserService;
 
 import lombok.AllArgsConstructor;
 

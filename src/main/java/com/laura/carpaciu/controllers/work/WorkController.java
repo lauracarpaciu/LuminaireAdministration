@@ -1,100 +1,65 @@
 package com.laura.carpaciu.controllers.work;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
-
 import com.laura.carpaciu.entity.work.Work;
 import com.laura.carpaciu.services.WorkService;
-import com.laura.carpaciu.utility.WorkCategory;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
-import java.util.ArrayList;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
 import java.util.List;
+import java.util.Optional;
 
-@Controller
-@RequestMapping("/works")
 public class WorkController {
 
 	private final WorkService workService;
 
-	private List<Work> works = new ArrayList<>();
-
 	@Autowired
 	public WorkController(WorkService workService) {
-
+		super();
 		this.workService = workService;
 	}
 
-	@GetMapping("/work")
-	public String getWorkPage(Model model) {
-
-		model.addAttribute("work", new Work());
-		model.addAttribute("workCategory", WorkCategory.values());
-		model.addAttribute("workList", works);
-		model.addAttribute("workUpdate", new Work());
-
-		return "/work/work-page";
+	@RequestMapping(value = "/employes", method = RequestMethod.POST)
+	public ResponseEntity<?> createWork(Work work) throws Exception {
+		return Optional.ofNullable(workService.createWork(work)).map(a -> new ResponseEntity<>(a, HttpStatus.OK))
+				.orElseThrow(() -> new Exception("Not found"));
 	}
 
-	@PostMapping("/create-work")
-	public String createWork(@Valid @ModelAttribute("work") Work work, BindingResult bindingResult, Model model) {
-
-		if (bindingResult.hasErrors()) {
-			model.addAttribute("workCategory", WorkCategory.values());
-			return "/work/work-page";
-		}
-
-		workService.createWork(work);
-		return "redirect:/works/work";
+	@RequestMapping(value = "/employees", method = RequestMethod.GET)
+	public ResponseEntity<?> findAllWorks() throws Exception {
+		return Optional.ofNullable(workService.findAllWorks())
+				.map(a -> new ResponseEntity<List<Work>>(a, HttpStatus.OK))
+				.orElseThrow(() -> new Exception("Not found"));
 	}
 
-	@GetMapping("/worksList")
-	public String getWorks(HttpServletRequest request, Model model) {
-
-		if (request.getParameter("workDescription") == null || request.getParameter("workDescription").equals("")) {
-
-			works = workService.findAllWorks();
-			model.addAttribute("workList", works);
-
-		} else {
-
-			String workDescription = request.getParameter("workDescription");
-			works = workService.findWorkByName(workDescription);
-			model.addAttribute("workList", works);
-		}
-
-		if (request.getParameter("workId") != null) {
-
-			int workId = Integer.parseInt(request.getParameter("workId"));
-			Work work = workService.findWorkById(workId);
-			model.addAttribute("workUpdate", work);
-		}
-
-		model.addAttribute("work", new Work());
-		model.addAttribute("workCategory", WorkCategory.values());
-
-		return "/work/work-page";
-
+	@RequestMapping(value = "/employes", method = RequestMethod.POST)
+	public ResponseEntity<?> findWorkByName(String workDescription) throws Exception {
+		return Optional.ofNullable(workService.findWorkByName(workDescription))
+				.map(a -> new ResponseEntity<List<Work>>(a, HttpStatus.OK))
+				.orElseThrow(() -> new Exception("Not found"));
 	}
 
-	@PostMapping("/update")
-	public String updatework(@ModelAttribute("workUpdate") Work work) {
-
-		workService.updateWorkTimeAndDescription(work.getTimedWork(), work.getWorkDescription(), work.getId());
-
-		return "redirect:/works/worksList";
+	@RequestMapping(value = "/employees", method = RequestMethod.GET)
+	public ResponseEntity<?> findWorkById(int workId) throws Exception {
+		return Optional.ofNullable(workService.findWorkById(workId))
+				.map(a -> new ResponseEntity<Work>(a, HttpStatus.OK)).orElseThrow(() -> new Exception("Not found"));
 	}
 
-	@GetMapping("/delete")
-	public String deleteWork(@RequestParam("workId") int id) {
+	@RequestMapping(value = "/employes", method = RequestMethod.POST)
+	public ResponseEntity<?> updateWorkTimeAndDescription(double timedWork, String workDescription, Long id)
+			throws Exception {
+		return Optional.ofNullable(workService.updateWorkTimeAndDescription(timedWork, workDescription, id))
+				.map(a -> new ResponseEntity<>(a, HttpStatus.OK)).orElseThrow(() -> new Exception("Not found"));
+	}
 
-		workService.deleteWork(id);
-
-		return "redirect:/works/worksList";
+	@RequestMapping(value = "/employees", method = RequestMethod.GET)
+	public ResponseEntity<?> deleteWork(int id) throws Exception {
+		return Optional.ofNullable(workService.deleteWork(id)).map(a -> new ResponseEntity<>(a, HttpStatus.OK))
+				.orElseThrow(() -> new Exception("Not found"));
 	}
 
 }

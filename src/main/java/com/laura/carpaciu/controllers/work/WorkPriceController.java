@@ -1,80 +1,58 @@
 package com.laura.carpaciu.controllers.work;
 
+import com.laura.carpaciu.entity.work.WorkPrice;
+import com.laura.carpaciu.services.WorkPriceService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
-import com.laura.carpaciu.entity.work.WorkPrice;
-import com.laura.carpaciu.errors.luminaire.InvalidPriceException;
-import com.laura.carpaciu.services.WorkPriceService;
-import com.laura.carpaciu.utility.WorkCategory;
+import java.util.List;
+import java.util.Optional;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
-
-@Controller
-@RequestMapping("/prices")
 public class WorkPriceController {
 	
-	private final WorkPriceService workPriceService;
-
+	private final WorkPriceService workpriceservice;
+	
 	@Autowired
-	public WorkPriceController(WorkPriceService workPriceService) {
+	public WorkPriceController(WorkPriceService workpriceservice) {
 		super();
-		this.workPriceService = workPriceService;
+		this.workpriceservice = workpriceservice;
 	}
 
-	@GetMapping("/showPrices")
-	public String showWorkPricePage(Model model) {
 
-		WorkPrice workPrice = workPriceService.findAllPrices();
+	@RequestMapping(value = "/employes", method = RequestMethod.POST)
+    public ResponseEntity<?> findWorkPrices() throws Exception {
+        return Optional.ofNullable(workpriceservice.findWorkPrices())
+                .map(a -> new ResponseEntity<>(a, HttpStatus.OK))
+                .orElseThrow(() -> new Exception("Not found"));
+    }
 
-		model.addAttribute("price", new WorkPrice());
-		model.addAttribute("workPrices", workPrice);
-		model.addAttribute("category", WorkCategory.values());
 
-		System.out.println(workPrice);
+    @RequestMapping(value = "/employees", method = RequestMethod.GET)
+    public ResponseEntity<?> findAllPrices() throws Exception {
+        return Optional.ofNullable(workpriceservice.findAllPrices())
+                .map(a -> new ResponseEntity<WorkPrice>(a, HttpStatus.OK))
+                .orElseThrow(() -> new Exception("Not found"));
+    }
+    
+    
+    @RequestMapping(value = "/employes", method = RequestMethod.POST)
+    public ResponseEntity<?> createAllWorkPrices(WorkPrice workPrice) throws Exception {
+        return Optional.ofNullable(workpriceservice.createAllWorkPrices( workPrice))
+                .map(a -> new ResponseEntity<>(a, HttpStatus.OK))
+                .orElseThrow(() -> new Exception("Not found"));
+    }
 
-		return "/work/work-price";
-	}
 
-	@PostMapping("/setPrices")
-	public String setWorkPrices(@Valid @ModelAttribute("price") WorkPrice workPrice, BindingResult bindingResult,
-			Model model) {
+    @RequestMapping(value = "/employees", method = RequestMethod.GET)
+    public ResponseEntity<?> updatePrices(double newPrice, String workCategory) throws Exception {
+        return Optional.ofNullable(workpriceservice.updatePrices( newPrice, workCategory))
+                .map(a -> new ResponseEntit<>>(a, HttpStatus.OK))
+                .orElseThrow(() -> new Exception("Not found"));
+    }
 
-		if (bindingResult.hasErrors()) {
-			System.out.println(bindingResult.toString());
-			model.addAttribute("workPrices", new WorkPrice());
-			model.addAttribute("category", WorkCategory.values());
-
-			return "/work/work-price";
-
-		}
-		workPriceService.createAllWorkPrices(workPrice);
-
-		return "redirect:/prices/showPrices";
-	}
-
-	@PostMapping("/updatePrice")
-	public String updatePrice(HttpServletRequest request) {
-
-		try {
-
-			String categoryPrice = request.getParameter("category");
-			double newPrice = Double.parseDouble(request.getParameter("updatePrice"));
-			workPriceService.updatePrices(newPrice, categoryPrice);
-		} catch (NumberFormatException e) {
-			e.printStackTrace();
-			throw new InvalidPriceException("wrong format number");
-
-		}
-
-		return "redirect:/prices/showPrices";
-	}
 }

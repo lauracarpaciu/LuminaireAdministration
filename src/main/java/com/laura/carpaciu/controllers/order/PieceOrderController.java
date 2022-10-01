@@ -15,7 +15,7 @@ import com.laura.carpaciu.entity.luminaire.Piece;
 import com.laura.carpaciu.entity.order.ServiceOrder;
 import com.laura.carpaciu.services.OrderService;
 import com.laura.carpaciu.services.PieceOrderService;
-
+@RestController
 public class PieceOrderController {
 
 	private final PieceOrderService partOrderService;

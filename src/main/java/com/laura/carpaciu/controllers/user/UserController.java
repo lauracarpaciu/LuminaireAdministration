@@ -1,6 +1,6 @@
 package com.laura.carpaciu.controllers.user;
 
-import com.laura.carpaciu.entity.user.User
+import com.laura.carpaciu.entity.user.User;
 import com.laura.carpaciu.services.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.Future;
-
+@RestController
 public class UserController {
 
 	private final UserService userService;

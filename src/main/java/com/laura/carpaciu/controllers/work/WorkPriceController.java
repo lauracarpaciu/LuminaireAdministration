@@ -24,7 +24,7 @@ public class WorkPriceController {
 	}
 
 
-	@RequestMapping(value = "/employes", method = RequestMethod.POST)
+	@RequestMapping(value = "/workprices", method = RequestMethod.POST)
     public ResponseEntity<?> findWorkPrices() throws Exception {
         return Optional.ofNullable(workpriceservice.findWorkPrices())
                 .map(a -> new ResponseEntity<>(a, HttpStatus.OK))
@@ -32,7 +32,7 @@ public class WorkPriceController {
     }
 
 
-    @RequestMapping(value = "/employees", method = RequestMethod.GET)
+    @RequestMapping(value = "/workprices", method = RequestMethod.GET)
     public ResponseEntity<?> findAllPrices() throws Exception {
         return Optional.ofNullable(workpriceservice.findAllPrices())
                 .map(a -> new ResponseEntity<WorkPrice>(a, HttpStatus.OK))
@@ -40,7 +40,7 @@ public class WorkPriceController {
     }
     
     
-    @RequestMapping(value = "/employes", method = RequestMethod.POST)
+    @RequestMapping(value = "/workprices", method = RequestMethod.POST)
     public ResponseEntity<?> createAllWorkPrices(WorkPrice workPrice) throws Exception {
         return Optional.ofNullable(workpriceservice.createAllWorkPrices( workPrice))
                 .map(a -> new ResponseEntity<>(a, HttpStatus.OK))
@@ -48,10 +48,10 @@ public class WorkPriceController {
     }
 
 
-    @RequestMapping(value = "/employees", method = RequestMethod.GET)
+    @RequestMapping(value = "/workprices", method = RequestMethod.PUT)
     public ResponseEntity<?> updatePrices(double newPrice, String workCategory) throws Exception {
         return Optional.ofNullable(workpriceservice.updatePrices( newPrice, workCategory))
-                .map(a -> new ResponseEntit<>>(a, HttpStatus.OK))
+                .map(a -> new ResponseEntit<>(a, HttpStatus.OK))
                 .orElseThrow(() -> new Exception("Not found"));
     }
 

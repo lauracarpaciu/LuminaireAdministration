@@ -23,40 +23,40 @@ public class WorkController {
 		this.workService = workService;
 	}
 
-	@RequestMapping(value = "/employes", method = RequestMethod.POST)
+	@RequestMapping(value = "/workServices", method = RequestMethod.POST)
 	public ResponseEntity<?> createWork(Work work) throws Exception {
 		return Optional.ofNullable(workService.createWork(work)).map(a -> new ResponseEntity<>(a, HttpStatus.OK))
 				.orElseThrow(() -> new Exception("Not found"));
 	}
 
-	@RequestMapping(value = "/employees", method = RequestMethod.GET)
+	@RequestMapping(value = "/workServices", method = RequestMethod.GET)
 	public ResponseEntity<?> findAllWorks() throws Exception {
 		return Optional.ofNullable(workService.findAllWorks())
 				.map(a -> new ResponseEntity<List<Work>>(a, HttpStatus.OK))
 				.orElseThrow(() -> new Exception("Not found"));
 	}
 
-	@RequestMapping(value = "/employes", method = RequestMethod.POST)
+	@RequestMapping(value = "/workServices", method = RequestMethod.GET)
 	public ResponseEntity<?> findWorkByName(String workDescription) throws Exception {
 		return Optional.ofNullable(workService.findWorkByName(workDescription))
 				.map(a -> new ResponseEntity<List<Work>>(a, HttpStatus.OK))
 				.orElseThrow(() -> new Exception("Not found"));
 	}
 
-	@RequestMapping(value = "/employees", method = RequestMethod.GET)
+	@RequestMapping(value = "/workServices", method = RequestMethod.GET)
 	public ResponseEntity<?> findWorkById(int workId) throws Exception {
 		return Optional.ofNullable(workService.findWorkById(workId))
 				.map(a -> new ResponseEntity<Work>(a, HttpStatus.OK)).orElseThrow(() -> new Exception("Not found"));
 	}
 
-	@RequestMapping(value = "/employes", method = RequestMethod.POST)
+	@RequestMapping(value = "/workServices", method = RequestMethod.PUT)
 	public ResponseEntity<?> updateWorkTimeAndDescription(double timedWork, String workDescription, Long id)
 			throws Exception {
 		return Optional.ofNullable(workService.updateWorkTimeAndDescription(timedWork, workDescription, id))
 				.map(a -> new ResponseEntity<>(a, HttpStatus.OK)).orElseThrow(() -> new Exception("Not found"));
 	}
 
-	@RequestMapping(value = "/employees", method = RequestMethod.GET)
+	@RequestMapping(value = "/workServices", method = RequestMethod.GET)
 	public ResponseEntity<?> deleteWork(int id) throws Exception {
 		return Optional.ofNullable(workService.deleteWork(id)).map(a -> new ResponseEntity<>(a, HttpStatus.OK))
 				.orElseThrow(() -> new Exception("Not found"));

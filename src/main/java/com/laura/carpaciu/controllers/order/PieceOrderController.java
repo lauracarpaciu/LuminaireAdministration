@@ -28,7 +28,7 @@ public class PieceOrderController {
 
 	}
 
-	@RequestMapping(value = "/pieceorders", method = RequestMethod.POST)
+	@RequestMapping(value = "/pieceorders", method = RequestMethod.PUT)
 	public ResponseEntity<?> addPartToServiceOrder(Piece part, ServiceOrder serviceOrder, int count) throws Exception {
 		return Optional.ofNullable(partOrderService.addPartToServiceOrder(part, serviceOrder, count))
 				.map(a -> new ResponseEntity<Employee>(a, HttpStatus.OK)).orElseThrow(() -> new Exception("Not found"));

@@ -94,7 +94,7 @@ public class OrderController {
 	@RequestMapping(value = "/orders", method = RequestMethod.GET)
 	public ResponseEntity<?> closeOrder(ServiceOrder serviceOrder) throws Exception {
 		return Optional.ofNullable(serviceOrderService.closeOrder(serviceOrder))
-				.map(a -> new ResponseEntity<int>(a, HttpStatus.OK)).orElseThrow(() -> new Exception("Not found"));
+				.map(a -> new ResponseEntity<>(a, HttpStatus.OK)).orElseThrow(() -> new Exception("Not found"));
 	}
 
 	@RequestMapping(value = "/orders", method = RequestMethod.GET)

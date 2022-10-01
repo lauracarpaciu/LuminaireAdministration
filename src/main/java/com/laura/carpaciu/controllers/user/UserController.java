@@ -31,21 +31,21 @@ public class UserController {
 				.orElseThrow(() -> new Exception("Not found"));
 	}
 
-	@RequestMapping(value = "/users", method = RequestMethod.GET)
+	@RequestMapping(value = "/users", method = RequestMethod.PUT)
 	public ResponseEntity<?> updateUserToken(User user) throws Exception {
 		return Optional.ofNullable(userService.updateUserToken(user))
 				.map(a -> new ResponseEntity<List<Employee>>(a, HttpStatus.OK))
 				.orElseThrow(() -> new Exception("Not found"));
 	}
 
-	@RequestMapping(value = "/users", method = RequestMethod.POST)
+	@RequestMapping(value = "/users", method = RequestMethod.GET)
 	public ResponseEntity<?> findUserWithToken(String email) throws Exception {
 		return Optional.ofNullable(userService.findUserWithToken(email))
 				.map(a -> new ResponseEntity<Optional<User>>(a, HttpStatus.OK))
 				.orElseThrow(() -> new Exception("Not found"));
 	}
 
-	@RequestMapping(value = "/users", method = RequestMethod.GET)
+	@RequestMapping(value = "/users", method = RequestMethod.POST)
 	public ResponseEntity<?> activateUserAccount(User user) throws Exception {
 		return Optional.ofNullable(userService.activateUserAccount(user))
 				.map(a -> new ResponseEntity<Optional<User>>(a, HttpStatus.OK))

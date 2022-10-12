@@ -6,6 +6,8 @@ import com.laura.carpaciu.services.PieceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,13 +26,13 @@ public class PieceController {
 	}
 
 	@RequestMapping(value = "/pieces", method = RequestMethod.POST)
-	public ResponseEntity<?> addPiece(Piece part) throws Exception {
+	public ResponseEntity<?> addPiece(@RequestBody Piece part) throws Exception {
 		return Optional.ofNullable(pieceService.addPiece(part)).map(a -> new ResponseEntity<Piece>(a, HttpStatus.OK))
 				.orElseThrow(() -> new Exception("Not found"));
 	}
 
-	@RequestMapping(value = "/pieces", method = RequestMethod.GET)
-	public ResponseEntity<?> findPieceByPartNumber(String partNumber) throws Exception {
+	@RequestMapping(value = "/pieces/{partNumber}", method = RequestMethod.GET)
+	public ResponseEntity<?> findPieceByPartNumber(@PathVariable String partNumber) throws Exception {
 		return Optional.ofNullable(pieceService.findPieceByPartNumber(partNumber))
 				.map(a -> new ResponseEntity<List<Piece>>(HttpStatus.OK)).orElseThrow(() -> new Exception("Not found"));
 	}

@@ -3,6 +3,8 @@ package com.laura.carpaciu.controllers.order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,8 +30,8 @@ public class PieceOrderController {
 
 	}
 
-	@RequestMapping(value = "/pieceorders", method = RequestMethod.PUT)
-	public ResponseEntity<?> addPartToServiceOrder(Piece part, ServiceOrder serviceOrder, int count) throws Exception {
+	@RequestMapping(value = "/pieceorders/{count}", method = RequestMethod.POST)
+	public ResponseEntity<?> addPartToServiceOrder(@RequestBody Piece part,@RequestBody ServiceOrder serviceOrder,@PathVariable int count) throws Exception {
 		return Optional.ofNullable(partOrderService.addPartToServiceOrder(part, serviceOrder, count))
 				.map(a -> new ResponseEntity<Employee>(a, HttpStatus.OK)).orElseThrow(() -> new Exception("Not found"));
 	}

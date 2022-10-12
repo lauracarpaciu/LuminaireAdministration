@@ -6,6 +6,8 @@ import com.laura.carpaciu.services.WorkPriceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,7 +43,7 @@ public class WorkPriceController {
     
     
     @RequestMapping(value = "/workprices", method = RequestMethod.POST)
-    public ResponseEntity<?> createAllWorkPrices(WorkPrice workPrice) throws Exception {
+    public ResponseEntity<?> createAllWorkPrices(@RequestBody WorkPrice workPrice) throws Exception {
         return Optional.ofNullable(workpriceservice.createAllWorkPrices( workPrice))
                 .map(a -> new ResponseEntity<>(a, HttpStatus.OK))
                 .orElseThrow(() -> new Exception("Not found"));
@@ -49,7 +51,7 @@ public class WorkPriceController {
 
 
     @RequestMapping(value = "/workprices", method = RequestMethod.PUT)
-    public ResponseEntity<?> updatePrices(double newPrice, String workCategory) throws Exception {
+    public ResponseEntity<?> updatePrices(@PathVariable double newPrice, @RequestBody String workCategory) throws Exception {
         return Optional.ofNullable(workpriceservice.updatePrices( newPrice, workCategory))
                 .map(a -> new ResponseEntit<>(a, HttpStatus.OK))
                 .orElseThrow(() -> new Exception("Not found"));

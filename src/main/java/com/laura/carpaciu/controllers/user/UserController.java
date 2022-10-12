@@ -6,6 +6,7 @@ import com.laura.carpaciu.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,14 +26,14 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/users", method = RequestMethod.POST)
-	public ResponseEntity<?> createUser(User user) throws Exception {
+	public ResponseEntity<?> createUser(@RequestBody User user) throws Exception {
 		return Optional.ofNullable(userService.createUser(user))
 				.map(a -> new ResponseEntity<Future<User>>(a, HttpStatus.OK))
 				.orElseThrow(() -> new Exception("Not found"));
 	}
 
 	@RequestMapping(value = "/users", method = RequestMethod.PUT)
-	public ResponseEntity<?> updateUserToken(User user) throws Exception {
+	public ResponseEntity<?> updateUserToken(@RequestBody User user) throws Exception {
 		return Optional.ofNullable(userService.updateUserToken(user))
 				.map(a -> new ResponseEntity<List<Employee>>(a, HttpStatus.OK))
 				.orElseThrow(() -> new Exception("Not found"));
@@ -46,7 +47,7 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/users", method = RequestMethod.POST)
-	public ResponseEntity<?> activateUserAccount(User user) throws Exception {
+	public ResponseEntity<?> activateUserAccount(@RequestBody User user) throws Exception {
 		return Optional.ofNullable(userService.activateUserAccount(user))
 				.map(a -> new ResponseEntity<Optional<User>>(a, HttpStatus.OK))
 				.orElseThrow(() -> new Exception("Not found"));
